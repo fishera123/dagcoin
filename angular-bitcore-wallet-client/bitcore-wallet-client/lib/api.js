@@ -515,7 +515,11 @@ API.prototype.sendMultiPayment = function (opts, cb) {
 
   if (opts.shared_address) {
     opts.paying_addresses = [opts.from_address, opts.shared_address];
-    opts.change_address = opts.shared_address;
+    if (opts.externallyFundedPayment) {
+      opts.change_address = opts.from_address;
+    } else {
+      opts.change_address = opts.shared_address;
+    }
     if (opts.asset && opts.asset !== 'base') {
       opts.fee_paying_wallet = self.credentials.walletId;
     }

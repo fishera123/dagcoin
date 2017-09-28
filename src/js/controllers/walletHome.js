@@ -855,17 +855,44 @@
               breadcrumbs.add(`sending payment in ${asset}`);
 
               profileService.bKeepUnlocked = true;
-              const opts = {
-                from_address: fundingExchangeClientService.dagcoinOrigin,
-                shared_address: fundingExchangeClientService.byteOrigin,
-                merkleProof,
-                asset,
-                to_address: toAddress,
-                amount,
-                send_all: self.bSendAll,
-                arrSigningDeviceAddresses,
-                recipientDeviceAddress
-              };
+
+              let opts;
+
+              // TODO: should check the end user choice
+              if (true) { // Using a shared address
+                opts = {
+                  from_address: fundingExchangeClientService.dagcoinOrigin,
+                  shared_address: fundingExchangeClientService.byteOrigin,
+                  merkleProof,
+                  asset,
+                  /* to_address: toAddress,
+                  amount, */
+                  send_all: self.bSendAll,
+                  arrSigningDeviceAddresses,
+                  recipientDeviceAddress,
+                  externallyFundedPayment: true,
+                  asset_outputs: [
+                    {
+                      address: fundingExchangeClientService.dagcoinDestination,
+                      amount: 1000 // TODO: this is the transaction fee in micro dagcoins 1000 = 0.001 dagcoins
+                    }, {
+                      address: toAddress,
+                      amount
+                    }
+                  ]
+                };
+              } else { // Using own bytes
+                opts = {
+                  shared_address: indexScope.shared_address,
+                  merkleProof,
+                  asset,
+                  to_address: toAddress,
+                  amount,
+                  send_all: self.bSendAll,
+                  arrSigningDeviceAddresses,
+                  recipientDeviceAddress,
+                };
+              }
 
               console.log(`PAYMENT OPTIONS BEFORE: ${JSON.stringify(opts)}`);
 

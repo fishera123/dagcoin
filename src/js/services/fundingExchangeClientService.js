@@ -7,7 +7,9 @@
                                               discoveryService,
                                               configService,
                                               dagcoinProtocolService,
-                                              promiseService) => {
+                                              promiseService,
+                                              addressService,
+                                              profileService) => {
       const self = {};
 
       // Statuses
@@ -184,7 +186,7 @@
           (result) => {
             self.activating = false;
             self.active = true;
-            self.index.selectSubWallet(self.byteOrigin);
+            // self.index.selectSubWallet(self.byteOrigin);
             return Promise.resolve(result);
           },
           (err) => {
@@ -261,13 +263,13 @@
       // TODO: should have some dagcoins on it
       function readMyAddress() {
         return new Promise((resolve, reject) => {
-          const walletGeneral = require('byteballcore/wallet_general.js');
-          walletGeneral.readMyAddresses((arrMyAddresses) => {
-            if (arrMyAddresses.length === 0) {
+          const fc = profileService.focusedClient;
+          addressService.getAddress(fc.credentials.walletId, false, (err, addr) => {
+            if (!addr) {
               reject('NO ADDRESSES AVAILABLE');
             } else {
-              console.log(`FOUND AN ADDRESS: ${arrMyAddresses[0]}`);
-              resolve(arrMyAddresses[0]);
+              console.log(`FOUND AN ADDRESS: ${addr}`);
+              resolve(addr);
             }
           });
         });
