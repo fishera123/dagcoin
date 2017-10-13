@@ -434,6 +434,11 @@
         }
       };
 
+      this.experiment = function () {
+        console.log('SENDING THE EXPERIMENT EVENT');
+        eventBus.emit('dagcoin.experiment');
+      };
+
       this.openCustomizedAmountModal = function (addr) {
         $rootScope.modalOpened = true;
         const self = this;

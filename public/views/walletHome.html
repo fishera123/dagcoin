@@ -425,7 +425,8 @@
 		</div> <!-- END History -->
 
     <div id="experimental" class="history tab-view">
-      <h2>test </h2>
+      <a href="#" ng-click="home.experiment()"
+         class="btn btn_red-full">Test</a>
     </div>
 
 		<div id="{{view.id}}" class="{{view.class}} tab-view" ng-repeat="view in index.addonViews" ng-include="view.template">
