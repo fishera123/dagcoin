@@ -631,7 +631,12 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         title: gettext('History'),
         icon: 'icon-history',
         link: 'history'
-      }];
+      },
+        {
+          title: gettext('Experimental'),
+          icon: 'icon-history',
+          link: 'experimental'
+        }];
 
       self.getSvgSrc = function (id) {
         return `img/svg/symbol-defs.svg#${id}`;
