@@ -81,6 +81,8 @@
         const bufToSign = crypto.createHash('sha256').update(textToProve, 'utf8').digest();
         const sig = ecdsaSig.sign(bufToSign, privKeyBuf);
 
+        console.log(`NEW SIGNATURE: ${sig} FROM ${bufToSign} OF ${privKeyBuf}`);
+
         try {
           const definition = JSON.parse(master.definition);
 
@@ -107,6 +109,8 @@
           const pubkey64 = new Buffer(publicKey, 'base64');
 
           const verified = ecdsaSig.verify(bufToSign, sig, pubkey64);
+
+          console.log(`NEW VERIFICATION: ${sig} AGAINST ${bufToSign} WITH ${pubkey64}`);
 
           console.log(`${verified ? 'VERIFIED' : 'NOT VERIFIED'}`);
 
