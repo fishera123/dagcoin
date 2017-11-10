@@ -71,6 +71,13 @@
                    ng-required="true"
                    ng-focus="create.formFocus('wallet-name')" ng-blur="create.formFocus(false)">
           </label>
+          <label><span translate class="left m10t">Single address wallet</span>
+            <switch name="isSingleAddress" ng-model="isSingleAddress" class="green right m10b"></switch>
+          </label>
+          <div class="description m10b">
+            Single address wallets will not spawn new addresses for every transaction, change will always go to the one
+            and only address the wallet contains.
+          </div>
         </div>
         <div class="row" ng-show="totalCosigners != 1">
 
