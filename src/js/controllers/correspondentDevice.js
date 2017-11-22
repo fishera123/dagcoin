@@ -863,7 +863,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
           }
           const amount = form.amount.$modelValue;
           // var asset = form.asset.$modelValue;
-          const asset = $scopeModal.index.arrBalances[$scopeModal.index.assetIndex].asset;
+          const asset = $scopeModal.index.arrBalances[$scopeModal.index.DAGCOIN_ASSET].asset;
           if (!asset) {
             throw Error('no asset');
           }
