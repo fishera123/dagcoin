@@ -13,16 +13,16 @@ ifeq ($(UNAME), Darwin)
 endif
 
 prepare-dev:
-	$(SHELLCMD) devbuilds/prepare-dev.sh base
+	$(SHELLCMD) devbuilds/prepare-dev.sh base 32
 
 prepare-dev-tn:
-	$(SHELLCMD) devbuilds/prepare-dev.sh testnet
+	$(SHELLCMD) devbuilds/prepare-dev.sh testnet 32
 
 prepare-package:
-	$(SHELLCMD) devbuilds/prepare-package.sh live
+	$(SHELLCMD) devbuilds/prepare-package.sh live 32
 
 prepare-package-tn:
-	$(SHELLCMD) devbuilds/prepare-package.sh testnet
+	$(SHELLCMD) devbuilds/prepare-package.sh testnet 32
 
 cordova-base:
 	grunt dist-mobile

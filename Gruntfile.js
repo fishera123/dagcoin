@@ -5,7 +5,8 @@ module.exports = function (grunt) {
       case 'win32':
         return 'win64'; // change to 'win' for both 32 and 64
       case 'linux':
-        return 'linux64';
+        return 'linux32';
+        // return `linux${process.arch.substr(1)}`;
       case 'darwin':
         return 'osx64';
       default:
@@ -385,10 +386,10 @@ module.exports = function (grunt) {
     compress: {
       linux32: {
         options: {
-          archive: '../byteballbuilds/<%= process.env.nwjsAppName %>-linux64.zip'
+          archive: '../byteballbuilds/<%= process.env.nwjsAppName %>-linux32.zip'
         },
         expand: true,
-        cwd: '../byteballbuilds/<%= process.env.nwjsAppName %>/linux64/',
+        cwd: '../byteballbuilds/<%= process.env.nwjsAppName %>/linux32/',
         src: ['**/*']
       },
       linux64: {

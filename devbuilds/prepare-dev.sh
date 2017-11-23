@@ -38,6 +38,13 @@ if ! gem list sass -i; then
   sudo gem install sass
 fi
 
+ArchitectureBit='64'
+ArchitectureCode='x64'
+if [ "$2" == "32" ]; then
+  ArchitectureBit='64'
+  ArchitectureCode='x86'
+fi
+
 if [ "$(uname)" == "Darwin" ]; then
   if [ -d "${Sqlite3Path}/node-webkit-v0.14.7-darwin-x64" ]; then
     grunt build:${environment}
@@ -46,11 +53,11 @@ if [ "$(uname)" == "Darwin" ]; then
   mkdir "${Sqlite3Path}/node-webkit-v0.14.7-darwin-x64"
   cp "${Sqlite3Path}/node-v47-darwin-x64/node_sqlite3.node" "${Sqlite3Path}/node-webkit-v0.14.7-darwin-x64"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-  if [ -d "${Sqlite3Path}/node-webkit-v0.14.7-linux-x64" ]; then
+  if [ -d "${Sqlite3Path}/node-webkit-v0.14.7-linux-$ArchitectureCode" ]; then
     grunt build:${environment}
     exit
   fi
-  mkdir "${Sqlite3Path}/node-webkit-v0.14.7-linux-x64"
-  cp "${Sqlite3Path}/node-v47-linux-x64/node_sqlite3.node" "${Sqlite3Path}/node-webkit-v0.14.7-linux-x64"
+  mkdir "${Sqlite3Path}/node-webkit-v0.14.7-linux-$ArchitectureCode"
+  cp "${Sqlite3Path}/node-v47-linux-$ArchitectureCode/node_sqlite3.node" "${Sqlite3Path}/node-webkit-v0.14.7-linux-$ArchitectureCode"
 fi
 grunt build:${environment}

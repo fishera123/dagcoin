@@ -30,16 +30,24 @@ fi
 
 Sqlite3Path='./node_modules/sqlite3/lib/binding'
 
+ArchitectureBit='64'
+ArchitectureCode='x64'
+
+if [ "$2" == "32" ]; then
+  ArchitectureBit='32'
+  ArchitectureCode='x86'
+fi
+
 if [ "$(uname)" == "Darwin" ]; then
  PackagePath='../byteballbuilds/DAGCOIN/osx64/DAGCOIN.app/Contents/Resources/app.nw/'
  Action=dmg
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   if [ "$1" == "testnet" ]; then
-    PackagePath='../byteballbuilds/Dagcoin-TN/linux64/'
-    Action=linux64:testnet
+    PackagePath="../byteballbuilds/Dagcoin-TN/linux$ArchitectureBit/"
+    Action="linux$ArchitectureBit:testnet"
   else
-    PackagePath='../byteballbuilds/Dagcoin/linux64/'
-    Action=linux64:live
+    PackagePath="../byteballbuilds/Dagcoin/linux$ArchitectureBit/"
+    Action="linux$ArchitectureBit:live"
   fi
 fi
 
@@ -70,12 +78,12 @@ if [ "$(uname)" == "Darwin" ]; then
   mkdir "${Sqlite3Path}/node-webkit-v0.14.7-darwin-x64"
   cp "${Sqlite3Path}/node-v47-darwin-x64/node_sqlite3.node" "${Sqlite3Path}/node-webkit-v0.14.7-darwin-x64"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-  if [ -d "${Sqlite3Path}/node-webkit-v0.14.7-linux-x64" ]; then
+  if [ -d "${Sqlite3Path}/node-webkit-v0.14.7-linux-$ArchitectureCode" ]; then
     grunt build:$1
     exit
   fi
-  mkdir "${Sqlite3Path}/node-webkit-v0.14.7-linux-x64"
-  cp "${Sqlite3Path}/node-v47-linux-x64/node_sqlite3.node" "${Sqlite3Path}/node-webkit-v0.14.7-linux-x64"
+  mkdir "${Sqlite3Path}/node-webkit-v0.14.7-linux-$ArchitectureCode"
+  cp "${Sqlite3Path}/node-v47-linux-$ArchitectureCode/node_sqlite3.node" "${Sqlite3Path}/node-webkit-v0.14.7-linux-$ArchitectureCode"
 fi
 
 cp -r "./node_modules" "${PackagePath}"
