@@ -312,9 +312,6 @@
 
 							<div class="title clearfix">
 								<span class="name" translate>Receiver</span>
-                <a ng-click="openDestinationAddressModal(index.otherWallets, _address)">
-                  <span style="text-transform: none; margin-left: 10px" translate>Address book</span>
-                </a>
 							</div>
 
 							<div class="input-wrap">
@@ -323,7 +320,9 @@
 									   ng-attr-placeholder="{{home.canSendExternalPayment() ? 'DAG address' : 'DAG address of your other wallet &#8594;'}}"
 									   ng-model="_address" valid-address required
 									   ng-blur="home.formFocus(false)">
-
+               <a  class="icon icon-d" ng-click="openDestinationAddressModal(index.otherWallets, _address)">
+                 <i class="icon-wallet size-18"></i>
+               </a>
 							</div>
 
 
