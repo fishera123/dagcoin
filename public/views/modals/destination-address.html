@@ -106,6 +106,7 @@
         <h4 class="header-modal center" translate>Add a new entry</h4>
 
         <form name="addressbookForm" class="modal-form" novalidate>
+          <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
           <div class="title clearfix">
             <span class="name" translate>Label</span>
           </div>
