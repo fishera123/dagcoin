@@ -279,10 +279,18 @@
 					  </span>
 						</div>
 						<div class="form-group">
-							<div class="title clearfix"><span class="name" translate>Amount</span>
+              <div ng-if="home.deviceAddressIsKnown()" style="font-size: 11px; font-weight: bold; margin-top: -1.5rem; margin-bottom: 1.5rem">
+              </div>
+              <div ng-if="!home.deviceAddressIsKnown()"
+                   style="font-size: 11px; font-weight: bold; margin-top: -1.5rem; margin-bottom: 1.5rem">
+                <a dropdown-toggle="#binding-drop" data-options="align:top"></a>
+              </div>
+							<div class="title clearfix">
+                <span class="name" translate>Amount</span>
 								<span class="available" translate>Available <span>{{index.dagBalance.stable / 1e6}}</span></span>
                 <a ng-click="home.setSendAll()" ng-show="!home.lockAmount" style="text-transform: none; margin-left: 10px" translate>Send all</a>
-							</div>
+              </div>
+
 
 							<div class="input-wrap input-icon">
 								<input ng-class="{'error': sendForm.amount.$invalid && !sendForm.amount.$error.required, 'success': !sendForm.amount.$invalid}" style="font-size: 12px;" type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount"
@@ -304,6 +312,9 @@
 
 							<div class="title clearfix">
 								<span class="name" translate>Receiver</span>
+                <a ng-click="openDestinationAddressModal(index.otherWallets, _address)">
+                  <span style="text-transform: none; margin-left: 10px" translate>Address book</span>
+                </a>
 							</div>
 
 							<div class="input-wrap">
@@ -322,7 +333,6 @@
             </div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 
