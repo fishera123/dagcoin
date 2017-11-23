@@ -48,6 +48,8 @@ svg {
   pointer-events: none;
 }
 
+
+
 .color_red {
   color: $red;
 }
@@ -1646,6 +1648,10 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   background: #000;
 }
 
+.modal-label {
+  margin-top: 10px;
+}
+
 .tx-details-blockchain {
   li {
     cursor: pointer !important;
@@ -2771,6 +2777,10 @@ canvas {
 
 .page-form {
   margin: 60px auto 0;
+  max-width: 300px;
+}
+
+.modal-form {
   max-width: 300px;
 }
 

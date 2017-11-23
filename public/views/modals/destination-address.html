@@ -1,52 +1,52 @@
 <div ng-init="(wallets[0] || !bAllowAddressbook) ? selectedWalletsOpt = true : selectedWalletsOpt = false">
-  <nav class="tab-bar">
-    <section class="left-small">
-      <a ng-show="!editAddressbook && !addAddressbookEntry" ng-click="cancel()" class="p10">
-        <span class="text-close" translate>Close</span>
-      </a>
-      <a ng-show="addAddressbookEntry" ng-click="newAddress = ''; toggleAddAddressbookEntry()" class="p10">
-		<i class="icon-arrow-left3 icon-back"></i>
-		<span class="text-back" translate>Back</span>
-      </a>
-    </section>
-
-    <section class="middle tab-bar-section" ng-show="bAllowAddressbook">
-      <ul class="button-group round even-2" ng-show="!editAddressbook && wallets[0] && !addAddressbookEntry">
-        <li class="ellipsis" ng-class="{'selected':selectedWalletsOpt}" ng-click="selectedWalletsOpt = true"
-          translate>
-          Wallets
-        </li>
-        <li class="ellipsis" ng-class="{'selected':!selectedWalletsOpt}" ng-click="selectedWalletsOpt = false" translate>
-          Addressbook
-        </li>
-      </ul>
-      <h1 ng-show="(editAddressbook || !wallets[0]) && !addAddressbookEntry" class="title ellipsis" translate>
-        Addressbook
-      </h1>
-    </section>
-    <section class="middle tab-bar-section" ng-show="!bAllowAddressbook">
-      <ul class="button-group round even-2">
-        <li class="ellipsis" ng-class="{'selected':selectedWalletsOpt}" ng-click="selectedWalletsOpt = true"
-          translate>
-          Wallets
-        </li>
-      </ul>
-    </section>
-
-    <section class="right-small" ng-show="!selectedWalletsOpt" ng-click="toggleEditAddressbook()">
-      <a ng-show="!editAddressbook && !addAddressbookEntry" href class="p10">
-        <span class="text-close" translate>Edit</span>
-      </a>
-      <a ng-show="editAddressbook && !addAddressbookEntry" href class="p10">
-        <span class="text-close" translate>Done</span>
-      </a>
-      <qr-scanner ng-show="addAddressbookEntry"
-        on-scan="onQrCodeScanned(data, addressbookForm)"
-        before-scan="beforeQrCodeScann()"></qr-scanner>
-    </section>
-  </nav>
-
   <div class="modal-content fix-modals-touch">
+
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a ng-show="!editAddressbook && !addAddressbookEntry" ng-click="cancel()" class="p10">
+          <span class="text-close" translate>Close</span>
+        </a>
+        <a ng-show="addAddressbookEntry" ng-click="newAddress = ''; toggleAddAddressbookEntry()" class="p10">
+  		<i class="icon-arrow-left3 icon-back"></i>
+  		<span class="text-back" translate>Back</span>
+        </a>
+      </section>
+
+      <section class="middle tab-bar-section" ng-show="bAllowAddressbook">
+        <ul class="button-group round even-2" ng-show="!editAddressbook && wallets[0] && !addAddressbookEntry">
+          <li class="ellipsis" ng-class="{'selected':selectedWalletsOpt}" ng-click="selectedWalletsOpt = true"
+            translate>
+            Wallets
+          </li>
+          <li class="ellipsis" ng-class="{'selected':!selectedWalletsOpt}" ng-click="selectedWalletsOpt = false" translate>
+            Addressbook
+          </li>
+        </ul>
+        <h1 ng-show="(editAddressbook || !wallets[0]) && !addAddressbookEntry" class="title ellipsis" translate>
+          Addressbook
+        </h1>
+      </section>
+      <section class="middle tab-bar-section" ng-show="!bAllowAddressbook">
+        <ul class="button-group round even-2">
+          <li class="ellipsis" ng-class="{'selected':selectedWalletsOpt}" ng-click="selectedWalletsOpt = true"
+            translate>
+            Wallets
+          </li>
+        </ul>
+      </section>
+
+      <section class="right-small" ng-show="!selectedWalletsOpt" ng-click="toggleEditAddressbook()">
+        <a ng-show="!editAddressbook && !addAddressbookEntry" href class="p10">
+          <span class="text-close" translate>Edit</span>
+        </a>
+        <a ng-show="editAddressbook && !addAddressbookEntry" href class="p10">
+          <span class="text-close" translate>Done</span>
+        </a>
+        <qr-scanner ng-show="addAddressbookEntry"
+          on-scan="onQrCodeScanned(data, addressbookForm)"
+          before-scan="beforeQrCodeScann()"></qr-scanner>
+      </section>
+    </nav>
 
     <div ng-show="selectedWalletsOpt">
       <div class="onGoingProcess" ng-if="gettingAddress">
@@ -103,30 +103,38 @@
       </ul>
 
       <div ng-show="addAddressbookEntry">
-        <h4 class="title m0" translate>Add a new entry</h4>
-        <form name="addressbookForm" class="p10" no-validate>
-          <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
-          <span ng-hide="addressbookForm.address.$pristine">
-            <span class="has-error right size-12" ng-show="addressbookForm.address.$invalid && addressbook.address">
-              <i class="icon-close-circle size-14"></i>
-              <span class="vm" translate>Not valid</span>
-            </span>
-            <small class="right text-primary" ng-show="!addressbookForm.address.$invalid">
-              <i class="icon-checkmark-circle size-14"></i>
-            </small>
-          </span>
-          <label translate>Address</label>
-          <input type="text" id="address" name="address" ng-model="addressbook.address" placeholder="Dagcoin address" valid-address required>
-          <label translate>Label</label> 
-          <input type="text" id="label" name="label" ng-model="addressbook.label" placeholder="Name of the contact" required>
+        <h4 class="header-modal center" translate>Add a new entry</h4>
+
+        <form name="addressbookForm" class="modal-form" novalidate>
+          <div class="title clearfix">
+            <span class="name" translate>Label</span>
+          </div>
+          <div class="input-wrap">
+            <input id="label" name="label" ng-model="addressbook.label"
+                   placeholder="Name of the contact" required>
+          </div>
+
+          <div class="title clearfix modal-label">
+            <span class="name" translate>Address</span>
+          </div>
+
+          <div class="input-wrap">
+            <input type="text" id="address" name="address"
+                   ng-model="addressbook.address" placeholder="Dagcoin address"
+
+                   valid-address required
+                   ng-class="{'error': addressbookForm.address.$invalid && addressbook.address,
+                              'success': addressbook.address && !addressbookForm.address.$invalid}">
+          </div>
+
           <div class="row">
-            <div class="columns large-6 medium-6 small-6">
+            <div class="columns large-6 medium-6 small-6 page-action">
               <input type="button"
                      class="button expand outline dark-gray round"
                      ng-click="newAddress = ''; toggleAddAddressbookEntry()"
                      value="{{'Cancel'|translate}}">
             </div>
-            <div class="columns large-6 medium-6 small-6">
+            <div class="columns large-6 medium-6 small-6 page-action">
               <input type="submit"
                      class="button expand round"
                      value="{{'Save'|translate}}"
