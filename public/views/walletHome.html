@@ -293,12 +293,14 @@
 
 
 							<div class="input-wrap input-icon">
-								<input ng-class="{'error': sendForm.amount.$invalid && !sendForm.amount.$error.required, 'success': !sendForm.amount.$invalid}" style="font-size: 12px;" type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount"
-									   name="amount" ng-attr-placeholder="{{('Amount')|translate}}" min="0.000001"
-									   ng-minlength="1" ng-maxlength="16" ng-model="_amount"
-									   ng-required="!home.bSendAll"
-									   autocomplete="off" ng-focus="home.formFocus('amount')"
-									   ng-blur="home.formFocus(false)">
+								<input ng-class="{'error': sendForm.amount.$invalid && !sendForm.amount.$error.required, 'success': !sendForm.amount.$invalid}"
+                       style="font-size: 12px;" type="number" id="amount"
+                       ng-disabled="home.blockUx || home.lockAmount"
+  									   name="amount" ng-attr-placeholder="{{('Amount')|translate}}" min="0.000001"
+  									   ng-minlength="1" ng-maxlength="16" ng-model="_amount"
+  									   ng-required="!home.bSendAll"
+  									   autocomplete="off" ng-focus="home.formFocus('amount')"
+  									   ng-blur="home.formFocus(false)">
 
 
 								<svg class="icon icon-d">
@@ -314,15 +316,18 @@
 								<span class="name" translate>Receiver</span>
 							</div>
 
-							<div class="input-wrap">
-								<input ng-class="{'error' : sendForm.address.$invalid && _address, 'success': _address && !sendForm.address.$invalid}" style="font-size: 12px;" class="m0" type="text" id="address"
+							<div class="input-wrap input-icon">
+								<input ng-class="{'error' : sendForm.address.$invalid && _address, 'success': _address && !sendForm.address.$invalid}"
+                     style="font-size: 12px;"
+                     type="text" id="address"
 									   name="address"
 									   ng-attr-placeholder="{{home.canSendExternalPayment() ? 'DAG address' : 'DAG address of your other wallet &#8594;'}}"
 									   ng-model="_address" valid-address required
 									   ng-blur="home.formFocus(false)">
-               <a class="icon icon-d"
-                   ng-click="openDestinationAddressModal(index.otherWallets, _address)">
-                 <i class="icon-wallet"></i>
+
+
+               <a ng-click="openDestinationAddressModal(index.otherWallets, _address)">
+                 <i class="icon icon-d icon-wallet"></i>
                </a>
 							</div>
 
