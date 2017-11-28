@@ -114,6 +114,6 @@ package.json
 src/js/config.js
 environments/dev.json
 
-#generated database.json
+# database migration
 database.json
 public/migrations/*
