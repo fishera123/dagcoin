@@ -723,11 +723,11 @@
           amount *= dagUnitValue;
           amount = Math.round(amount);
 
-        const currentPaymentKey = `${asset}${address}${amount}`;
-        if (currentPaymentKey === self.current_payment_key) {
-          return $rootScope.$emit('Local/ShowErrorAlert', 'This payment is being processed');
-        }
-        self.current_payment_key = currentPaymentKey;
+          const currentPaymentKey = `${asset}${address}${amount}`;
+          if (currentPaymentKey === self.current_payment_key) {
+            return $rootScope.$emit('Local/ShowErrorAlert', 'This payment is being processed');
+          }
+          self.current_payment_key = currentPaymentKey;
 
           indexScope.setOngoingProcess(gettextCatalog.getString('sending'), true);
           $timeout(() => {
@@ -954,7 +954,8 @@
                           });
                           // issue next address to avoid reusing the reverse payment address
                           if (!fc.isSingleAddress) {
-                             walletDefinedByKeys.issueNextAddress(fc.credentials.walletId, 0, () => {});
+                            walletDefinedByKeys.issueNextAddress(fc.credentials.walletId, 0, () => {
+                            });
                           }
                         }
                       } else {
