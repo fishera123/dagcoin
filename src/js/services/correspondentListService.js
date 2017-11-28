@@ -552,7 +552,7 @@ angular.module('copayApp.services').factory('correspondentListService',
               const lastMessageDate = row.last_message_date;
 
               if (address && lastMessageDate) {
-                addresses.push({address, lastMessageDate});
+                addresses.push({ address, lastMessageDate });
               }
             }
 

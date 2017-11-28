@@ -48,7 +48,7 @@
         if (index === -1) {
           index = 10000;
         } else {
-          index = parseInt(index);
+          index = parseInt(index, 10);
         }
 
         return index;
