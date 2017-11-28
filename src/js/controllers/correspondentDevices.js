@@ -43,15 +43,9 @@
 
       $scope.messageByDateComparator = function (correspondent) {
         const address = correspondent.device_address;
-        let index = $scope.addressesByDate.findIndex(x => x.address === address);
+        const index = $scope.addressesByDate.findIndex(x => x.address === address);
 
-        if (index === -1) {
-          index = 10000;
-        } else {
-          index = parseInt(index, 10);
-        }
-
-        return index;
+        return (index === -1) ? 10000 : parseInt(index, 10);
       };
 
       $scope.beginAddCorrespondent = function () {
