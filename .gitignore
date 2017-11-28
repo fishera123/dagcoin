@@ -116,3 +116,4 @@ environments/dev.json
 
 #generated database.json
 database.json
+public/migrations/*
