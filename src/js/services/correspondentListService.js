@@ -528,6 +528,40 @@ angular.module('copayApp.services').factory('correspondentListService',
       return promise;
     }
 
+    function getCorrespondentAddressesOrderedByMessageDate() {
+      const db = require('byteballcore/db.js');
+
+      return new Promise((resolve) => {
+        db.query(
+          'SELECT C1.correspondent_address, C1.last_message_date \n\ ' +
+          'FROM ( \n\ ' +
+          '      SELECT correspondent_address, MAX(creation_date) as last_message_date \n\ ' +
+          '      FROM chat_messages \n\ ' +
+          '      WHERE type <> \'system\' \n\ ' +
+          '      GROUP BY correspondent_address\n\ ' +
+          ') C1 \n\ ' +
+          'INNER JOIN chat_messages C \n\ ' +
+          'ON C.correspondent_address = C1.correspondent_address AND C.creation_date = C1.last_message_date \n\ ' +
+          'ORDER BY C1.last_message_date DESC',
+          (rows) => {
+            const addresses = [];
+
+            for (let i = 0; i < rows.length; i += 1) {
+              const row = rows[i];
+              const address = row.correspondent_address;
+              const lastMessageDate = row.last_message_date;
+
+              if (address && lastMessageDate) {
+                addresses.push({address, lastMessageDate});
+              }
+            }
+
+            resolve(addresses);
+          }
+        );
+      });
+    }
+
     eventBus.on('text', (fromAddress, body) => {
       console.log(`NEW TEXT MESSAGE FROM ${fromAddress}`);
 
@@ -656,6 +690,7 @@ angular.module('copayApp.services').factory('correspondentListService',
     root.loadMoreHistory = loadMoreHistory;
     root.checkAndInsertDate = checkAndInsertDate;
     root.parseMessage = parseMessage;
+    root.getCorrespondentAddressesOrderedByMessageDate = getCorrespondentAddressesOrderedByMessageDate;
 
     root.list = function (cb) {
       device.readCorrespondents((arrCorrespondents) => {

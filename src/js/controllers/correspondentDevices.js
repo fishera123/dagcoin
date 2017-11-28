@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('copayApp.controllers').controller('correspondentDevicesController',
-    ($scope, $timeout, configService, profileService, go, correspondentListService, $state, $rootScope, ENV) => {
+    ($scope, $timeout, configService, profileService, go, correspondentListService, $state, $rootScope, lodash, ENV) => {
       const wallet = require('byteballcore/wallet.js');
       $scope.editCorrespondentList = false;
       $scope.selectedCorrespondentList = {};
@@ -41,8 +41,17 @@
         $scope.selectedCorrespondentList[addr] = !$scope.selectedCorrespondentList[addr];
       };
 
-      $scope.newMsgByAddressComparator = function (correspondent) {
-        return (-$scope.newMessagesCount[correspondent.device_address] || correspondent.name.toLowerCase());
+      $scope.messageByDateComparator = function (correspondent) {
+        const address = correspondent.device_address;
+        let index = $scope.addressesByDate.findIndex(x => x.address === address);
+
+        if (index === -1) {
+          index = 10000;
+        } else {
+          index = parseInt(index);
+        }
+
+        return index;
       };
 
       $scope.beginAddCorrespondent = function () {
@@ -54,11 +63,13 @@
 
       $scope.readList = function () {
         $scope.error = null;
+
         correspondentListService.list((err, ab) => {
           if (err) {
             $scope.error = err;
             return;
           }
+
           wallet.readDeviceAddressesUsedInSigningPaths((arrNotRemovableDeviceAddresses) => {
             // adding manually discovery service, because it doesn't exists in signing paths
             arrNotRemovableDeviceAddresses.push(ENV.discoveryDeviceAddress);
@@ -70,8 +81,12 @@
               // device is removable when not in list
               corrDev.removable = (ix === -1);
             }
-            $scope.list = ab;
-            $scope.$digest();
+
+            correspondentListService.getCorrespondentAddressesOrderedByMessageDate().then((addresses) => {
+              $scope.addressesByDate = addresses;
+              $scope.list = lodash.sortBy(ab, 'name');
+              $scope.$digest();
+            });
           });
         });
       };
