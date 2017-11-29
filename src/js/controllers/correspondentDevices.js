@@ -70,7 +70,6 @@
         }, (err) => {
           if (err) {
             $scope.error = err;
-            return;
           }
         });
       };
