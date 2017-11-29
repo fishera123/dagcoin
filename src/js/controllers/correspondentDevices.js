@@ -56,8 +56,7 @@
             // adding manually discovery service, because it doesn't exists in signing paths
             arrNotRemovableDeviceAddresses.push(ENV.discoveryDeviceAddress);
             // add a new property indicating whether the device can be removed or not
-            const length = correspondents.length;
-            for (let i = 0; i < length; i += 1) {
+            for (let i = 0, { length } = correspondents; i < length; i += 1) {
               const corrDev = correspondents[i];
               const ix = arrNotRemovableDeviceAddresses.indexOf(corrDev.device_address);
               // device is removable when not in list
