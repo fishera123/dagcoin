@@ -41,13 +41,6 @@
         $scope.selectedCorrespondentList[addr] = !$scope.selectedCorrespondentList[addr];
       };
 
-      $scope.messageByDateComparator = function (correspondent) {
-        const address = correspondent.device_address;
-        const index = $scope.addressesByDate.findIndex(x => x.address === address);
-
-        return (index === -1) ? 10000 : parseInt(index, 10);
-      };
-
       $scope.beginAddCorrespondent = function () {
         console.log('beginAddCorrespondent');
         listScrollTop = document.querySelector('[ui-view=chat]').scrollTop;
@@ -58,30 +51,27 @@
       $scope.readList = function () {
         $scope.error = null;
 
-        correspondentListService.list((err, ab) => {
-          if (err) {
-            $scope.error = err;
-            return;
-          }
-
+        correspondentListService.getCorrespondentsOrderedByMessageDate().then((correspondents) => {
           wallet.readDeviceAddressesUsedInSigningPaths((arrNotRemovableDeviceAddresses) => {
             // adding manually discovery service, because it doesn't exists in signing paths
             arrNotRemovableDeviceAddresses.push(ENV.discoveryDeviceAddress);
             // add a new property indicating whether the device can be removed or not
-            const length = ab.length;
+            const length = correspondents.length;
             for (let i = 0; i < length; i += 1) {
-              const corrDev = ab[i];
+              const corrDev = correspondents[i];
               const ix = arrNotRemovableDeviceAddresses.indexOf(corrDev.device_address);
               // device is removable when not in list
               corrDev.removable = (ix === -1);
             }
 
-            correspondentListService.getCorrespondentAddressesOrderedByMessageDate().then((addresses) => {
-              $scope.addressesByDate = addresses;
-              $scope.list = lodash.sortBy(ab, 'name');
-              $scope.$digest();
-            });
+            $scope.list = correspondents;
+            $scope.$digest();
           });
+        }, (err) => {
+          if (err) {
+            $scope.error = err;
+            return;
+          }
         });
       };
 

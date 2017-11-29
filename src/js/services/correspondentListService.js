@@ -562,6 +562,22 @@ angular.module('copayApp.services').factory('correspondentListService',
       });
     }
 
+    function getCorrespondentsOrderedByMessageDate() {
+      const db = require('byteballcore/db.js');
+
+      return new Promise((resolve) => {
+        db.query(
+          'SELECT device_address, hub, name, my_record_pref, peer_record_pref, latest_message_date FROM correspondent_devices CD \n\ ' +
+          'LEFT JOIN (SELECT correspondent_address, MAX(creation_date) AS latest_message_date FROM chat_messages GROUP BY correspondent_address) CM \n\ ' +
+          'ON CM.correspondent_address = CD.device_address \n\ ' +
+          'ORDER BY latest_message_date DESC, name ASC',
+          (rows) => {
+            resolve(rows);
+          }
+        );
+      });
+    }
+
     eventBus.on('text', (fromAddress, body) => {
       console.log(`NEW TEXT MESSAGE FROM ${fromAddress}`);
 
@@ -691,13 +707,13 @@ angular.module('copayApp.services').factory('correspondentListService',
     root.checkAndInsertDate = checkAndInsertDate;
     root.parseMessage = parseMessage;
     root.getCorrespondentAddressesOrderedByMessageDate = getCorrespondentAddressesOrderedByMessageDate;
+    root.getCorrespondentsOrderedByMessageDate = getCorrespondentsOrderedByMessageDate;
 
     root.list = function (cb) {
       device.readCorrespondents((arrCorrespondents) => {
         cb(null, arrCorrespondents);
       });
     };
-
 
     root.startWaitingForPairing = function (cb) {
       device.startWaitingForPairing((pairingInfo) => {
