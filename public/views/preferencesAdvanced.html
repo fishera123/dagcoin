@@ -1,5 +1,5 @@
 <div ng-include="'views/includes/topbar.html'"
-  ng-init="titleSection='Advanced'; goBackToState = 'preferences';">
+  ng-init="titleSection=('Advanced' | translate); goBackToState = 'preferences';">
 </div>
 
 <div class="content preferences" ng-controller="preferencesAdvancedController as prefAdvanced">
@@ -16,4 +16,3 @@
     </div>
 </div>
 <div class="extra-margin-bottom"></div>
-
