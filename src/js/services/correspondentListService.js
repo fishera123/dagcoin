@@ -643,6 +643,12 @@ angular.module('copayApp.services').factory('correspondentListService',
     root.parseMessage = parseMessage;
     root.getCorrespondentsOrderedByMessageDate = getCorrespondentsOrderedByMessageDate;
 
+    root.list = function (cb) {
+      device.readCorrespondents((arrCorrespondents) => {
+        cb(null, arrCorrespondents);
+      });
+    };
+
     root.startWaitingForPairing = function (cb) {
       device.startWaitingForPairing((pairingInfo) => {
         cb(pairingInfo);
