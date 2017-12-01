@@ -573,9 +573,9 @@ angular.module('copayApp.services').factory('correspondentListService',
       });
     });
 
-    eventBus.on('sent_payment', (peerAddress, amount, asset) => {
+    eventBus.on('sent_payment', (peerAddress, amount, asset, walletId) => {
       setCurrentCorrespondent(peerAddress, () => {
-        const body = `<a ng-click="showPayment('${asset}')" class="payment">Payment: ${getAmountText(amount, asset)}</a>`;
+        const body = `<a ng-click="showPayment('${asset}', '${walletId}')" class="payment">Payment: ${getAmountText(amount, asset)}</a>`;
         addMessageEvent(false, peerAddress, body);
         device.readCorrespondent(peerAddress, (correspondent) => {
           if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(peerAddress, body, 0, 'html');
