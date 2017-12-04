@@ -946,7 +946,7 @@
                       self.resetForm();
                       $rootScope.$emit('NewOutgoingTx');
                       if (recipientDeviceAddress) { // show payment in chat window
-                        eventBus.emit('sent_payment', recipientDeviceAddress, amount || 'all', asset, indexScope.walletId);
+                        eventBus.emit('sent_payment', recipientDeviceAddress, amount || 'all', asset, indexScope.walletId, true);
                         if (binding && binding.reverseAmount) { // create a request for reverse payment
                           if (!myAddress) {
                             throw Error(gettextCatalog.getString('my address not known'));
