@@ -468,18 +468,25 @@
               configurable: true,
             });
 
+            $scope.$watch('_customAmount', (newValue, oldValue) => {
+              if (typeof newValue !== 'undefined') {
+                if (newValue.length > 12) {
+                  $scope._customAmount.alias = oldValue;
+                }
+              }
+            });
+
             $scope.submitForm = function (form) {
               if ($scope.index.arrBalances.length === 0) {
                 return console.log('openCustomizedAmountModal: no balances yet');
               }
               const amount = form.amount.$modelValue;
               const asset = ENV.DAGCOIN_ASSET;
-              let amountInSmallestUnits;
               if (!asset) {
                 throw Error('no asset');
               }
 
-              amountInSmallestUnits = parseInt((amount * $scope.dagUnitValue).toFixed(0));
+              const amountInSmallestUnits = parseInt((amount * $scope.dagUnitValue).toFixed(0));
 
               return $timeout(() => {
                 $scope.customizedAmountUnit = `${amount} ${(asset === 'base') ? $scope.unitName : (asset === ENV.DAGCOIN_ASSET ? $scope.dagUnitName : `of ${asset}`)}`;
