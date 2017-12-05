@@ -936,7 +936,11 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
     }
 
     $scope.goToCorrespondentDevices = function () {
-      $deepStateRedirect.reset('correspondentDevices');
-      go.path('correspondentDevices');
+      if ($rootScope.goBackState) {
+        go.path($rootScope.goBackState);
+      } else {
+        $deepStateRedirect.reset('correspondentDevices');
+        go.path('correspondentDevices');
+      }
     };
   });
