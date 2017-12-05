@@ -4,6 +4,81 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+msgid "Accept invitation"
+msgstr ""
+
+msgid "Add wallet"
+msgstr ""
+
+msgid "Add device"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Paired devices"
+msgstr ""
+
+msgid "Create new wallet"
+msgstr ""
+
+msgid "Terms of Use"
+msgstr ""
+
+msgid "Export"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Invite new device"
+msgstr ""
+
+msgid "Sweep paper wallet (unimplemented)"
+msgstr ""
+
+msgid "Choose wallet"
+msgstr ""
+
+msgid "Wallet Preferences"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Wallet Alias"
+msgstr ""
+
+msgid "Color"
+msgstr ""
+
+msgid "Delete Wallet"
+msgstr ""
+
+msgid "Device name"
+msgstr ""
+
+msgid "Email Notifications"
+msgstr ""
+
+msgid "Global preferences"
+msgstr ""
+
+msgid "Wallet Information"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Recovery"
+msgstr ""
+
+msgid "My wallet"
+msgstr ""
+
 #: public/views/authConfirmation.html:10
 msgid "(The site won't see your balance and no money will be spent)"
 msgstr ""
