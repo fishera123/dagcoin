@@ -1,6 +1,5 @@
-<div
-  ng-include="'views/includes/topbar.html'"
-  ng-init="titleSection=('Accept invitation' | translate); goBackToState = 'correspondentDevices.addCorrespondentDevice';">
+<div ng-include="'views/includes/topbar.html'"
+  ng-init="titleSection='Accept invitation'; goBackToState = 'correspondentDevices.addCorrespondentDevice';">
 </div>
 <div ng-controller="acceptCorrespondentInvitationController">
   <qr-scanner on-scan="onQrCodeScanned(data)" before-scan="beforeQrCodeScan()"></qr-scanner>

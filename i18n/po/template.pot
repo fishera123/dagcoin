@@ -488,7 +488,7 @@ msgstr ""
 msgid "Email for wallet notifications"
 msgstr ""
 
-#: public/views/acceptCorrespondentInvitation.html:24
+#: public/views/acceptCorrespondentInvitation.html:23
 msgid "Enter the pairing code received from the other device, or use your camera (icon at the upper right corner) to scan the QR code displayed on the other device."
 msgstr ""
 
@@ -817,7 +817,7 @@ msgstr ""
 msgid "Oracle address:"
 msgstr ""
 
-#: public/views/acceptCorrespondentInvitation.html:34
+#: public/views/acceptCorrespondentInvitation.html:33
 msgid "Pair"
 msgstr ""
 
