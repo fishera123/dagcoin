@@ -140,7 +140,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
       });
     };
 
-    $scope.showPayment = function (asset, walletId) {
+    $scope.showPayment = function (asset, walletId, address) {
       console.log(`will show payment in asset ${asset}`);
       if (!asset) {
         throw Error('no asset in showPayment');
@@ -155,11 +155,23 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
       }
       $scope.index.assetIndex = assetIndex;
 
-      if (walletId !== indexScope.walletId) {
+      if (walletId && walletId !== indexScope.walletId) {
         return profileService.setAndStoreFocus(walletId, () => {
           $timeout(() => {
             go.history();
           }, 500);
+        });
+      }
+
+      if (address) {
+        profileService.getWalletByAddress(address).then((wallet) => {
+          if (wallet) {
+            return profileService.setAndStoreFocus(wallet, () => {
+              $timeout(() => {
+                go.history();
+              }, 500);
+            });
+          }
         });
       }
 

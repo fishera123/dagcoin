@@ -584,7 +584,7 @@ angular.module('copayApp.services').factory('correspondentListService',
       });
     });
 
-    eventBus.on('sent_payment', (peerAddress, amount, asset, walletId, sendMessageToDevice) => {
+    eventBus.on('sent_payment', (peerAddress, amount, asset, walletId, sendMessageToDevice, address) => {
       setCurrentCorrespondent(peerAddress, () => {
         const body = `<a ng-click="showPayment('${asset}', '${walletId}')" class="payment">Payment: ${getAmountText(amount, asset)}</a>`;
         addMessageEvent(false, peerAddress, body);
@@ -593,7 +593,7 @@ angular.module('copayApp.services').factory('correspondentListService',
         });
 
         if (sendMessageToDevice) {
-          const deviceMessage = `<a ng-click="showPayment('${asset}')" class="payment">Payment: ${getAmountText(amount, asset)}</a>`;
+          const deviceMessage = `<a ng-click="showPayment('${asset}', null, '${address}')" class="payment">Payment: ${getAmountText(amount, asset)}</a>`;
           device.sendMessageToDevice(peerAddress, 'text', deviceMessage);
         }
 
