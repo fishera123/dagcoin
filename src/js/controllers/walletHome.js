@@ -766,7 +766,7 @@
                     const arrSeenCondition = ['seen', {
                       what: 'output',
                       address: myAddress,
-                      asset: self.binding.reverseAsset,
+                      asset: ENV.DAGCOIN_ASSET,
                       amount: self.binding.reverseAmount,
                     }];
                     arrDefinition = ['or', [
@@ -777,7 +777,7 @@
                       ['and', [
                         ['address', myAddress],
                         ['not', arrSeenCondition],
-                        ['in data feed', [[configService.TIMESTAMPER_ADDRESS], 'timestamp', '>', Date.now() + Math.round(self.binding.timeout * 3600 * 1000)]],
+                        ['in data feed', [[ENV.TIMESTAMPER_ADDRESS], 'timestamp', '>', Date.now() + Math.round(self.binding.timeout * 3600 * 1000)]],
                       ]],
                     ]];
                     assocSignersByPath = {
@@ -808,7 +808,7 @@
                     arrDefinition = ['or', [
                       ['and', [['address', address], arrEventCondition]],
                       ['and', [
-                        ['address', myAddress], ['in data feed', [[configService.TIMESTAMPER_ADDRESS], 'timestamp', '>', Date.now() + Math.round(self.binding.timeout * 3600 * 1000)]]
+                        ['address', myAddress], ['in data feed', [[ENV.TIMESTAMPER_ADDRESS], 'timestamp', '>', Date.now() + Math.round(self.binding.timeout * 3600 * 1000)]]
                       ]]
                     ]];
                     assocSignersByPath = {
@@ -1062,6 +1062,7 @@
               timeout: 4,
               reverseAsset: 'base',
               feed_type: 'either',
+              oracle_address: ''
             };
             if (self.binding) {
               $scope.binding.type = self.binding.type;
