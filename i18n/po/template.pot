@@ -22,9 +22,6 @@ msgstr ""
 msgid "Create new wallet"
 msgstr ""
 
-msgid "Terms of Use"
-msgstr ""
-
 msgid "Export"
 msgstr ""
 
