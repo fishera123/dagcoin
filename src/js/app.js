@@ -45,7 +45,7 @@ if (typeof fs.readFileSync === 'function') {
 }
 
 // Assumes that in generated production package.json doesn't have env object
-const isProduction = !constants.version.match(/t$/);
+const isProduction = !(constants.version.match(/t$/) || constants.version.match(/dev$/));
 
 Raven
   .config('https://2b16cb28f5864d1db14e1db9cc2407ef@sentry.io/215634', {

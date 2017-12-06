@@ -4,15 +4,14 @@
   const eventBus = require('byteballcore/event_bus.js');
 
   angular.module('copayApp.controllers').controller('inviteCorrespondentDeviceController',
-    ($scope, $timeout, profileService, go, isCordova, correspondentListService, gettextCatalog) => {
+    ($scope, $timeout, profileService, go, isCordova, correspondentListService, gettextCatalog, ENV) => {
       function onPaired(peerAddress) {
         correspondentListService.setCurrentCorrespondent(peerAddress, () => {
           go.path('correspondentDevices.correspondentDevice');
         });
       }
 
-      const conf = require('byteballcore/conf.js');
-      $scope.protocol = conf.program;
+      $scope.protocol = ENV.protocolPrefix;
       $scope.isCordova = isCordova;
       const fc = profileService.focusedClient;
       $scope.color = fc.backgroundColor;

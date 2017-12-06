@@ -19,6 +19,8 @@
       '#7A8C9E',
     ];
 
+    root.TIMESTAMPER_ADDRESS = ENV.TIMESTAMPER_ADDRESS;
+
     const defaultConfig = {
       // wallet limits
       limits: {

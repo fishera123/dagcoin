@@ -4,9 +4,6 @@
 const ecdsaSig = require('byteballcore/signature.js');
 const breadcrumbs = require('byteballcore/breadcrumbs.js');
 const constants = require('byteballcore/constants.js');
-
-const isTestnet = constants.version.match(/t$/);
-constants.DAGCOIN_ASSET = isTestnet ? 'B9dw3C3gMC+AODL/XqWjFh9jFe31jS08yf2C3zl8XGg=' : 'j5brqzPhQ0H2VNYi3i59PmlV15p54yAiSzacrQ2KqQQ=';
 const lodash = require('lodash');
 const $ = require('preconditions').singleton();
 const util = require('util');
@@ -18,6 +15,14 @@ const Constants = Common.Constants;
 const log = require('./log');
 const Credentials = require('./credentials');
 const Errors = require('./errors/errordefinitions');
+
+constants.DAGCOIN_ASSET = 'j5brqzPhQ0H2VNYi3i59PmlV15p54yAiSzacrQ2KqQQ=';
+
+if (constants.version.match(/t$/)) {
+  constants.DAGCOIN_ASSET = 'B9dw3C3gMC+AODL/XqWjFh9jFe31jS08yf2C3zl8XGg=';
+} else if (constants.version.match(/dev$/)) {
+  constants.DAGCOIN_ASSET = 'JkOyxtKClDAG70o6vtqK62CkOKqEX8en5/gGq3I1ot4=';
+}
 
 if (process.browser) {
   const conf = require('byteballcore/conf.js');

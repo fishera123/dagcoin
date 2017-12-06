@@ -454,7 +454,7 @@
             $scope.dagAsset = ENV.DAGCOIN_ASSET;
             $scope.isCordova = isCordova;
             $scope.buttonLabel = 'Generate QR Code';
-            $scope.protocol = conf.program;
+            $scope.protocol = ENV.protocolPrefix;
 
 
             Object.defineProperty($scope, '_customAmount', {
@@ -1355,7 +1355,7 @@
             };
 
             $scope.openInExplorer = function () {
-              const url = `https://${ENV.explorerPrefix}explorer.dagcoin.org/#${btx.unit}`;
+              const url = `${ENV.explorerUrl}/#${btx.unit}`;
               if (typeof nw !== 'undefined') {
                 nw.Shell.openExternal(url);
               } else if (isCordova) {

@@ -1,31 +1,32 @@
 VERSION=`cut -d '"' -f2 $BUILDDIR/../version.js`
+GREEN=\033[0;32m
+CLOSECOLOR=\033[0m
 
 UNAME := $(shell uname)
 
 ifeq ($(UNAME), Linux)
-  # do something Linux-y
   SHELLCMD := bash
 endif
 
 ifeq ($(UNAME), Darwin)
-  # do something MAC
   SHELLCMD := sh
 endif
 
-prepare-dev:
-	$(SHELLCMD) devbuilds/prepare-dev.sh base
+build-live:
+	$(SHELLCMD) devbuilds/prepare-dev.sh live
 
-prepare-dev-tn:
+build-testnet:
 	$(SHELLCMD) devbuilds/prepare-dev.sh testnet
+
+build-devnet:
+	$(SHELLCMD) devbuilds/prepare-dev.sh devnet
+	@echo "$(GREEN)Setting devnet protocol...$(CLOSECOLOR)"
+	$(SHELLCMD) devbuilds/devnetify.sh
+	@echo "$(GREEN)Building docker Witness, hub and explorer...$(CLOSECOLOR)"
+	docker pull fishera123/devnet
 
 prepare-package:
 	$(SHELLCMD) devbuilds/prepare-package.sh live
-
-prepare-package-tn:
-	$(SHELLCMD) devbuilds/prepare-package.sh testnet
-
-cordova-base:
-	grunt dist-mobile
 
 ios-prod:
 	cordova/build.sh IOS --clear
@@ -49,14 +50,6 @@ android-prod-tn:
 	cd ../byteballbuilds/project-ANDROID  && cordova build --release android
 	jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore dagcoin.jks -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp -signedjar ../byteballbuilds/project-ANDROID/platforms/android/build/outputs/apk/android-release-signed.apk  ../byteballbuilds/project-ANDROID/platforms/android/build/outputs/apk/android-release-unsigned.apk dagcoin
 	$(ANDROID_HOME)/build-tools/25.0.3/zipalign -v 4 ../byteballbuilds/project-ANDROID/platforms/android/build/outputs/apk/android-release-signed.apk ../byteballbuilds/project-ANDROID/platforms/android/build/outputs/apk/android-release-signed-aligned.apk
-
-android-debug:
-	cordova/build.sh ANDROID dagcoin --dbgjs --clear live
-	cd ../byteballbuilds/project-ANDROID  && cordova run android --device
-
-android-debug-tn:
-	cordova/build.sh ANDROID dagcoin --dbgjs --clear testnet
-	cd ../byteballbuilds/project-ANDROID  && cordova run android --device
 
 android-debug-fast:
 	cordova/build.sh ANDROID dagcoin --dbgjs live

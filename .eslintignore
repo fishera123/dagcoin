@@ -12,3 +12,4 @@ src/js/version.js
 #generated files
 public/angular.js
 public/dagcoin.js
+constants/*

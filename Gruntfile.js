@@ -356,6 +356,9 @@ module.exports = function (grunt) {
       },
       live: {
         constants: './environments/live.json'
+      },
+      devnet: {
+        constants: './environments/devnet.json'
       }
     },
     nwjs: {
@@ -534,9 +537,19 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dev', ['watch']);
   grunt.registerTask('build', (target) => {
-    var ngconstantTask = 'ngconstant:testnet';
-    if (target === 'live') {
-      ngconstantTask = 'ngconstant:live';
+    var ngconstantTask;
+    switch (target) {
+      case 'live':
+        ngconstantTask = 'ngconstant:live';
+        break;
+      case 'testnet':
+        ngconstantTask = 'ngconstant:testnet';
+        break;
+      case 'devnet':
+        ngconstantTask = 'ngconstant:devnet';
+        break;
+      default:
+        // do nothing
     }
     grunt.task.run([ngconstantTask, 'copy', 'ngtemplates', 'nggettext_compile', 'exec:version', 'stylelint', 'sass', 'concat', 'postcss', 'svgmin']);
   });

@@ -15,7 +15,8 @@
      gettextCatalog,
      authService,
      $deepStateRedirect,
-     $stickyState) => {
+     $stickyState,
+     ENV) => {
       const root = {};
       let removeListener;
       const hideSidebars = function () {
@@ -156,8 +157,7 @@
       }
 
       function extractByteballArgFromCommandLine(commandLine) {
-        const conf = require('byteballcore/conf.js');
-        const re = new RegExp(`^${conf.program}:`, 'i');
+        const re = new RegExp(`^${ENV.protocolPrefix}:`, 'i');
         const arrParts = commandLine.split(' '); // on windows includes exe and all args, on mac just our arg
         for (let i = 0; i < arrParts.length; i += 1) {
           const part = arrParts[i].trim();

@@ -1,0 +1,11 @@
+{
+  "ENV": {
+    "discoveryDeviceAddress": "06HM3M45WJYU7EXIXWCYAKPXQS32ZNR6X",
+    "DAGCOIN_ASSET": "JkOyxtKClDAG70o6vtqK62CkOKqEX8en5/gGq3I1ot4=",
+    "TIMESTAMPER_ADDRESS": "ZQFHJXFWT2OCEBXF26GFXJU4MPASWPJT",
+    "explorerUrl": "localhost:8080",
+    "hub": "localhost:6611",
+    "discoveryServicePairingCode": "AnqLjlEMkQsoP6yZ/vDwT41F3IE6ItfggF0oxyYsUj42@testnetexplorer.dagcoin.org/wss/#0000",
+    "protocolPrefix": "dagcoin-dev"
+  }
+}
