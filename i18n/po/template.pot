@@ -80,7 +80,7 @@ msgstr ""
 msgid "(The site won't see your balance and no money will be spent)"
 msgstr ""
 
-#: public/views/create.html:104
+#: public/views/create.html:105
 msgid "-- Select co-signer --"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: public/views/create.html:100
+#: public/views/create.html:101
 msgid "Co-signer {{$index+1}}:"
 msgstr ""
 
@@ -367,7 +367,7 @@ msgstr ""
 msgid "Correspondents are not restored."
 msgstr ""
 
-#: src/js/controllers/walletHome.js:652
+#: src/js/controllers/walletHome.js:651
 msgid "Could not create payment proposal"
 msgstr ""
 
@@ -406,7 +406,7 @@ msgstr ""
 msgid "Could not recognize a valid Dagcoin QR Code"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:652
+#: src/js/controllers/walletHome.js:651
 msgid "Could not send payment"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgstr ""
 msgid "Create new wallet  together with  ?"
 msgstr ""
 
-#: public/views/create.html:118
+#: public/views/create.html:119
 msgid "Create {{requiredCosigners}}-of-{{totalCosigners}} wallet"
 msgstr ""
 
@@ -618,7 +618,7 @@ msgstr ""
 msgid "Funding hub"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:892
+#: src/js/controllers/walletHome.js:891
 msgid "Funding hub is fueling your wallet, it may take several minutes. Please try again a bit later."
 msgstr ""
 
@@ -636,6 +636,10 @@ msgstr ""
 
 #: public/views/splash.html:156
 msgid "GET STARTED"
+msgstr ""
+
+#: src/js/controllers/walletHome.js:456
+msgid "Generate QR Code"
 msgstr ""
 
 #: public/views/preferencesInformation.html:69
@@ -746,7 +750,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: public/views/create.html:69
+#: public/views/create.html:70
 msgid "Laptop + phone + tablet"
 msgstr ""
 
@@ -790,7 +794,7 @@ msgstr ""
 msgid "Mobile version supports only light wallets."
 msgstr ""
 
-#: public/views/create.html:57
+#: public/views/create.html:58
 msgid "Multidevice Wallet"
 msgstr ""
 
@@ -853,7 +857,7 @@ msgstr ""
 msgid "Not enough confirmed funds"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:939
+#: src/js/controllers/walletHome.js:938
 msgid "Not enough dagcoins"
 msgstr ""
 
@@ -996,7 +1000,7 @@ msgstr ""
 msgid "Please choose the type of this wallet"
 msgstr ""
 
-#: src/js/controllers/create.js:124
+#: src/js/controllers/create.js:126
 msgid "Please enter the required fields"
 msgstr ""
 
@@ -1012,11 +1016,11 @@ msgstr ""
 msgid "Press again to exit"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:1434
+#: src/js/controllers/walletHome.js:1433
 msgid "Private payloads sent"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:941
+#: src/js/controllers/walletHome.js:940
 msgid "Problems with connecting to the hub. Please try again later"
 msgstr ""
 
@@ -1111,7 +1115,7 @@ msgstr ""
 msgid "Request specific amount"
 msgstr ""
 
-#: public/views/create.html:91
+#: public/views/create.html:92
 msgid "Required number of signatures"
 msgstr ""
 
@@ -1274,13 +1278,13 @@ msgid "Sign transaction spending  from wallet ?"
 msgstr ""
 
 #: public/views/create.html:46
-#: public/views/create.html:77
+#: public/views/create.html:78
 #: public/views/preferences.html:15
 msgid "Single address wallet"
 msgstr ""
 
 #: public/views/create.html:43
-#: public/views/create.html:74
+#: public/views/create.html:75
 #: public/views/preferences.html:20
 msgid "Single address wallets will not spawn new addresses for every transaction, change will always go to the one and only address the wallet contains."
 msgstr ""
@@ -1320,7 +1324,7 @@ msgstr ""
 #: src/js/controllers/index.js:250
 #: src/js/controllers/index.js:283
 #: src/js/controllers/preferencesDelete.js:31
-#: src/js/controllers/walletHome.js:1434
+#: src/js/controllers/walletHome.js:1433
 msgid "Success"
 msgstr ""
 
@@ -1356,13 +1360,13 @@ msgstr ""
 msgid "Terms of Use"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:880
+#: src/js/controllers/walletHome.js:879
 msgid "The Funding Client is not ready"
 msgstr ""
 
 #: src/js/controllers/correspondentDevice.js:270
 msgid ""
-"The amounts are equal, you cannot require the peer to pay to the contract.  \n"
+"The amounts are equal, you cannot require the peer to pay to the contract.\n"
 "              Please either change the amounts slightly or fund the entire contract yourself and require the peer to pay his half to you."
 msgstr ""
 
@@ -1370,7 +1374,7 @@ msgstr ""
 msgid "The expected value will be posted:"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:885
+#: src/js/controllers/walletHome.js:884
 msgid "The funding service is currently not supported on secondary wallets. Load some bytes on it"
 msgstr ""
 
@@ -1470,7 +1474,7 @@ msgstr ""
 msgid "Total Locked Balance"
 msgstr ""
 
-#: public/views/create.html:83
+#: public/views/create.html:84
 msgid "Total number of co-signers"
 msgstr ""
 
@@ -1482,7 +1486,7 @@ msgstr ""
 msgid "Transactions<br> Downloaded"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:699
+#: src/js/controllers/walletHome.js:698
 msgid "Unable to send transaction proposal"
 msgstr ""
 
@@ -1588,7 +1592,7 @@ msgid "Wallet cannot be converted to single address wallet as it consists of mul
 msgstr ""
 
 #: public/views/create.html:31
-#: public/views/create.html:67
+#: public/views/create.html:68
 msgid "Wallet name"
 msgstr ""
 
@@ -1631,7 +1635,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:1272
+#: src/js/controllers/walletHome.js:1271
 msgid "You are sending all your stable amount. Transaction fee will be automatically excluded!"
 msgstr ""
 
@@ -1664,7 +1668,7 @@ msgstr ""
 msgid "Your wallet will be created on this device, keep it safe.  See your backup options in the Settings menu."
 msgstr ""
 
-#: public/views/create.html:110
+#: public/views/create.html:111
 msgid "[ Add new co-signer device ]"
 msgstr ""
 
@@ -1678,6 +1682,10 @@ msgstr ""
 
 #: public/views/copayers.html:30
 msgid "cancel wallet creation"
+msgstr ""
+
+#: src/js/services/correspondentListService.js:456
+msgid "chat recording"
 msgstr ""
 
 #: public/views/editCorrespondentDevice.html:56
@@ -1704,7 +1712,7 @@ msgstr ""
 msgid "failed to create shared address :"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:1209
+#: src/js/controllers/walletHome.js:1208
 msgid "failed to find asset index of asset"
 msgstr ""
 
@@ -1739,7 +1747,7 @@ msgstr ""
 msgid "more than 1 non-base asset not supported"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:952
+#: src/js/controllers/walletHome.js:951
 msgid "my address not known"
 msgstr ""
 
@@ -1751,7 +1759,11 @@ msgstr ""
 msgid "pairing"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:756
+#: src/js/controllers/correspondentDevice.js:405
+msgid "payment:"
+msgstr ""
+
+#: src/js/controllers/walletHome.js:755
 msgid "recipient device address not known"
 msgstr ""
 
@@ -1759,11 +1771,11 @@ msgstr ""
 msgid "refused to sign the transaction"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:738
-#: src/js/controllers/walletHome.js:743
-#: src/js/controllers/walletHome.js:838
-#: src/js/controllers/walletHome.js:933
-#: src/js/controllers/walletHome.js:980
+#: src/js/controllers/walletHome.js:737
+#: src/js/controllers/walletHome.js:742
+#: src/js/controllers/walletHome.js:837
+#: src/js/controllers/walletHome.js:932
+#: src/js/controllers/walletHome.js:979
 msgid "sending"
 msgstr ""
 
@@ -1783,7 +1795,7 @@ msgstr ""
 msgid "{{address}} can be spent if:"
 msgstr ""
 
-#: public/views/modals/customized-amount.html:61
+#: public/views/modals/customized-amount.html:62
 msgid "{{buttonLabel}}"
 msgstr ""
 

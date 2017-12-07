@@ -54,7 +54,8 @@
       </form>
     </dag-tab>
 
-    <dag-tab heading="{{'Multidevice Wallet' | translate}}" tab-click="create.setMultisig()">
+
+    <dag-tab heading="{{'Multidevice Wallet' | translate}}" tab-click="create.setMultisig()" selected="create.multisigSelected">
 
       <form name="setupForm" ng-submit="create.create(setupForm)" novalidate>
 
