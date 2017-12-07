@@ -1112,7 +1112,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         self.setOngoingProcess('generatingCSV', true);
 
         $timeout(() => {
-          fc.getTxHistory(self.arrBalances[self.assetIndex].asset, self.shared_address, (txs) => {
+          fc.getTxHistory(ENV.DAGCOIN_ASSET, self.shared_address, (txs) => {
             self.setOngoingProcess('generatingCSV', false);
             $log.debug('Wallet Transaction History:', txs);
 
@@ -1121,7 +1121,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
             let csvContent = '';
 
             if (!isNode) csvContent = 'data:text/csv;charset=utf-8,';
-            csvContent += 'Date,Destination,Note,Amount,Currency,Spot Value,Total Value,Tax Type,Category\n';
+            csvContent += 'Date,Destination,Note,Amount,Currency\n';
 
             let amount;
             let note;
@@ -1141,7 +1141,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                 note += ` Moved:${it.amount}`;
               }
 
-              dataString = `${formatDate(it.time * 1000)},${formatString(it.addressTo)},${note},${amount},byte,,,,`;
+              dataString = `${formatDate(it.time * 1000)},${formatString(it.addressTo)},${note},${amount},dag`;
               csvContent += `${dataString}\n`;
             });
 
