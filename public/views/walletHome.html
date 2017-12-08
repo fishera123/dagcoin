@@ -332,7 +332,7 @@
                </a>
 							</div>
               
-              <div class="title clearfix" style="margin-left: 0;">
+              <div class="title clearfix" style="margin-left: 0;" ng-if="index.baseBalance.stable > 0">
                 <div ng-if="home.deviceAddressIsKnown()">
                   <a ng-click="home.openBindModal()">
                     <span ng-if="!home.binding" translate>Bind the payment to a condition</span>
