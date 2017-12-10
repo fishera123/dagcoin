@@ -450,16 +450,12 @@ angular.module('copayApp.services').factory('correspondentListService',
     }
 
     function parseMessage(message) {
-      switch (message.type) {
-        case 'system':
-          message.message = JSON.parse(message.message);
-          message.message = gettextCatalog.getString(`chat recording ${message.message.state ? '&nbsp;' : ''}`) +
-            `<b dropdown-toggle="#recording-drop">${message.message.state ? 'ON' : 'OFF'}</b>` +
-            '<span class="padding"></span>';
-          message.chat_recording_status = true;
-          break;
-        default:
-          break;
+      if (message.type === 'system') {
+        message.message = JSON.parse(message.message);
+        message.message = `${gettextCatalog.getString('chat recording')}
+             <b dropdown-toggle="#recording-drop">${message.message.state ? 'ON' : 'OFF'}</b>
+             <span class="padding"></span>`;
+        message.chat_recording_status = true;
       }
       return message;
     }
