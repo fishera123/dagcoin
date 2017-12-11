@@ -5,7 +5,7 @@
 
 <qr-scanner ng-if="tab === 'send'" ng-show="index.isComplete" on-scan="index.onQrCodeScanned(data)" before-scan="index.onBeforeScan()"></qr-scanner>
 <div class="backup" ng-if="index.needsBackup" ng-click="index.openBackupNeededModal()">
-  <span translate>Wallet not backed up</span>
+  <span translate>Wallet seed not backed up</span>
 </div>
 <div ng-controller="walletHomeController as home">
   <div class="onGoingProcess" ng-show="index.isOffline">
