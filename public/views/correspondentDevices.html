@@ -11,7 +11,7 @@
       <ul class="no-bullet m0 correspondentList" ng-init="readList()">
         <li class="p10 line-b"
             ng-repeat="correspondent in list"
-            ng-class="{'noclick': !correspondent.removable}">
+            ng-class="{'noclick': !correspondent.clickable}">
           <a ng-show="selectedCorrespondentList[correspondent.device_address]" 
             ng-hide="hideRemoveButton(correspondent.removable)"
             class="removeCorrespondentList" 

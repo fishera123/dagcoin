@@ -758,7 +758,7 @@
 
 
                 // never reuse addresses as the required output could be already present
-                useOrIssueNextAddress(fc.credentials.walletId, 0, (addressInfo) => {
+                walletDefinedByKeys.issueNextAddress(fc.credentials.walletId, 0, (addressInfo) => {
                   myAddress = addressInfo.address;
                   let arrDefinition;
                   let assocSignersByPath;
@@ -955,7 +955,8 @@
                           device.sendMessageToDevice(recipientDeviceAddress, 'text', paymentRequestText);
                           correspondentListService.messageEventsByCorrespondent[recipientDeviceAddress].push({
                             bIncoming: false,
-                            message: correspondentListService.formatOutgoingMessage(paymentRequestText)
+                            message: correspondentListService.formatOutgoingMessage(paymentRequestText),
+                            timestamp: Math.floor(Date.now() / 1000)
                           });
                           // issue next address to avoid reusing the reverse payment address
                           if (!fc.isSingleAddress) {
@@ -1060,7 +1061,7 @@
             $scope.binding = { // defaults
               type: 'reverse_payment',
               timeout: 4,
-              reverseAsset: 'base',
+              reverseAsset: ENV.DAGCOIN_ASSET,
               feed_type: 'either',
               oracle_address: ''
             };

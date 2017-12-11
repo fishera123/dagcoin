@@ -102,6 +102,14 @@
 
 							<span ng-if="index.dagBalance.pending" class="ballance" translate>Pending wallet balance: {{index.dagBalance.pendingStr}}</span>
 							<span ng-if="!index.dagBalance.pending" class="ballance" translate>Wallet balance</span>
+              
+              <div class="size-10 m10t" ng-if="index.dagBalance.shared !== undefined">
+                <a ng-click="index.openSubwalletModal()">
+                  <span translate>Also</span>
+                  <span>{{index.dagBalance.sharedStr}}</span>
+                  <span translate>in smart wallets</span>
+                </a>
+              </div>
 
 						</div>
 
