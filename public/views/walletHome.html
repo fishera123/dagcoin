@@ -375,34 +375,34 @@
 
 			<div class="p-history js-introduction">
 				<div class="p-wrap">
-					<div class="page-heading"><span translate>Your transaction history</span></div>
-					<div  class="transactions" >
-						<div class="oh text-center" ng-show="!index.txHistory[0] || index.updatingTxHistory[index.walletId]">
-						<span ng-show="index.txHistoryError" ng-click='index.updateTxHistory()'>
-						  <p class="size-12 m10b db text-gray" translate>Could not fetch transaction history</p>
-						  <button class="btn_red-full round light-gray tiny" translate>Tap to retry</button>
-						</span>
-							<span ng-if="!index.txHistoryError" translate>
-						  No transactions yet
-						</span>
-						</div>
+					  <div class="page-heading"><span translate>Your transaction history</span></div>
+  					<div  class="transactions" >
+  						<div class="oh text-center" ng-show="!index.txHistory[0] || index.updatingTxHistory[index.walletId]">
+  						<span ng-show="index.txHistoryError" ng-click='index.updateTxHistory()'>
+  						  <p class="size-12 m10b db text-gray" translate>Could not fetch transaction history</p>
+  						  <button class="btn_red-full round light-gray tiny" translate>Tap to retry</button>
+  						</span>
+  							<span ng-if="!index.txHistoryError" translate>
+  						  No transactions yet
+  						</span>
+  						</div>
 
-						<div ng-show="index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
-							<div class="transactions__head"><span></span></div>
-							<div class="transactions__table">
-								<table>
-									<tbody>
-									<tr  ng-repeat="btx in index.txHistory | filter: { isFundingNodeTransaction: false }" ng-click="home.openTxModal(btx, index.txHistory)"
-										 class="row  last-transactions-content">
-										<td><span class="details-price" ng-class="btx.action == 'received'? 'success':'danger'">{{btx.amountStr}}</span>
-											<div class="details-wrap"><span class="details-info" translate>My Account</span>
-												<svg class="icon" ng-class="btx.action == 'received'? 'icon-arrow-left':'icon-arrow-right'">
-													<use
-															xlink:href="{{index.getSvgSrc(btx.action == 'received'? 'icon-arrow-left':'icon-arrow-right')}}"></use>
-												</svg>
-												<span ng-if="btx.action == 'received'" ng-repeat="address in btx.arrPayerAddresses" class="details-info">{{address ? address : ('Incoming transaction' | translate)}}</span>
+  						<div ng-show="index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
+  							<div class="transactions__head"><span></span></div>
+  							<div class="transactions__table">
+  								<table>
+  									<tbody>
+  									<tr  ng-repeat="btx in index.txHistory | filter: { isFundingNodeTransaction: false }" ng-click="home.openTxModal(btx, index.txHistory)"
+  										 class="row  last-transactions-content">
+  										<td><span class="details-price" ng-class="btx.action == 'received'? 'success':'danger'">{{btx.amountStr}}</span>
+  											<div class="details-wrap"><span class="details-info" translate>My Account</span>
+  												<svg class="icon" ng-class="btx.action == 'received'? 'icon-arrow-left':'icon-arrow-right'">
+  													<use
+  															xlink:href="{{index.getSvgSrc(btx.action == 'received'? 'icon-arrow-left':'icon-arrow-right')}}"></use>
+  												</svg>
+  												<span ng-if="btx.action == 'received'" ng-repeat="address in btx.arrPayerAddresses" class="details-info">{{address ? address : ('Incoming transaction' | translate)}}</span>
 
-												<span ng-if="btx.action == 'sent'" class="details-info">{{btx.addressTo}}</span>
+  												<span ng-if="btx.action == 'sent'" class="details-info">{{btx.addressTo}}</span>
 
 											</div>
 										</td>

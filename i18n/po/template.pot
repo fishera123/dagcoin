@@ -4,83 +4,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-msgid "Accept invitation"
-msgstr ""
-
-msgid "Add wallet"
-msgstr ""
-
-msgid "Add device"
-msgstr ""
-
-msgid "Backup"
-msgstr ""
-
-msgid "Paired devices"
-msgstr ""
-
-msgid "Create new wallet"
-msgstr ""
-
-msgid "Export"
-msgstr ""
-
-msgid "Import"
-msgstr ""
-
-msgid "Invite new device"
-msgstr ""
-
-msgid "Sweep paper wallet (unimplemented)"
-msgstr ""
-
-msgid "Choose wallet"
-msgstr ""
-
-msgid "Wallet Preferences"
-msgstr ""
-
-msgid "About"
-msgstr ""
-
-msgid "Advanced"
-msgstr ""
-
-msgid "Wallet Alias"
-msgstr ""
-
-msgid "Color"
-msgstr ""
-
-msgid "Delete Wallet"
-msgstr ""
-
-msgid "Device name"
-msgstr ""
-
-msgid "Email Notifications"
-msgstr ""
-
-msgid "Global preferences"
-msgstr ""
-
-msgid "Wallet Information"
-msgstr ""
-
-msgid "Language"
-msgstr ""
-
-msgid "Recovery"
-msgstr ""
-
-msgid "My wallet"
-msgstr ""
-
 #: public/views/authConfirmation.html:10
 msgid "(The site won't see your balance and no money will be spent)"
 msgstr ""
 
-#: public/views/create.html:105
+#: public/views/create.html:104
 msgid "-- Select co-signer --"
 msgstr ""
 
@@ -107,11 +35,11 @@ msgstr ""
 msgid "A wallet for decentralized value"
 msgstr ""
 
-#: public/views/preferencesGlobal.html:59
+#: public/views/preferencesGlobal.html:73
 msgid "ABOUT"
 msgstr ""
 
-#: public/views/preferencesGlobal.html:62
+#: public/views/preferencesGlobal.html:76
 msgid "About Dagcoin"
 msgstr ""
 
@@ -158,7 +86,9 @@ msgid "Advanced"
 msgstr ""
 
 #: public/views/preferencesInformation.html:68
-msgid "All Wallet Addresses"
+msgid ""
+"All Wallet Addresses\n"
+"      <button ng-click=\"info.setAddress()\" ng-disabled=\"index.isOffline\" ng-show=\"!info.isSingleAddressWallet()\">{{'Generate new address' | translate}}</button>"
 msgstr ""
 
 #: public/views/splash.html:52
@@ -215,6 +145,10 @@ msgstr ""
 msgid "Available Balance"
 msgstr ""
 
+#: public/views/preferencesGlobal.html:44
+msgid "BACKUP"
+msgstr ""
+
 #: public/views/correspondentDevice.html:7
 #: public/views/editCorrespondentDevice.html:15
 #: public/views/modals/correspondentListToReSendPrivPayloads.html:6
@@ -226,12 +160,8 @@ msgstr ""
 msgid "Backup now"
 msgstr ""
 
-#: public/views/backup.html:5
-msgid "Backup seed"
-msgstr ""
-
-#: public/views/preferencesGlobal.html:40
-msgid "Backup wallet"
+#: public/views/preferencesGlobal.html:48
+msgid "Backup wallet seed"
 msgstr ""
 
 #: src/js/controllers/backup.js:7
@@ -330,7 +260,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: public/views/create.html:101
+#: public/views/create.html:100
 msgid "Co-signer {{$index+1}}:"
 msgstr ""
 
@@ -338,7 +268,7 @@ msgstr ""
 msgid "Co-signers"
 msgstr ""
 
-#: public/views/backup.html:134
+#: public/views/export.html:53
 msgid "Compress the file? (Slower)"
 msgstr ""
 
@@ -363,7 +293,7 @@ msgstr ""
 msgid "Copied to clipboard"
 msgstr ""
 
-#: public/views/recovery.html:46
+#: public/views/recoveryFromSeed.html:43
 msgid "Correspondents are not restored."
 msgstr ""
 
@@ -410,7 +340,7 @@ msgstr ""
 msgid "Could not send payment"
 msgstr ""
 
-#: public/views/add.html:10
+#: public/views/add.html:9
 #: public/views/create.html:52
 msgid "Create new wallet"
 msgstr ""
@@ -419,7 +349,7 @@ msgstr ""
 msgid "Create new wallet  together with  ?"
 msgstr ""
 
-#: public/views/create.html:119
+#: public/views/create.html:118
 msgid "Create {{requiredCosigners}}-of-{{totalCosigners}} wallet"
 msgstr ""
 
@@ -446,11 +376,7 @@ msgstr ""
 msgid "Custom settings"
 msgstr ""
 
-#: public/views/modals/destination-address.html:124
-msgid "DAG address"
-msgstr ""
-
-#: public/views/backup.html:73
+#: public/views/backup.html:79
 msgid "DELETE WORDS"
 msgstr ""
 
@@ -539,7 +465,7 @@ msgid ""
 "\t\t\t\twith."
 msgstr ""
 
-#: public/views/recovery.html:47
+#: public/views/recoveryFromSeed.html:44
 msgid "Do not clone wallets, stop using the original wallet with this seed."
 msgstr ""
 
@@ -560,7 +486,7 @@ msgstr ""
 msgid "Email for wallet notifications"
 msgstr ""
 
-#: public/views/acceptCorrespondentInvitation.html:23
+#: public/views/acceptCorrespondentInvitation.html:24
 msgid "Enter the pairing code received from the other device, or use your camera (icon at the upper right corner) to scan the QR code displayed on the other device."
 msgstr ""
 
@@ -577,7 +503,7 @@ msgstr ""
 msgid "Expected value:"
 msgstr ""
 
-#: public/views/backup.html:142
+#: public/views/export.html:61
 msgid "Export"
 msgstr ""
 
@@ -590,7 +516,7 @@ msgstr ""
 msgid "Export completed successfully"
 msgstr ""
 
-#: public/views/backup.html:95
+#: public/views/export.html:14
 msgid "Exporting..."
 msgstr ""
 
@@ -598,7 +524,7 @@ msgstr ""
 msgid "Extended Public Keys"
 msgstr ""
 
-#: public/views/backup.html:101
+#: public/views/export.html:20
 msgid "Failed to export"
 msgstr ""
 
@@ -614,7 +540,7 @@ msgstr ""
 msgid "Full address:"
 msgstr ""
 
-#: public/views/backup.html:84
+#: public/views/preferencesGlobal.html:63
 msgid "Full backup"
 msgstr ""
 
@@ -642,10 +568,6 @@ msgstr ""
 msgid "GET STARTED"
 msgstr ""
 
-#: src/js/controllers/walletHome.js:456
-msgid "Generate QR Code"
-msgstr ""
-
 #: public/views/preferencesInformation.html:69
 msgid "Generate new address"
 msgstr ""
@@ -670,7 +592,7 @@ msgstr ""
 msgid "Hardware wallet"
 msgstr ""
 
-#: public/views/backup.html:28
+#: public/views/backup.html:32
 msgid "Hide the Wallet Seed"
 msgstr ""
 
@@ -698,7 +620,7 @@ msgstr ""
 msgid "If the peer doesn't pay, I can take my money back after:"
 msgstr ""
 
-#: public/views/recovery.html:94
+#: public/views/import.html:45
 msgid "Import"
 msgstr ""
 
@@ -707,11 +629,11 @@ msgstr ""
 msgid "Import successfully completed, please restart the application."
 msgstr ""
 
-#: public/views/add.html:17
+#: public/views/add.html:16
 msgid "Import wallet"
 msgstr ""
 
-#: public/views/recovery.html:64
+#: public/views/import.html:15
 msgid "Importing wallet..."
 msgstr ""
 
@@ -725,7 +647,7 @@ msgstr ""
 msgid "Insert my address"
 msgstr ""
 
-#: src/js/controllers/index.js:1592
+#: src/js/controllers/index.js:1591
 msgid "Invalid Touch ID"
 msgstr ""
 
@@ -746,7 +668,6 @@ msgid "KEEP ONLY DATA RELEVANT TO YOU"
 msgstr ""
 
 #: public/views/modals/destination-address.html:111
-#: public/views/modals/destination-address.html:115
 msgid "Label"
 msgstr ""
 
@@ -754,7 +675,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: public/views/create.html:70
+#: public/views/create.html:69
 msgid "Laptop + phone + tablet"
 msgstr ""
 
@@ -796,10 +717,6 @@ msgstr ""
 
 #: src/js/controllers/import.js:173
 msgid "Mobile version supports only light wallets."
-msgstr ""
-
-#: public/views/create.html:58
-msgid "Multidevice Wallet"
 msgstr ""
 
 #: public/views/walletHome.html:153
@@ -857,7 +774,7 @@ msgstr ""
 msgid "No transactions yet"
 msgstr ""
 
-#: src/js/controllers/correspondentDevice.js:406
+#: src/js/controllers/correspondentDevice.js:385
 msgid "Not enough confirmed funds"
 msgstr ""
 
@@ -884,11 +801,11 @@ msgstr ""
 msgid "Offer a contract"
 msgstr ""
 
-#: public/views/backup.html:67
+#: public/views/backup.html:73
 msgid "Once you have written your wallet seed down, it is recommended to delete it from this device."
 msgstr ""
 
-#: public/views/recovery.html:45
+#: public/views/recoveryFromSeed.html:42
 msgid "Only single-sig wallets can be recovered."
 msgstr ""
 
@@ -897,7 +814,7 @@ msgstr ""
 msgid "Oracle address:"
 msgstr ""
 
-#: public/views/acceptCorrespondentInvitation.html:33
+#: public/views/acceptCorrespondentInvitation.html:34
 msgid "Pair"
 msgstr ""
 
@@ -914,7 +831,7 @@ msgstr ""
 msgid "Passphrase"
 msgstr ""
 
-#: public/views/recovery.html:86
+#: public/views/import.html:37
 msgid "Password"
 msgstr ""
 
@@ -971,10 +888,6 @@ msgstr ""
 msgid "Payment Sent"
 msgstr ""
 
-#: src/js/services/correspondentListService.js:196
-msgid "Payment request:"
-msgstr ""
-
 #: public/views/modals/offer-contract.html:50
 msgid "Peer pays to:"
 msgstr ""
@@ -993,10 +906,6 @@ msgstr ""
 
 #: public/views/preferencesDeleteWallet.html:10
 msgid "Permanently delete this wallet."
-msgstr ""
-
-#: public/views/create.html:22
-msgid "Plain Wallet"
 msgstr ""
 
 #: public/views/splash.html:22
@@ -1060,20 +969,12 @@ msgstr ""
 msgid "Reconnecting to Wallet Service..."
 msgstr ""
 
-#: public/views/recovery.html:36
+#: public/views/recoveryFromSeed.html:33
 msgid "Recover"
 msgstr ""
 
-#: public/views/recovery.html:52
-msgid "Recover from backup"
-msgstr ""
-
-#: public/views/recovery.html:6
-msgid "Recover from seed"
-msgstr ""
-
-#: public/views/preferencesGlobal.html:49
-msgid "Recover wallet"
+#: public/views/preferencesGlobal.html:58
+msgid "Recovery from seed"
 msgstr ""
 
 #: public/views/walletHome.html:38
@@ -1100,12 +1001,12 @@ msgstr ""
 msgid "Rename:"
 msgstr ""
 
-#: public/views/backup.html:128
+#: public/views/export.html:47
 #: public/views/includes/password.html:10
 msgid "Repeat password"
 msgstr ""
 
-#: public/views/backup.html:125
+#: public/views/export.html:44
 msgid "Repeat the password"
 msgstr ""
 
@@ -1113,8 +1014,8 @@ msgstr ""
 msgid "Replace"
 msgstr ""
 
-#: public/views/preferencesGlobal.html:53
-msgid "Request Spending Restrictions"
+#: public/views/preferencesGlobal.html:39
+msgid "Request Password"
 msgstr ""
 
 #: public/views/walletHome.html:261
@@ -1122,7 +1023,7 @@ msgid "Request a specific amount"
 msgstr ""
 
 #: public/views/correspondentDevice.html:297
-#: src/js/controllers/correspondentDevice.js:866
+#: src/js/controllers/correspondentDevice.js:845
 msgid "Request payment"
 msgstr ""
 
@@ -1130,8 +1031,12 @@ msgstr ""
 msgid "Request specific amount"
 msgstr ""
 
-#: public/views/create.html:92
+#: public/views/create.html:91
 msgid "Required number of signatures"
+msgstr ""
+
+#: public/views/preferencesGlobal.html:67
+msgid "Restore from full backup"
 msgstr ""
 
 #: public/views/splash.html:125
@@ -1174,7 +1079,7 @@ msgstr ""
 msgid "Scan the above QR code using the other device, or send this pairing code to the other device:"
 msgstr ""
 
-#: src/js/controllers/index.js:1583
+#: src/js/controllers/index.js:1582
 msgid "Scan your fingerprint please"
 msgstr ""
 
@@ -1182,16 +1087,12 @@ msgstr ""
 msgid "Scanning Wallet funds..."
 msgstr ""
 
-#: public/views/recovery.html:18
+#: public/views/recoveryFromSeed.html:15
 msgid "Scanning for addresses..."
 msgstr ""
 
 #: public/views/paperWallet.html:18
 msgid "Scanning wallet funds..."
-msgstr ""
-
-#: public/views/preferencesGlobal.html:36
-msgid "Security"
 msgstr ""
 
 #: src/js/controllers/recoveryFromSeed.js:297
@@ -1248,7 +1149,7 @@ msgstr ""
 msgid "Session log"
 msgstr ""
 
-#: public/views/backup.html:116
+#: public/views/export.html:35
 msgid "Set up a Password"
 msgstr ""
 
@@ -1268,10 +1169,6 @@ msgstr ""
 msgid "Share address"
 msgstr ""
 
-#: public/views/walletHome.html:220
-msgid "Share it with the sender via email or text."
-msgstr ""
-
 #: public/views/walletHome.html:258
 msgid "Share the link above to receive payments."
 msgstr ""
@@ -1284,7 +1181,7 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
-#: public/views/backup.html:27
+#: public/views/backup.html:31
 msgid "Show the Wallet Seed Anyway"
 msgstr ""
 
@@ -1293,13 +1190,13 @@ msgid "Sign transaction spending  from wallet ?"
 msgstr ""
 
 #: public/views/create.html:46
-#: public/views/create.html:78
+#: public/views/create.html:77
 #: public/views/preferences.html:15
 msgid "Single address wallet"
 msgstr ""
 
 #: public/views/create.html:43
-#: public/views/create.html:75
+#: public/views/create.html:74
 #: public/views/preferences.html:20
 msgid "Single address wallets will not spawn new addresses for every transaction, change will always go to the one and only address the wallet contains."
 msgstr ""
@@ -1308,19 +1205,12 @@ msgstr ""
 msgid "Small Expenses Wallet"
 msgstr ""
 
-#: public/views/unsupported.html:7
-msgid ""
-"Sorry, Copay is not supported by your browser.\n"
-"    Please use a current version of Google Chrome, Mozilla Firefox, Internet Explorer, Safari, or Opera.\n"
-"    <br>\n"
-"    Note that localStorage should also be enabled (enabled by default in most cases)."
-msgstr ""
-
 #: src/js/controllers/create.js:31
 msgid "Specify Seed..."
 msgstr ""
 
 #: public/views/preferences.html:37
+#: public/views/preferencesGlobal.html:36
 msgid "Spending Restrictions"
 msgstr ""
 
@@ -1328,7 +1218,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: public/views/preferencesGlobal.html:43
+#: public/views/preferencesGlobal.html:51
 msgid "Still not done"
 msgstr ""
 
@@ -1359,7 +1249,7 @@ msgid "THIS ACTION CANNOT BE REVERSED"
 msgstr ""
 
 #: public/views/walletHome.html:220
-msgid "Tap the"
+msgid "Tap the <strong>QR-code</strong> to copy its address.<br>Share it with the sender via email or text."
 msgstr ""
 
 #: public/views/walletHome.html:126
@@ -1378,9 +1268,9 @@ msgstr ""
 msgid "The Funding Client is not ready"
 msgstr ""
 
-#: src/js/controllers/correspondentDevice.js:291
+#: src/js/controllers/correspondentDevice.js:270
 msgid ""
-"The amounts are equal, you cannot require the peer to pay to the contract.\n"
+"The amounts are equal, you cannot require the peer to pay to the contract.  \n"
 "              Please either change the amounts slightly or fund the entire contract yourself and require the peer to pay his half to you."
 msgstr ""
 
@@ -1443,11 +1333,11 @@ msgstr ""
 msgid "This Wallet has positive balance."
 msgstr ""
 
-#: src/js/controllers/correspondentDevice.js:403
+#: src/js/controllers/correspondentDevice.js:382
 msgid "This is a private asset, please send it only by clicking links from chat"
 msgstr ""
 
-#: src/js/controllers/correspondentDevice.js:642
+#: src/js/controllers/correspondentDevice.js:621
 msgid "This payment is already under way"
 msgstr ""
 
@@ -1455,7 +1345,7 @@ msgstr ""
 msgid "This transaction has become invalid; possibly due to a double spend attempt."
 msgstr ""
 
-#: public/views/recovery.html:44
+#: public/views/recoveryFromSeed.html:41
 msgid "This will permanently delete all your existing wallets!"
 msgstr ""
 
@@ -1488,7 +1378,7 @@ msgstr ""
 msgid "Total Locked Balance"
 msgstr ""
 
-#: public/views/create.html:84
+#: public/views/create.html:83
 msgid "Total number of co-signers"
 msgstr ""
 
@@ -1532,15 +1422,15 @@ msgstr ""
 msgid "WARNING: Backup needed"
 msgstr ""
 
-#: public/views/backup.html:57
+#: public/views/backup.html:63
 msgid "WARNING: This seed was created with a passphrase. To recover this wallet both the mnemonic and passphrase are needed."
 msgstr ""
 
-#: public/views/recovery.html:112
+#: public/views/import.html:62
 msgid "WARNING: This will permanently delete all your existing wallets!"
 msgstr ""
 
-#: public/views/recovery.html:43
+#: public/views/recoveryFromSeed.html:40
 msgid "WARNINGS:"
 msgstr ""
 
@@ -1606,11 +1496,11 @@ msgid "Wallet cannot be converted to single address wallet as it consists of mul
 msgstr ""
 
 #: public/views/create.html:31
-#: public/views/create.html:68
+#: public/views/create.html:67
 msgid "Wallet name"
 msgstr ""
 
-#: public/views/backup.html:18
+#: public/views/backup.html:21
 msgid "Wallet seed not available."
 msgstr ""
 
@@ -1636,7 +1526,7 @@ msgstr ""
 msgid "Who signs:"
 msgstr ""
 
-#: public/views/backup.html:37
+#: public/views/backup.html:43
 msgid "Write it down and keep it somewhere safe."
 msgstr ""
 
@@ -1653,12 +1543,12 @@ msgstr ""
 msgid "You are sending all your stable amount. Transaction fee will be automatically excluded!"
 msgstr ""
 
-#: public/views/backup.html:36
-#: public/views/recovery.html:30
+#: public/views/backup.html:42
+#: public/views/recoveryFromSeed.html:27
 msgid "Your Wallet Seed:"
 msgstr ""
 
-#: public/views/backup.html:119
+#: public/views/export.html:38
 msgid "Your export password"
 msgstr ""
 
@@ -1670,7 +1560,7 @@ msgstr ""
 msgid "Your transaction history"
 msgstr ""
 
-#: public/views/recovery.html:78
+#: public/views/import.html:29
 msgid "Your wallet file:"
 msgstr ""
 
@@ -1682,11 +1572,11 @@ msgstr ""
 msgid "Your wallet will be created on this device, keep it safe.  See your backup options in the Settings menu."
 msgstr ""
 
-#: public/views/create.html:111
+#: public/views/create.html:110
 msgid "[ Add new co-signer device ]"
 msgstr ""
 
-#: src/js/controllers/correspondentDevice.js:430
+#: src/js/controllers/correspondentDevice.js:409
 msgid "[your share of payment to the contract]()"
 msgstr ""
 
@@ -1696,10 +1586,6 @@ msgstr ""
 
 #: public/views/copayers.html:30
 msgid "cancel wallet creation"
-msgstr ""
-
-#: src/js/services/correspondentListService.js:466
-msgid "chat recording"
 msgstr ""
 
 #: public/views/editCorrespondentDevice.html:56
@@ -1722,7 +1608,7 @@ msgstr ""
 msgid "explicitly"
 msgstr ""
 
-#: src/js/controllers/correspondentDevice.js:568
+#: src/js/controllers/correspondentDevice.js:547
 msgid "failed to create shared address :"
 msgstr ""
 
@@ -1757,7 +1643,7 @@ msgstr ""
 msgid "locked by pending payments"
 msgstr ""
 
-#: src/js/controllers/correspondentDevice.js:623
+#: src/js/controllers/correspondentDevice.js:602
 msgid "more than 1 non-base asset not supported"
 msgstr ""
 
@@ -1765,7 +1651,7 @@ msgstr ""
 msgid "my address not known"
 msgstr ""
 
-#: src/js/controllers/correspondentDevice.js:514
+#: src/js/controllers/correspondentDevice.js:493
 msgid "no member addresses in"
 msgstr ""
 
@@ -1790,12 +1676,7 @@ msgid "sending"
 msgstr ""
 
 #: public/views/modals/approveNewWitnesses.html:17
-#: src/js/services/correspondentListService.js:190
 msgid "to"
-msgstr ""
-
-#: public/views/walletHome.html:220
-msgid "to copy its address."
 msgstr ""
 
 #: src/js/controllers/recoveryFromSeed.js:264
@@ -1827,7 +1708,7 @@ msgstr ""
 msgid "{{item.m}}-of-{{item.n}}"
 msgstr ""
 
-#: public/views/backup.html:14
+#: public/views/backup.html:16
 msgid "{{wordsC.text}}"
 msgstr ""
 
