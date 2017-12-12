@@ -543,15 +543,12 @@ angular.module('copayApp.services').factory('correspondentListService',
         db.query(
           'SELECT DISTINCT device_address FROM shared_address_signing_paths',
           (rows) => {
-            const addresses = rows.map(
-              (r) => { 
-                return r.device_address;
-              });
+            const addresses = rows.map(r => r.device_address);
             resolve(addresses);
           }
         );
       });
-    };
+    }
 
     eventBus.on('text', (fromAddress, body) => {
       console.log(`NEW TEXT MESSAGE FROM ${fromAddress}`);
