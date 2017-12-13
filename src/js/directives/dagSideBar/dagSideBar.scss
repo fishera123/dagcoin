@@ -15,7 +15,6 @@
     width: 90%;
     height: 100%;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    -webkit-transform: translateX(-103%);
     transform: translateX(-103%);
     display: flex;
     flex-direction: column;
@@ -28,7 +27,6 @@
     pointer-events: auto;
 
     .sidebar_content {
-      -webkit-transform: none;
       transform: none;
     }
 
@@ -51,7 +49,7 @@
   }
 
   .sidebar_overlay {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     left: 0;
