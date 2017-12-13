@@ -721,7 +721,7 @@
           const address = form.address.$modelValue;
           const recipientDeviceAddress = assocDeviceAddressesByPaymentAddress[address];
           let amount = form.amount.$modelValue;
-          const paymentId = form.paymentId ? form.amount.$modelValue : null;
+          const paymentId = form.paymentId ? form.paymentId.$modelValue : null;
           // const paymentId = 1;
           let merkleProof = '';
           if (form.merkle_proof && form.merkle_proof.$modelValue) {
