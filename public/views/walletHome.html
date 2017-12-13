@@ -67,7 +67,7 @@
         <div id="walletHome" class="walletHome tab-view tab-in">
             <div class="introduction-svg" ng-include="'views/includes/background.html'"></div>
 
-            <dag-wallets-carousel></dag-wallets-carousel>
+            <!--<dag-wallets-carousel></dag-wallets-carousel>-->
 
             <!--<dag-tip heading="Scheduled Payment"
                      body="You can now make a scheduled payment that shall transact at specific date and time."
@@ -75,9 +75,7 @@
                      icon="update">
             </dag-tip>-->
 
-            <dag-transactions-table></dag-transactions-table>
-
-            <div class="p-wallet js-introduction" style="display: none;">
+            <div class="p-wallet js-introduction">
                 <div class="p-wallet__price-block">
                     <div ng-if="!index.anyOnGoingProcess || 1">
                         <div class="text-gray text-center size-12 p10t" ng-show="index.updateError"
@@ -128,6 +126,8 @@
                     </div>
 
                 </div>
+
+                <dag-transactions-table></dag-transactions-table>
 
                 <div class="transactions">
                     <div class="transactions__head">

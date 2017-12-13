@@ -7,7 +7,7 @@
         <svg-icon name="arrow_back"></svg-icon>
       </span>
     </div>
-    <span ng-click="openSideBar('left')" ng-show="!goBackToState && !closeToHome  && !index.noFocusedWallet">
+    <span ng-click="index.openMenu()" ng-show="!goBackToState && !closeToHome  && !index.noFocusedWallet">
             <svg-icon name="menu2"></svg-icon>
         </span>
     <span ng-show="closeToHome && !goBackToState"
@@ -16,5 +16,5 @@
     </span>
   </div>
 
-  <div class="navbar-container-title">{{titleSection}} <span ng-click="openSideBar('right')"><svg-icon name="notifications_none"></svg-icon></span></div>
+  <div class="navbar-container-title">{{titleSection}}</div>
 </div>

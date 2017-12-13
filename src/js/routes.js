@@ -536,9 +536,12 @@
         }
       }
 
+      $rootScope.$on('$stateChangeSuccess', (e) => {
+        console.log('$stateChangeSuccess');
+      });
+
       $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState) => {
         $rootScope.params = toParams;
-
         backButton.menuOpened = false;
         go.swipe();
         if (!profileService.profile && toState.needProfile) {

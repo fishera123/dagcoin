@@ -2484,7 +2484,7 @@ canvas {
 .p-wallet {
   position: relative;
   width: 100%;
-  padding-top: 60px;
+  padding-top: 0;
 
   .price {
     position: relative;
@@ -2589,7 +2589,7 @@ canvas {
   z-index: 2;
   text-align: center;
   color: #fff;
-  padding: 30px 0 0;
+  padding: 30px 0;
 
   .price-wrapper {
     color: #d52026;
@@ -2729,7 +2729,7 @@ canvas {
 }
 
 .tab-view.walletHome{
-  padding-top: 170px;
+  padding-top: 0;
 }
 
 .tab-in {

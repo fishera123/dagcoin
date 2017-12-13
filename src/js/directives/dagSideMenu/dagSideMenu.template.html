@@ -11,8 +11,20 @@
 
     <div ng-repeat="list in ::lists">
         <ul class="list">
+            <li ng-repeat="item in index.menu">
+                <a ng-click="index.setTab(item, false, 0, true)" id="menu-{{item.link}}">
+                    <svg class="icon {{item.icon}}">
+                        <use xlink:href="{{index.getSvgSrc(item.icon)}}"></use>
+                    </svg>
+                    <span>{{ item.title|translate }}</span>
+                    <div ng-if="item.title == 'Chat' && totalNewMsgCnt > 0" class="badge">
+                        {{totalNewMsgCnt}}
+                    </div>
+                </a>
+            </li>
+
             <li ng-repeat="link in ::list.links">
-                <a ui-sref-active="active" ui-sref="{{::link.state}}">
+                <a ui-sref-active="active" ui-sref="{{::link.state}}" ng-click="closeMenu()">
                     <svg-icon name="{{::link.icon}}"></svg-icon>
                     <span>{{::link.title}}</span>
                 </a>
@@ -20,5 +32,5 @@
         </ul>
     </div>
 
-    <dag-exchange-rate-view></dag-exchange-rate-view>
+    <!--<dag-exchange-rate-view></dag-exchange-rate-view>-->
 </div>

@@ -33,10 +33,10 @@ console.log(getLocationHref());
           const restyled = `${style.getAttribute('href')}?v=${Math.floor((Math.random() * 10000) + 1)}`;
           style.setAttribute('href', restyled);
         }
-      } else if (!reloading) {
+      }/* else if (!reloading) {
         reloading = true;
         setInterval(triggerReload, 100);
-      }
+      }*/
     });
   }
 }());
