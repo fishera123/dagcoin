@@ -6,7 +6,6 @@
       const JSZip = require('jszip');
       const async = require('async');
       const crypto = require('crypto');
-      const conf = require('byteballcore/conf');
       const userAgent = navigator.userAgent;
       let zip;
       let unzip;
