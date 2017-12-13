@@ -2,9 +2,14 @@
 
 .dag_tabs {
   position: relative;
+  background: #fff;
 
   .dag_tabs_list {
     position: relative;
+
+    .dag_tab{
+      display: block;
+    }
 
     > .dag_tabs_slider {
       position: absolute;

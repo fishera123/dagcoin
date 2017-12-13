@@ -53,6 +53,7 @@
         const config = configService.getSync();
         config.colorFor = config.colorFor || {};
         config.aliasFor = config.aliasFor || {};
+
         const ret = lodash.map(profileService.profile.credentials, c => ({
           m: c.m,
           n: c.n,
@@ -60,6 +61,7 @@
           id: c.walletId,
           color: config.colorFor[c.walletId] || '#d51f26',
         }));
+
         self.wallets = lodash.sortBy(ret, 'name');
       };
 

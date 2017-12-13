@@ -853,12 +853,12 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
             self.setOngoingProcess('updatingStatus', false);
           }
 
-
           fc.getBalance(self.shared_address, (err, assocBalances, assocSharedBalances) => {
             if (err) {
               throw Error('impossible getBal');
             }
             $log.debug('updateAll Wallet Balance:', assocBalances, assocSharedBalances);
+
             self.setBalance(assocBalances, assocSharedBalances);
             // Notify external addons or plugins
             $rootScope.$emit('Local/BalanceUpdated', assocBalances);
@@ -981,6 +981,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         self.dagUnitName = config.dagUnitName;
 
         self.arrBalances = [];
+
         Object.keys(assocBalances).forEach((asset) => {
           const balanceInfo = assocBalances[asset];
           balanceInfo.asset = asset;
@@ -1013,6 +1014,11 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         if (!self.shared_address) {
           self.arrMainWalletBalances = self.arrBalances;
         }
+
+        console.group('Balances');
+        console.log(self.arrBalances);
+        console.groupEnd('Balances');
+
         self.dagBalance = _.find(self.arrBalances, { asset: ENV.DAGCOIN_ASSET });
         self.baseBalance = _.find(self.arrBalances, { asset: 'base' });
         console.log(`========= setBalance done, balances: ${JSON.stringify(self.arrBalances)}`);

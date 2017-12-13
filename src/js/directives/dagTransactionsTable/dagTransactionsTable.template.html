@@ -1,0 +1,57 @@
+<div class="dag_transactions">
+    <dag-tabset>
+        <dag-tab heading="Transactions">
+            <div class="dag_transactions_in_process_list">
+                <h4>In Process</h4>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="dag_transactions_list">
+                <h4>Today</h4>
+                <table ng-repeat="s in [1,2,3,4]">
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h4>Yesterday</h4>
+                <table ng-repeat="s in [1,2,3,4]">
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h4>1 December, 2017</h4>
+                <table ng-repeat="s in [1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4] track by $index">
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </dag-tab>
+        <dag-tab heading="Details">
+            Details
+        </dag-tab>
+    </dag-tabset>
+</div>

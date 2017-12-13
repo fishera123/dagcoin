@@ -3,7 +3,6 @@ const modules = [
   'config',
   'ui.router',
   'angularMoment',
-  'angular-carousel',
   'mm.foundation',
   'monospaced.qrcode',
   'monospaced.elastic',

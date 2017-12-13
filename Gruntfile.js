@@ -1,4 +1,4 @@
-/* eslint-disable no-var */
+/* eslint-disable */
 module.exports = function (grunt) {
   function getPlatform() {
     switch (process.platform) {
@@ -172,8 +172,6 @@ module.exports = function (grunt) {
           'bower_components/ng-lodash/build/ng-lodash.js',
           'bower_components/angular-qrcode/angular-qrcode.js',
           'bower_components/angular-gettext/dist/angular-gettext.js',
-          'bower_components/angular-touch/angular-touch.js',
-          'bower_components/angular-carousel/dist/angular-carousel.js',
           'bower_components/angular-ui-switch/angular-ui-switch.js',
           'bower_components/angular-elastic/elastic.js',
           'bower_components/ui-router-extras/release/ct-ui-router-extras.js',
@@ -181,8 +179,12 @@ module.exports = function (grunt) {
           'bower_components/raven-js/dist/plugins/angular.js',
           'bower_components/ng-dialog/js/ngDialog.min.js',
           'bower_components/angular-animate/angular-animate.js',
-          'bower_components/angular-swipe/dist/angular-swipe.min.js',
           'bower_components/gsap/src/minified/TweenMax.min.js',
+
+          /* Angular-Swipe | Swipes gestures library (e.g ng-swipe-up) */
+          'bower_components/angular-swipe/dist/angular-swipe.min.js',
+
+          /* Angular-Swiper | AngularJS Carousel directive (e.g <ks-swiper-container></ks-swiper-container>) */
           'bower_components/swiper/dist/js/swiper.min.js',
           'bower_components/angular-swiper/dist/angular-swiper.js'
         ],
@@ -224,7 +226,7 @@ module.exports = function (grunt) {
           'bower_components/animate.css/animate.css',
           'bower_components/foundation/css/foundation.css',
           'bower_components/angular-ui-switch/angular-ui-switch.css',
-          'bower_components/angular-carousel/dist/angular-carousel.css'
+
         ],
         dest: 'public/css/foundation.css'
       },
@@ -497,6 +499,7 @@ module.exports = function (grunt) {
           'src/js/init.js',
           'src/js/app.js',
           'src/js/directives/**/*.js',
+          'src/js/factories/**/*.js',
           'src/js/filters/**/*.js',
           'src/js/routes.js',
           'src/js/services/**/*.js',

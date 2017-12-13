@@ -2239,7 +2239,7 @@ a.a_none {
       border-bottom: 4px solid transparent;
 
       &.active {
-        border-bottom: 4px solid #d52026;
+        border-bottom: 4px solid $red;
       }
 
       a {
@@ -2253,7 +2253,7 @@ a.a_none {
   position: relative;
   z-index: 2;
   height: 50px;
-  background: #d51f26;
+  background: $red;
   color: #fff;
 
   .navbar-container-triggers {
@@ -2724,6 +2724,18 @@ canvas {
   padding-bottom: 70px;
 }
 
+.tab-view {
+  display: none;
+}
+
+.tab-view.walletHome{
+  padding-top: 170px;
+}
+
+.tab-in {
+  display: block;
+}
+
 .send.tab-in .p-wrap {
   max-height: 485px;
   overflow-y: auto;
@@ -2872,21 +2884,6 @@ input {
   .tab-bar {
     background: transparent;
     border: 0;
-  }
-}
-
-.tab-view {
-  transform: translate3d(-100%, 0, 0);
-  width: 100%;
-  position: absolute;
-  padding-top: 0;
-  top: 45px;
-  bottom: 37px;
-  overflow: hidden;
-  padding-bottom: 40px;
-
-  &.tab-in {
-    transform: translate3d(0, 0, 0) !important;
   }
 }
 
