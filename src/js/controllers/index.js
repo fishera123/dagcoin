@@ -737,17 +737,15 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
             });
           });
 
-          self.needsBackup = false;
+          if (fc.isPrivKeyExternal()) {
+            self.needsBackup = false;
+          } else {
+            storageService.getBackupFlag('all', (err, val) => {
+              self.needsBackup = !val;
+            });
+          }
           self.openWallet();
-          /* if (fc.isPrivKeyExternal()) {
-           self.needsBackup = false;
-           self.openWallet();
-           } else {
-           storageService.getBackupFlag('all', function(err, val) {
-           self.needsBackup = self.network == 'testnet' ? false : !val;
-           self.openWallet();
-           });
-           } */
+          self.updateSingleAddressFlag();
         });
       };
 
@@ -1064,6 +1062,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                 $log.debug(evt, err);
               }
             });
+            this.value = '';
           }, false);
           chooser.click();
         }
@@ -1116,16 +1115,16 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         self.setOngoingProcess('generatingCSV', true);
 
         $timeout(() => {
-          fc.getTxHistory(self.arrBalances[self.assetIndex].asset, self.shared_address, (txs) => {
+          fc.getTxHistory(ENV.DAGCOIN_ASSET, self.shared_address, (txs) => {
             self.setOngoingProcess('generatingCSV', false);
             $log.debug('Wallet Transaction History:', txs);
 
             const data = txs;
-            const filename = `Byteball-${self.alias || self.walletName}.csv`;
+            const filename = `Dagcoin-${self.alias || self.walletName}.csv`;
             let csvContent = '';
 
             if (!isNode) csvContent = 'data:text/csv;charset=utf-8,';
-            csvContent += 'Date,Destination,Note,Amount,Currency,Spot Value,Total Value,Tax Type,Category\n';
+            csvContent += 'Date,Destination,Note,Amount,Currency\n';
 
             let amount;
             let note;
@@ -1145,7 +1144,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                 note += ` Moved:${it.amount}`;
               }
 
-              dataString = `${formatDate(it.time * 1000)},${formatString(it.addressTo)},${note},${amount},byte,,,,`;
+              dataString = `${formatDate(it.time * 1000)},${formatString(it.addressTo)},${note},${amount},dag`;
               csvContent += `${dataString}\n`;
             });
 
@@ -1400,6 +1399,40 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         return profileService.getWallets('livenet');
       };
 
+      self.openBackupNeededModal = function () {
+        const ModalInstanceCtrl = function ($scopeModal, $modalInstance, $sce) {
+          $scopeModal.header = $sce.trustAsHtml(gettextCatalog.getString('Bakup needed'));
+          $scopeModal.title = $sce.trustAsHtml(gettextCatalog.getString(`Now is a good time to backup your wallet seed.
+          Write it down and keep it somewhere safe. Once you have written your wallet seed down, you must delete it from
+          this device. If this device is lost, it will be impossible to access your funds without a backup.`));
+
+          $scopeModal.yes_label = gettextCatalog.getString('Backup now');
+          $scopeModal.ok = function () {
+            $modalInstance.close(true);
+          };
+          $scopeModal.cancel = function () {
+            $modalInstance.dismiss('cancel');
+          };
+        };
+
+        const modalInstance = $modal.open({
+          templateUrl: 'views/modals/confirmation.html',
+          windowClass: animationService.modalAnimated.slideUp,
+          controller: ['$scope', '$modalInstance', '$sce', ModalInstanceCtrl],
+        });
+
+        modalInstance.result.finally(() => {
+          const m = angular.element(document.getElementsByClassName('reveal-modal'));
+          m.addClass(animationService.modalAnimated.slideOutDown);
+        });
+
+        modalInstance.result.then((ok) => {
+          if (ok) {
+            $state.go('backup');
+          }
+        });
+      };
+
 
       $rootScope.$on('Local/ClearHistory', (event) => {
         $log.debug('The wallet transaction history has been deleted', event);
@@ -1485,13 +1518,13 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
       });
 
       $rootScope.$on('Local/BackupDone', () => {
-        self.needsBackup = false;
         $log.debug('Backup done');
         storageService.setBackupFlag('all', (err) => {
           if (err) {
             $log.warn(`setBackupFlag failed: ${JSON.stringify(err)}`);
             return;
           }
+          self.needsBackup = false;
           $log.debug('Backup done stored');
         });
       });
