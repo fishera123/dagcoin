@@ -2,7 +2,21 @@
   'use strict';
 
   angular.module('copayApp.controllers').controller('createController',
-    function ($scope, $rootScope, $location, $anchorScroll, $timeout, $log, lodash, go, profileService, configService, isCordova, gettextCatalog, isMobile, derivationPathHelper, correspondentListService) {
+    function ($scope, 
+              $rootScope, 
+              $location, 
+              $anchorScroll, 
+              $timeout, 
+              $log, 
+              lodash, 
+              go, 
+              profileService, 
+              configService, 
+              isCordova, 
+              gettextCatalog, 
+              isMobile, 
+              derivationPathHelper, 
+              correspondentListService) {
       const self = this;
       const defaults = configService.getDefaults();
       this.isWindowsPhoneApp = isMobile.Windows() && isCordova;
