@@ -34,9 +34,6 @@
       self.toggle = function () {
         self.error = '';
         if (!self.credentialsEncrypted) {
-          if (!self.show) {
-            $rootScope.$emit('Local/BackupDone');
-          }
           self.show = !self.show;
         }
 
@@ -55,6 +52,7 @@
             fc.clearMnemonic();
             profileService.clearMnemonic(() => {
               self.deleted = true;
+              $rootScope.$emit('Local/BackupDone');
               notification.success(successMsg);
               go.walletHome();
             });
