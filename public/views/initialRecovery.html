@@ -1,7 +1,7 @@
 <div ng-include="'views/includes/topbar.html'"
      ng-init="titleSection='Recovery'; goBackToState = 'preferencesGlobal';">
 </div>
-<div class="content p20v">
+<div class="content">
     <div ng-controller="importController as import">
       <div class="onGoingProcess" ng-show="import.imported">
         <div class="onGoingProcess-content" ng-style="{'background-color':'#222'}">
@@ -15,8 +15,7 @@
           <span translate> Importing wallet... </span>
         </div>
       </div>
-
-      <div class="box-notification" ng-show="import.error">
+      <div class="box-notification text-center" ng-show="import.error">
         <span class="text-warning">
           {{import.error}}
         </span>
@@ -48,7 +47,6 @@
           </form>
         </div>
       </div>
-
       <div ng-show="import.iOs && import.arrBackupFiles.length > 0" style="background-color: #fff">
         <div class="center">OR</div>
         <div>
