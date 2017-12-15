@@ -111,6 +111,7 @@
             function (callback) {
               const existsConfJson = fileSystemService.nwExistsSync(`${dbDirPath}temp/conf.json`);
               const existsLight = fileSystemService.nwExistsSync(`${dbDirPath}temp/light`);
+              const conf = require('byteballcore/conf');
               if (existsConfJson) {
                 fileSystemService.nwMoveFile(`${dbDirPath}temp/conf.json`, `${dbDirPath}conf.json`, callback);
               } else if (existsLight && !existsConfJson) {
