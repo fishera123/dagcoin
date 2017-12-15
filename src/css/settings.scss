@@ -1,4 +1,17 @@
+$background: #f5f5f5;
+
 .preferences {
+  background: $background;
+
+  &:before {
+    content: '';
+    position: fixed;
+    background: $background;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
   form {
     background: #fff;
@@ -13,9 +26,11 @@
   h4 {
     padding: 0 30px;
     color: #969696;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
-    margin: 30px 0 5px;
+    margin: 15px 0 5px;
+    text-transform: uppercase;
+    position: relative;
 
     button {
       color: $red;
@@ -27,11 +42,16 @@
         background: transparent;
       }
     }
+
+    & + ul {
+      margin-top: 0;
+    }
   }
 
   ul {
     font-size: 14px;
-    margin: 5px 0;
+    margin: 15px 5px 0;
+    padding: 0 15px;
 
     .cursor-default {
       cursor: default !important;
@@ -47,14 +67,13 @@
       white-space: nowrap;
       color: #4e4e4e;
       position: relative;
-      display: flex;
+      box-shadow: 0 1px 3px 0 rgba(150, 150, 150, 0.1);
 
       .description {
         font-size: 12px;
         color: #999;
         display: block;
         width: 100%;
-        flex: none;
       }
 
       .switch {
@@ -67,7 +86,6 @@
       .value {
         font-size: 12px;
         color: #999;
-        text-align: right;
       }
 
       .wrapped {
@@ -88,13 +106,14 @@
         left: 30px;
         top: 50%;
         margin-top: -8px;
+        float: none;
 
         svg {
           width: 16px;
           height: 16px;
         }
 
-        &.svg-icon-chevron-thin-right {
+        &.svg-icon-chevron-thin-right, &.right {
           left: auto;
           right: 30px;
           margin-top: -5px;
@@ -115,7 +134,14 @@
       }
 
       &:first-child {
-        border-top: 1px solid #eee;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+      }
+
+      &:last-child {
+        border-bottom: none;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
       }
     }
   }

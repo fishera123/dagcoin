@@ -483,7 +483,7 @@ module.exports = function (grunt) {
         tasks: ['svgmin']
       },
       sass: {
-        files: ['src/css/*.scss', 'src/css/icons.css'],
+        files: ['src/css/**/*.scss', 'src/css/icons.css'],
         tasks: ['sass', 'concat:css']
       },
       components: {

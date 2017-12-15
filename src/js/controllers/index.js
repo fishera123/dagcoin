@@ -1290,12 +1290,12 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         });
       };
 
-      self.openMenu = function () {
+      $rootScope.openMenu = self.openMenu = function () {
         backButton.menuOpened = true;
         go.swipe(true);
       };
 
-      self.closeMenu = function () {
+      $rootScope.closeMenu = self.closeMenu = function () {
         backButton.menuOpened = false;
         go.swipe();
       };

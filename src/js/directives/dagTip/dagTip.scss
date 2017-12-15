@@ -1,3 +1,5 @@
+@import "../../../css/variables";
+
 .dag_tip{
   background: #f4f5f6;
   color: #091528;
@@ -5,6 +7,7 @@
   z-index: 12;
   border-radius: 5px;
   position: relative;
+  padding: 15px;
 
   &:not(.no_icon){
     padding-left: 80px;
@@ -13,6 +16,10 @@
   h4{
     text-transform: uppercase;
     font-weight: 600;
+    margin: 5px 0;
+    padding: 0;
+    color: #444;
+    font-size: 14px;
   }
 
   p{
@@ -25,13 +32,21 @@
 
   a{
     display: inline-block;
-    background: #f1c40f;
-    padding: 5px 10px;
     border-radius: 5px;
-    color: currentColor;
     font-size: 12px;
-    text-transform: uppercase;
     font-weight: 600;
+
+    &:not(.inline){
+      text-transform: uppercase;
+      background: #f1c40f;
+      color: currentColor;
+      padding: 5px 10px;
+    }
+
+    &.inline{
+      color: $red;
+      padding: 2px 4px;
+    }
   }
 
   svg-icon{

@@ -363,15 +363,44 @@
             },
           },
         })
+        .state('system', {
+          url: '/system',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+            main: {
+              templateUrl: 'views/preferencesSystem.html',
+            },
+          },
+        })
+        .state('security', {
+          url: '/security',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+            main: {
+              templateUrl: 'views/preferencesSecurity.html',
+            },
+          },
+        })
 
         .state('about', {
           url: '/about',
-          templateUrl: 'views/preferencesAbout.html',
           walletShouldBeComplete: true,
           needProfile: true,
           views: {
             main: {
               templateUrl: 'views/preferencesAbout.html',
+            },
+          },
+        })
+        .state('aboutDevice', {
+          url: '/aboutDevice',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+            main: {
+              templateUrl: 'views/preferencesAboutDevice.html',
             },
           },
         })
@@ -427,12 +456,6 @@
               templateUrl: 'views/preferencesGlobal.html',
             },
           },
-        })
-        .state('settings', {
-          url: '/settings',
-          controller: 'settingsController',
-          templateUrl: 'views/settings.html',
-          needProfile: false,
         })
         .state('warning', {
           url: '/warning',
@@ -515,10 +538,6 @@
           win.menu = nativeMenuBar;
         }
       }
-
-      $rootScope.$on('$stateChangeSuccess', (e) => {
-        console.log('$stateChangeSuccess');
-      });
 
       $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState) => {
         $rootScope.params = toParams;

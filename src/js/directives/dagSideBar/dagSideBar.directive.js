@@ -32,10 +32,6 @@
         };
 
         $rootScope.closeSideBar = () => {
-
-          console.log(opened);
-          console.log(element);
-
           if (opened) {
             opened = false;
             element.addClass('sidebar--animatable');
