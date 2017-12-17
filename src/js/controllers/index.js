@@ -559,15 +559,18 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           $scope.mainWalletBalanceInfo = _.find(self.arrMainWalletBalances, { asset: ENV.DAGCOIN_ASSET });
           $scope.asset = ENV.DAGCOIN_ASSET;
           const assocSharedByAddress = $scope.mainWalletBalanceInfo.assocSharedByAddress;
-          Object.keys(assocSharedByAddress).forEach((sa) => {
-            const objSharedWallet = {};
-            objSharedWallet.shared_address = sa;
-            objSharedWallet.total = assocSharedByAddress[sa];
-            objSharedWallet.totalStr = `${profileService.formatAmount(assocSharedByAddress[sa], 'dag')}`;
 
-            arrSharedWallets.push(objSharedWallet);
-          });
-          $scope.arrSharedWallets = arrSharedWallets;
+          if (assocSharedByAddress) {
+            Object.keys(assocSharedByAddress).forEach((sa) => {
+              const objSharedWallet = {};
+              objSharedWallet.shared_address = sa;
+              objSharedWallet.total = assocSharedByAddress[sa];
+              objSharedWallet.totalStr = `${profileService.formatAmount(assocSharedByAddress[sa], 'dag')}`;
+
+              arrSharedWallets.push(objSharedWallet);
+            });
+            $scope.arrSharedWallets = arrSharedWallets;
+          }
 
           $scope.cancel = function () {
             breadcrumbs.add('openSubwalletModal cancel');
