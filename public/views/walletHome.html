@@ -1,12 +1,14 @@
 <div class="topbar-container topbar-transparent"
      ng-include="'views/includes/topbar.html'"
-     ng-init="titleSection='My wallet';">
+     ng-init="titleSection='My wallet'">
 </div>
 
 <qr-scanner ng-if="tab === 'send'" ng-show="index.isComplete" on-scan="index.onQrCodeScanned(data)" before-scan="index.onBeforeScan()"></qr-scanner>
-
+<div class="backup" ng-if="index.needsBackup" ng-click="index.openBackupNeededModal()">
+  <span translate>Wallet seed not backed up</span>
+</div>
 <div ng-controller="walletHomeController as home">
-	<div class="onGoingProcess" ng-show="index.isOffline">
+  <div class="onGoingProcess" ng-show="index.isOffline">
 		<div class="onGoingProcess-content" ng-style="{'background-color':'#222'}">
 			<div class="spinner">
 				<div class="rect1"></div>
@@ -197,28 +199,9 @@
         -->
 		<div id="receive" class="receive p-share tab-view cordova-scrollable" style="padding-bottom: 0">
 			<div class="introduction-svg" ng-include="'views/includes/background.html'"></div>
-			<div ng-show="index.needsBackup" class="p60t row text-center">
-				<div class="large-12 columns">
-					<div class="text-warning text-bold m15b">
-						<i class="fi-alert"></i>
-						<span translate>
-              WARNING: Backup needed
-            </span>
-					</div>
-					<div class="text-gray" translate>
-						Before receiving funds, it is highly recommended you backup your wallet keys.
-					</div>
+			<div class="p-wrap text-center m20t">
 
-					<button class="m20t button black expand round"
-							ng-click="$root.go('backup')" ng-style="{'background-color':index.backgroundColor}" >
-						<span translate>Backup now</span>
-					</button>
-				</div>
-			</div>
-			<div class="p-wrap text-center m20t" ng-show="!index.needsBackup">
-
-				<h2 style="padding: 10px 20px;font-weight: 400;font-size: 14px;margin-top: 40px;" translate>Tap the <strong>QR-code</strong> to copy its address.<br/>Share it with the sender via email or text.</h2>
-
+				<h2 style="padding: 10px 20px;font-weight: 400;font-size: 14px;margin-top: 40px;">{{'Tap the' | translate}} <strong>QR-code</strong> {{'to copy its address.' | translate}}<br/>{{'Share it with the sender via email or text.' | translate}}</h2>
 
 				<!-- Address-->
 				<div class="text-center">
@@ -257,7 +240,9 @@
 					<div ng-show="index.isCordova" class="page-action__info">
 						<span translate>Share the link above to receive payments.</span></div>
 				</div>
-
+        <a class="size-14" ng-click="home.openCustomizedAmountModal(index.shared_address || home.addr[index.walletId])">
+          <span translate>Request a specific amount</span>
+        </a>
 			</div>
 		</div> <!-- END Receive -->
 
@@ -279,18 +264,28 @@
 					  </span>
 						</div>
 						<div class="form-group">
-							<div class="title clearfix"><span class="name" translate>Amount</span>
+              <div ng-if="home.deviceAddressIsKnown()" style="font-size: 11px; font-weight: bold; margin-top: -1.5rem; margin-bottom: 1.5rem">
+              </div>
+              <div ng-if="!home.deviceAddressIsKnown()"
+                   style="font-size: 11px; font-weight: bold; margin-top: -1.5rem; margin-bottom: 1.5rem">
+                <a dropdown-toggle="#binding-drop" data-options="align:top"></a>
+              </div>
+							<div class="title clearfix">
+                <span class="name" translate>Amount</span>
 								<span class="available" translate>Available <span>{{index.dagBalance.stable / 1e6}}</span></span>
                 <a ng-click="home.setSendAll()" ng-show="!home.lockAmount" style="text-transform: none; margin-left: 10px" translate>Send all</a>
-							</div>
+              </div>
+
 
 							<div class="input-wrap input-icon">
-								<input ng-class="{'error': sendForm.amount.$invalid && !sendForm.amount.$error.required, 'success': !sendForm.amount.$invalid}" style="font-size: 12px;" type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount"
-									   name="amount" ng-attr-placeholder="{{('Amount')|translate}}" min="0.000001"
-									   ng-minlength="1" ng-maxlength="16" ng-model="_amount"
-									   ng-required="!home.bSendAll"
-									   autocomplete="off" ng-focus="home.formFocus('amount')"
-									   ng-blur="home.formFocus(false)">
+								<input ng-class="{'error': sendForm.amount.$invalid && !sendForm.amount.$error.required, 'success': !sendForm.amount.$invalid}"
+                       style="font-size: 12px;" type="number" id="amount"
+                       ng-disabled="home.blockUx || home.lockAmount"
+  									   name="amount" ng-attr-placeholder="{{('Amount')|translate}}" min="0.000001"
+  									   ng-minlength="1" ng-maxlength="16" ng-model="_amount"
+  									   ng-required="!home.bSendAll"
+  									   autocomplete="off" ng-focus="home.formFocus('amount')"
+  									   ng-blur="home.formFocus(false)">
 
 
 								<svg class="icon icon-d">
@@ -306,13 +301,19 @@
 								<span class="name" translate>Receiver</span>
 							</div>
 
-							<div class="input-wrap">
-								<input ng-class="{'error' : sendForm.address.$invalid && _address, 'success': _address && !sendForm.address.$invalid}" style="font-size: 12px;" class="m0" type="text" id="address"
+							<div class="input-wrap input-icon">
+								<input ng-class="{'error' : sendForm.address.$invalid && _address, 'success': _address && !sendForm.address.$invalid}"
+                     style="font-size: 12px;"
+                     type="text" id="address"
 									   name="address"
-									   ng-attr-placeholder="{{home.canSendExternalPayment() ? 'DAG address' : 'DAG address of your other wallet &#8594;'}}"
+									   ng-attr-placeholder="{{home.canSendExternalPayment() ? ('DAG address' | translate) : ('DAG address of your other wallet &#8594;' | translate)}}"
 									   ng-model="_address" valid-address required
 									   ng-blur="home.formFocus(false)">
 
+
+               <a ng-click="openDestinationAddressModal(index.otherWallets, _address)">
+                 <i class="icon icon-d icon-wallet"></i>
+               </a>
 							</div>
 
 
@@ -322,7 +323,6 @@
             </div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 
@@ -397,8 +397,19 @@
 								</table>
 							</div>
 						</div>
-            <div class="page-action">
-              <a href="#" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" class="btn btn_red-full" translate>Show all</a>
+
+              <div class="row">
+                <div class="small-6 columns page-action">
+                  <a href="#" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" class="btn btn_red-full" translate>Show all</a>
+                </div>
+                <div class="small-6 columns page-action" ng-show="index.txHistory[0] && !index.updatingTxHistory[index.walletId] && !index.isCordova" >
+                  <input id="export_file" type="file" nwsaveas="Dagcoin-{{index.alias || index.walletName}}.csv" accept=".csv" style="display:none">
+                  <a class="btn btn_red-full" ng-click="index.csvHistory();">
+                    <i class="fi-page-export-csv"></i>
+                    <span translate>Export CSV</span>
+                  </a>
+                </div>
+              </div>
             </div>
 					</div>
 				</div>
