@@ -30,6 +30,7 @@
     position: absolute;
     right: 10px;
     top: 15px;
+    min-width: 120px;
 
     svg {
       width: 14px;
@@ -44,8 +45,8 @@
     }
 
     .loader {
-      font-size: 2px;
-      margin: -10px 0 0 -10px;
+      font-size: 1.5px;
+      margin: -8px 0 0 -8px;
       border-left: 1.1em solid $main_color;
       position: absolute;
       left: 50%;
