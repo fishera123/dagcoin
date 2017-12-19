@@ -4,7 +4,7 @@ $background: #f5f5f5;
   background: $background;
 
   &:before {
-    content: '';
+    content: "";
     position: fixed;
     background: $background;
     top: 0;

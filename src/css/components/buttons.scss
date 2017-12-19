@@ -24,6 +24,11 @@ button {
   text-decoration: none;
   text-align: center;
 
+  &:hover, &:focus{
+    color: $main_color;
+    background: transparent;
+  }
+
   & + .btn {
     margin-top: 13px;
   }
@@ -34,9 +39,9 @@ button {
       background: transparent;
       color: $main_color;
 
-      &:hover {
+      &:hover, &:focus {
         color: $main_color;
-        background: transparent;
+        background: #F9F9F9;
       }
     }
 
@@ -46,7 +51,7 @@ button {
       @include gradientBackground($main_color, darken($main_color, 10), left, right);
       text-shadow: 1px 1px 0 darken($main_color, 10);
 
-      &:hover {
+      &:hover, &:focus {
         color: #fff;
         @include gradientBackground(darken($main_color, 2), darken($main_color, 12), left, right);
       }
@@ -63,39 +68,31 @@ button {
 body:not(.no_animation){
   .btn{
 
-    &:not(.btn_red-full){
-      &:hover{
-        background: transparent;
-      }
-    }
+    &:not([disabled]){
+      @extend .transition;
 
-    &.btn_red-full{
-      &:not([disabled]){
+      &:after, &:before{
         @extend .transition;
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 40px;
+        height: 100%;
+        opacity: 0.15;
+        right: -100px;
+        @include gradientBackground(#fff, darken(#fff, 10), left, right);
+        transform: skewX(30deg);
+      }
+
+      &:before{
+        margin-left: 30px;
+      }
+
+      &:hover {
+        outline: none;
 
         &:after, &:before{
-          @extend .transition;
-          content: "";
-          position: absolute;
-          top: 0;
-          width: 40px;
-          height: 100%;
-          opacity: 0.15;
-          right: -100px;
-          @include gradientBackground(#fff, darken(#fff, 10), left, right);
-          transform: skewX(30deg);
-        }
-
-        &:before{
-          margin-left: 30px;
-        }
-
-        &:hover {
-          outline: none;
-
-          &:after, &:before{
-            right: 110%;
-          }
+          right: 110%;
         }
       }
     }

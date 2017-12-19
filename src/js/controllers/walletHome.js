@@ -148,7 +148,6 @@
         // const cancel_msg = gettextCatalog.getString('Cancel');
         // const confirm_msg = gettextCatalog.getString('Confirm');
 
-
         $scope.openDestinationAddressModal = function (wallets, address) {
           $rootScope.modalOpened = true;
           const fc = profileService.focusedClient;
@@ -221,9 +220,9 @@
             };
 
             $scope.$watch('addressbook.label', (value) => {
-                if (value && value.length > 16) {
-                 $scope.addressbook.label = value.substr(0, 16);
-                }
+              if (value && value.length > 16) {
+                $scope.addressbook.label = value.substr(0, 16);
+              }
             });
 
             $scope.add = function (addressbook) {
@@ -310,7 +309,6 @@
           });
         };
 
-
         $scope.openSharedAddressDefinitionModal = function (address) {
           $rootScope.modalOpened = true;
           const fc = profileService.focusedClient;
@@ -370,7 +368,6 @@
             m.addClass(animationService.modalAnimated.slideOutDown);
           });
         };
-
 
         this.openTxpModal = function () {
           // deleted, maybe restore from copay sometime later
@@ -456,7 +453,6 @@
             $scope.buttonLabel = gettextCatalog.getString('Generate QR Code');
             $scope.protocol = conf.program;
 
-
             Object.defineProperty($scope, '_customAmount', {
               get() {
                 return $scope.customAmount;
@@ -541,7 +537,6 @@
           unwatchSpendUnconfirmed();
         });
 
-
         this.resetError = function () {
           this.error = null;
           this.success = null;
@@ -584,7 +579,6 @@
           }
           $rootScope.$digest();
         }, 100);
-
 
         this.formFocus = function (what) {
           if (isCordova && !this.isWindowsPhoneApp) {
@@ -658,7 +652,6 @@
           }, 1);
         };
 
-
         this.setOngoingProcess = function (name) {
           const self = this;
           self.blockUx = !!name;
@@ -721,6 +714,8 @@
           const address = form.address.$modelValue;
           const recipientDeviceAddress = assocDeviceAddressesByPaymentAddress[address];
           let amount = form.amount.$modelValue;
+          const paymentId = form.paymentId ? form.paymentId.$modelValue : null;
+          // const paymentId = 1;
           let merkleProof = '';
           if (form.merkle_proof && form.merkle_proof.$modelValue) {
             merkleProof = form.merkle_proof.$modelValue.trim();
@@ -728,11 +723,11 @@
           amount *= dagUnitValue;
           amount = Math.round(amount);
 
-        const currentPaymentKey = `${asset}${address}${amount}`;
-        if (currentPaymentKey === self.current_payment_key) {
-          return $rootScope.$emit('Local/ShowErrorAlert', 'This payment is being processed');
-        }
-        self.current_payment_key = currentPaymentKey;
+          const currentPaymentKey = `${asset}${address}${amount}`;
+          if (currentPaymentKey === self.current_payment_key) {
+            return $rootScope.$emit('Local/ShowErrorAlert', 'This payment is being processed');
+          }
+          self.current_payment_key = currentPaymentKey;
 
           indexScope.setOngoingProcess(gettextCatalog.getString('sending'), true);
           $timeout(() => {
@@ -755,7 +750,6 @@
                   throw Error(gettextCatalog.getString('recipient device address not known'));
                 }
                 const walletDefinedByAddresses = require('byteballcore/wallet_defined_by_addresses.js');
-
 
                 // never reuse addresses as the required output could be already present
                 useOrIssueNextAddress(fc.credentials.walletId, 0, (addressInfo) => {
@@ -923,6 +917,17 @@
                 }
 
                 paymentPromise.then(() => new Promise((resolve, reject) => {
+                  if (paymentId != null) {
+                    const objectHash = require('byteballcore/object_hash');
+                    const payload = JSON.stringify({ paymentId });
+                    opts.messages = [{
+                      app: 'text',
+                      payload_location: 'inline',
+                      payload_hash: objectHash.getBase64Hash(payload),
+                      payload
+                    }];
+                  }
+
                   console.log(`PAYMENT OPTIONS BEFORE: ${JSON.stringify(opts)}`);
                   useOrIssueNextAddress(fc.credentials.walletId, 0, (addressInfo) => {
                     opts.change_address = addressInfo.address;
@@ -959,7 +964,8 @@
                           });
                           // issue next address to avoid reusing the reverse payment address
                           if (!fc.isSingleAddress) {
-                             walletDefinedByKeys.issueNextAddress(fc.credentials.walletId, 0, () => {});
+                            walletDefinedByKeys.issueNextAddress(fc.credentials.walletId, 0, () => {
+                            });
                           }
                         }
                       } else {
@@ -994,7 +1000,6 @@
             });
           }, 100);
         };
-
 
         let assocDeviceAddressesByPaymentAddress = {};
 
@@ -1032,7 +1037,6 @@
           return !!recipientDeviceAddress;
         };
 
-
         this.openBindModal = function () {
           $rootScope.modalOpened = true;
           const fc = profileService.focusedClient;
@@ -1042,7 +1046,6 @@
             return;
           }
           const address = form.address;
-
 
           const ModalInstanceCtrl = function ($scope, $modalInstance) {
             $scope.color = fc.backgroundColor;
@@ -1230,7 +1233,6 @@
 
           const form = $scope.sendForm;
 
-
           if (form && form.amount) {
             form.amount.$pristine = true;
             form.amount.$setViewValue('');
@@ -1280,7 +1282,6 @@
             form.amount.$render();
           }
         };
-
 
         this.setFromUri = function (uri) {
           let objRequest;
@@ -1399,6 +1400,10 @@
             const m = angular.element(document.getElementsByClassName('reveal-modal'));
             m.addClass(animationService.modalAnimated.slideOutRight);
           });
+        };
+
+        $rootScope.openTxModal = (transaction, rows) => {
+          this.openTxModal(transaction, rows);
         };
 
         this.showCorrespondentListToReSendPrivPayloads = function (btx) {

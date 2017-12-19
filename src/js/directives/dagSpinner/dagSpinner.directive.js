@@ -17,7 +17,7 @@
       scope: {
         color: '@'
       },
-      template: '<div class="loader"></div>',
+      template: '<div><div class="loader"></div></div>',
       link: () => {
       }
     };

@@ -122,66 +122,7 @@
 
                 </div>
 
-                <dag-transactions-table></dag-transactions-table>
-
-                <div class="transactions">
-                    <div class="transactions__head">
-                        <span translate>Recent transactions</span>
-                    </div>
-                    <div class="oh text-center" ng-show=" index.updatingTxHistory">
-
-					<span ng-show="!index.txHistory[0] && index.txHistoryError" ng-click='index.updateTxHistory()'>
-					  <p class="size-12 m10b db text-gray" translate>Could not fetch transaction history</p>
-					  <button class="btn_red-full round light-gray tiny" translate>Tap to retry</button>
-					</span>
-                        <br/>
-                        <div class="onGoingProcess-content" ng-style="{'background-color':'#222'}">
-                            <div class="spinner">
-                                <div class="rect1"></div>
-                                <div class="rect2"></div>
-                                <div class="rect3"></div>
-                                <div class="rect4"></div>
-                                <div class="rect5"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="oh text-center"
-                         ng-show="!index.updatingTxHistory">
-					<span class="text-center" ng-show="!index.txHistory[0] && !index.txHistoryError" translate>
-					  No recent transactions yet
-					</span>
-                    </div>
-                    <div ng-show="index.txHistory[0] && !index.updatingTxHistory">
-                        <div class="transactions__table ">
-                            <table>
-                                <tbody>
-                                <tr ng-repeat="btx in index.txHistory | filter: { isFundingNodeTransaction: false } | limitTo: 3"
-                                    class="row ">
-                                    <td><span class="details-price"
-                                              ng-class="btx.action == 'received'? 'success':'danger'">{{btx.amountStr}}</span>
-                                        <div class="details-wrap"><span class="details-info" translate>My Account</span>
-                                            <svg class="icon"
-                                                 ng-class="btx.action == 'received'? 'icon-arrow-left':'icon-arrow-right'">
-                                                <use
-                                                        xlink:href="{{index.getSvgSrc(btx.action == 'received'? 'icon-arrow-left':'icon-arrow-right')}}"></use>
-                                            </svg>
-
-                                            <span ng-if="btx.action == 'received'"
-                                                  ng-repeat="address in btx.arrPayerAddresses" class="details-info">{{address ? address : ('Incoming transaction' | translate)}}</span>
-                                            <span ng-if="btx.action == 'sent'"
-                                                  class="details-info">{{btx.addressTo}}</span>
-                                        </div>
-                                    </td>
-                                    <td><span class="details-time">{{ btx.time * 1000 | amDateFormat:'HH:mm'}}</span>
-                                        <span class="details-date">{{ btx.time * 1000 | amDateFormat:'MM.DD.YYYY'}}</span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <dag-transactions-table rows="index.txHistory"></dag-transactions-table>
 
                 <div ng-if="index.txps[0]">
                     <h4 ng-show="index.requiresMultipleSignatures" class="title m0" translate>Payment Proposals</h4>
@@ -447,6 +388,8 @@
                 </div>
             </div>
         </div>
+
+
     </div> <!-- END History -->
 
     <div id="{{view.id}}" class="{{view.class}} tab-view" ng-repeat="view in index.addonViews"
