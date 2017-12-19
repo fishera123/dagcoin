@@ -52,18 +52,22 @@
           return value;
         };
 
-        $scope.statusIcon = (status) => {
-          if (status === 'received') {
-            return 'call_received';
-          } else if (status === 'pending') {
-            return 'autorenew';
+        $scope.transactionStatus = (transaction) => {
+          if (!transaction.confirmations) {
+            return { icon: 'autorenew', title: 'Pending' };
           }
-          return 'call_made';
+
+          if (transaction.status === 'received') {
+            return { icon: 'call_received', title: 'Received' };
+          }
+          return { icon: 'call_made', title: 'Sent' };
         };
 
         function filterRows() {
+          $scope.transactions = {};
+
           for (let x = 0, maxLen = $scope.total_transactions; x < maxLen; x += 1) {
-            if (x >= $scope.visible_rows && x <= $scope.limit) {
+            if (x <= $scope.limit) {
               const t = $scope.rows[x];
               console.log(t);
               if (!t.isFundingNodeTransaction) {

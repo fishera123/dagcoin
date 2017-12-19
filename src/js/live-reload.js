@@ -29,7 +29,7 @@
         }
       } else if (!reloading) {
         reloading = true;
-        setInterval(triggerReload, 100);
+        /* setInterval(triggerReload, 100); */
       }
     });
   }

@@ -34,10 +34,10 @@
                             class="transaction_status_{{transaction.action}}" ng-click="openTransaction(transaction)">
                             <td class="transaction_status">
                                 <svg-icon class="transaction_status_icon"
-                                          name="{{statusIcon(transaction.action)}}"></svg-icon>
+                                          name="{{transactionStatus(transaction).icon}}"></svg-icon>
                             </td>
                             <td>
-                                <div class="transaction_title">{{transaction.action}}</div>
+                                <div class="transaction_title">{{transactionStatus(transaction).title}}</div>
                                 <div ng-if="transaction.action === 'received'">
                                     <div class="transaction_address"
                                          ng-repeat="address in transaction.arrPayerAddresses">{{address ? address :
@@ -66,12 +66,7 @@
                         <span>Show More</span>
                     </button>
                 </div>
-
             </div>
-
-        </dag-tab>
-        <dag-tab heading="Details">
-            Details
         </dag-tab>
     </dag-tabset>
 </div>
