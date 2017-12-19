@@ -1168,6 +1168,9 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
               self.completeHistory = newHistory;
               self.txHistory = newHistory.slice(0, self.historyShowLimit);
               self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
+
+              console.log('wallet transaction history is updated');
+              $rootScope.$apply();
             }
 
             return cb();

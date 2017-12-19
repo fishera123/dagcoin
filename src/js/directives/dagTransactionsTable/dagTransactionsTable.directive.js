@@ -87,6 +87,8 @@
           if ($scope.rows.length > 0) {
             $scope.total_transactions = $scope.rows.length;
             filterRows();
+          } else {
+            $scope.total_transactions = 0;
           }
         });
 
