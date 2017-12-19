@@ -68,7 +68,7 @@
 
         -->
 
-        <div id="walletHome" class="walletHome tab-view tab-in">
+        <div id="walletHome" class="walletHome tab-view tab-in" ng-scrollbars>
             <div class="introduction-svg" ng-include="'views/includes/background.html'"></div>
             <div class="p-wallet js-introduction">
                 <div class="p-wallet__price-block">
@@ -146,7 +146,7 @@
         receive
 
         -->
-        <div id="receive" class="receive p-share tab-view cordova-scrollable" style="padding-bottom: 0">
+        <div id="receive" class="receive p-share tab-view cordova-scrollable" ng-scrollbars style="padding-bottom: 0">
             <div class="introduction-svg" ng-include="'views/includes/background.html'"></div>
             <div class="p-wrap text-center m20t">
 
@@ -207,7 +207,7 @@
         <!--
         send
         -->
-		<div id="send" class="send tab-view cordova-scrollable">
+		<div id="send" class="send tab-view cordova-scrollable" ng-scrollbars>
 			<div class="introduction-svg" ng-include="'views/includes/background.html'"></div>
 			<div class="p-share js-introduction">
 				<div class="p-wrap" style="width: 300px;margin: 0 auto;">
@@ -297,108 +297,7 @@
 		</div>
 
 
-		<!--
-
-        history
-
-        -->
-        <div id="history" class="history tab-view" style="overflow: auto !important;">
-
-            <div class="introduction-svg" ng-include="'views/includes/background.html'"></div>
-            <div class="row m20t text-center" ng-show="index.updatingTxHistory[index.walletId]">
-                <div class="columns large-12 medium-12 small-12">
-                    <div class="spinner">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
-                </div>
-                <div ng-show="index.txProgress > 6" translate class="size-12 text-gray m20t" style="margin-left: 40px;">
-                    Initial transaction history synchronization can take some minutes for wallets with many
-                    transactions.<br/>
-                    Please stand by.
-                </div>
-                <div ng-show="index.txProgress > 6" class="size-14 text-gray m20t">
-                    <b>{{index.txProgress}}</b>
-                    <span translate>Transactions<br> Downloaded</span>
-                </div>
-            </div>
-
-
-            <div class="p-history js-introduction">
-                <div class="p-wrap">
-                    <div class="page-heading"><span translate>Your transaction history</span></div>
-                    <div class="transactions">
-                        <div class="oh text-center"
-                             ng-show="!index.txHistory[0] || index.updatingTxHistory[index.walletId]">
-						<span ng-show="index.txHistoryError" ng-click='index.updateTxHistory()'>
-						  <p class="size-12 m10b db text-gray" translate>Could not fetch transaction history</p>
-						  <button class="btn_red-full round light-gray tiny" translate>Tap to retry</button>
-						</span>
-                            <span ng-if="!index.txHistoryError" translate>
-						  No transactions yet
-						</span>
-                        </div>
-
-                        <div ng-show="index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
-                            <div class="transactions__head"><span></span></div>
-                            <div class="transactions__table">
-                                <table>
-                                    <tbody>
-                                    <tr ng-repeat="btx in index.txHistory | filter: { isFundingNodeTransaction: false }"
-                                        ng-click="home.openTxModal(btx, index.txHistory)"
-                                        class="row  last-transactions-content">
-                                        <td><span class="details-price"
-                                                  ng-class="btx.action == 'received'? 'success':'danger'">{{btx.amountStr}}</span>
-                                            <div class="details-wrap"><span class="details-info"
-                                                                            translate>My Account</span>
-                                                <svg class="icon"
-                                                     ng-class="btx.action == 'received'? 'icon-arrow-left':'icon-arrow-right'">
-                                                    <use
-                                                            xlink:href="{{index.getSvgSrc(btx.action == 'received'? 'icon-arrow-left':'icon-arrow-right')}}"></use>
-                                                </svg>
-                                                <span ng-if="btx.action == 'received'"
-                                                      ng-repeat="address in btx.arrPayerAddresses" class="details-info">{{address ? address : ('Incoming transaction' | translate)}}</span>
-
-                                                <span ng-if="btx.action == 'sent'" class="details-info">{{btx.addressTo}}</span>
-
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="details-time">{{ btx.time * 1000 | amDateFormat:'HH:mm'}}</span>
-                                            <span class="details-date">{{ btx.time * 1000 | amDateFormat:'MM.DD.YYYY'}}</span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="small-6 columns page-action">
-                                <a href="#" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()"
-                                   class="btn btn_red-full" translate>Show all</a>
-                            </div>
-                            <div class="small-6 columns page-action"
-                                 ng-show="index.txHistory[0] && !index.updatingTxHistory[index.walletId] && !index.isCordova">
-                                <input id="export_file" type="file"
-                                       nwsaveas="Dagcoin-{{index.alias || index.walletName}}.csv" accept=".csv"
-                                       style="display:none">
-                                <a class="btn btn_red-full" ng-click="index.csvHistory();">
-                                    <i class="fi-page-export-csv"></i>
-                                    <span translate>Export CSV</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div> <!-- END History -->
+    </div>
 
     <div id="{{view.id}}" class="{{view.class}} tab-view" ng-repeat="view in index.addonViews"
          ng-include="view.template">

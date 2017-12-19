@@ -19,7 +19,21 @@
 // Setting up route
   angular
     .module('copayApp')
-    .config((historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider) => {
+    .config((historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, ScrollBarsProvider) => {
+      ScrollBarsProvider.defaults = {
+        autoHideScrollbar: true,
+        scrollButtons: {
+          scrollAmount: 'auto',
+          enable: true
+        },
+        scrollInertia: 400,
+        theme: 'dark',
+        advanced: {
+          updateOnContentResize: true
+        },
+        axis: 'y'
+      };
+
       $urlRouterProvider.otherwise('/');
 
       $logProvider.debugEnabled(true);
