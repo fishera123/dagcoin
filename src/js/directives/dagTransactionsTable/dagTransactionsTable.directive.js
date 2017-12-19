@@ -57,7 +57,7 @@
             return { icon: 'autorenew', title: 'Pending' };
           }
 
-          if (transaction.status === 'received') {
+          if (transaction.action === 'received') {
             return { icon: 'call_received', title: 'Received' };
           }
           return { icon: 'call_made', title: 'Sent' };
