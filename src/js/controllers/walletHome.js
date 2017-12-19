@@ -970,7 +970,7 @@
                           }
                         }
                       } else {
-                        $rootScope.$emit('Local/SetTab', 'history');
+                        $rootScope.$emit('Local/SetTab', 'walletHome');
 
                         $timeout(() => {
                           indexScope.updateTxHistory();

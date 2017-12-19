@@ -1,17 +1,17 @@
-<dag-nav-bar title="Global Preferences" invert></dag-nav-bar>
+<dag-nav-bar title="{{ 'Global preferences' | translate }}" invert></dag-nav-bar>
 
 <div class="content preferences" ng-controller="preferencesGlobalController as prefGlobal" ng-init="prefGlobal.init()">
 
     <h4 translate>GENERAL</h4>
     <ul>
         <li ui-sref="system" dag-left-icon="globe" dag-right-icon="chevron-thin-right">
-            <div>System</div>
-            <div class="description">Setup your wallets.</div>
+            <div translate>System</div>
+            <div class="description" translate>Setup your wallets.</div>
         </li>
 
         <li ui-sref="security" dag-left-icon="shield" dag-right-icon="chevron-thin-right">
-            <div>Security</div>
-            <div class="description">Backup your wallets and configure restrictions.</div>
+            <div translate>Security</div>
+            <div class="description" translate>Backup your wallets and configure restrictions.</div>
         </li>
     </ul>
 
@@ -19,12 +19,12 @@
     <h4 translate>Other</h4>
     <ul>
         <li ui-sref="aboutDevice" dag-left-icon="devices_other" dag-right-icon="chevron-thin-right">
-            <div>About Device</div>
-            <div class="description">Information about device in use.</div>
+            <div translate>About Device</div>
+            <div class="description" translate>Information about device in use.</div>
         </li>
         <li ui-sref="about" dag-left-icon="info" dag-right-icon="chevron-thin-right">
-            <div>About Dagcoin</div>
-            <div class="description">Information about changes and app in general.</div>
+            <div translate>About Dagcoin</div>
+            <div class="description" translate>Information about changes and app in general.</div>
         </li>
     </ul>
 

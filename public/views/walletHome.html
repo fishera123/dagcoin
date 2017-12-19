@@ -1,4 +1,4 @@
-<dag-nav-bar title="My Wallets">
+<dag-nav-bar title="{{ 'My Wallet' | translate}}">
     <qr-scanner ng-if="tab === 'send' && index.isComplete"
                 on-scan="index.onQrCodeScanned(data)"
                 before-scan="index.onBeforeScan()">
