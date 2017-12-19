@@ -1,9 +1,3 @@
-function getLocationHref() {
-  return (document && document.location && document.location.href ? document.location.href : '');
-}
-
-console.log(getLocationHref());
-
 (function () {
   'use strict';
 
@@ -12,9 +6,9 @@ console.log(getLocationHref());
   function triggerReload() {
     console.warn('Reloading app...');
 
-    if (location) {
+    /* if (location) {
       location.reload();
-    }
+    } */
   }
 
   if (window.location.href.indexOf('chrome') > -1) {
@@ -33,10 +27,10 @@ console.log(getLocationHref());
           const restyled = `${style.getAttribute('href')}?v=${Math.floor((Math.random() * 10000) + 1)}`;
           style.setAttribute('href', restyled);
         }
-      }/* else if (!reloading) {
+      } else if (!reloading) {
         reloading = true;
         setInterval(triggerReload, 100);
-      }*/
+      }
     });
   }
 }());

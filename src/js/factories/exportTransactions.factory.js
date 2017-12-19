@@ -67,7 +67,7 @@
       if (!fc.isComplete()) return;
       $log.debug('Generating CSV from History');
 
-      return $q((resolve, reject) => {
+      return $q((resolve) => {
         $timeout(() => {
           fc.getTxHistory(ENV.DAGCOIN_ASSET, self.shared_address, (txs) => {
             $log.debug('Wallet Transaction History:', txs);

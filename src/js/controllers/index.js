@@ -1280,14 +1280,22 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           });
         };
 
-        $rootScope.openMenu = self.openMenu = function () {
+        self.openMenu = () => {
           backButton.menuOpened = true;
           go.swipe(true);
         };
 
-        $rootScope.closeMenu = self.closeMenu = function () {
+        $rootScope.openMenu = () => {
+          self.openMenu();
+        };
+
+        self.closeMenu = () => {
           backButton.menuOpened = false;
           go.swipe();
+        };
+
+        $rootScope.closeMenu = () => {
+          self.closeMenu();
         };
 
         self.swipeRight = function () {

@@ -1,8 +1,6 @@
 (() => {
   'use strict';
 
-  const fs = require('fs');
-
   /**
    * @desc Transactions table
    * @example <dag-transactions-table></dag-transactions-table>
@@ -64,7 +62,7 @@
         };
 
         function filterRows() {
-          for (let x = 0, maxLen = $scope.total_transactions; x < maxLen; x++) {
+          for (let x = 0, maxLen = $scope.total_transactions; x < maxLen; x += 1) {
             if (x >= $scope.visible_rows && x <= $scope.limit) {
               const t = $scope.rows[x];
               console.log(t);

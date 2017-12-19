@@ -20,7 +20,6 @@
       templateUrl: 'directives/dagSideMenu/dagSideMenu.template.html',
       scope: {},
       link: ($scope) => {
-
         $scope.closeMenu = () => {
           $rootScope.closeSideBar();
         };
