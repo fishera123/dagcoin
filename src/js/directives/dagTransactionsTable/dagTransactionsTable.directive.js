@@ -9,9 +9,9 @@
     .module('copayApp.directives')
     .directive('dagTransactionsTable', dagTransactionsTable);
 
-  dagTransactionsTable.$inject = ['moment', 'exportTransactions', 'isCordova', '$timeout', '$rootScope'];
+  dagTransactionsTable.$inject = ['moment', 'exportTransactions', 'isCordova', '$timeout', '$rootScope', 'gettextCatalog'];
 
-  function dagTransactionsTable(moment, exportTransactions, isCordova, $timeout, $rootScope) {
+  function dagTransactionsTable(moment, exportTransactions, isCordova, $timeout, $rootScope, gettextCatalog) {
     return {
       restrict: 'E',
       replace: true,
@@ -53,14 +53,17 @@
         };
 
         $scope.transactionStatus = (transaction) => {
+          const pending = gettextCatalog.getString('Pending');
+          const received = gettextCatalog.getString('Received');
+          const sent = gettextCatalog.getString('Sent');
           if (!transaction.confirmations) {
-            return { icon: 'autorenew', title: 'Pending' };
+            return { icon: 'autorenew', title: pending };
           }
 
           if (transaction.action === 'received') {
-            return { icon: 'call_received', title: 'Received' };
+            return { icon: 'call_received', title: received };
           }
-          return { icon: 'call_made', title: 'Sent' };
+          return { icon: 'call_made', title: sent };
         };
 
         function filterRows() {

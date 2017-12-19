@@ -2,12 +2,12 @@
     <dag-tabset>
         <dag-tab heading="Transactions">
             <div class="transaction_history_status" ng-show="total_transactions <= 0">
-                <p>No transactions yet</p>
+                <p translate>No transactions yet</p>
             </div>
             <div class="dag_transactions_list" ng-show="total_transactions > 0">
 
                 <div class="dag_transactions_list_triggers">
-                    <h4>Transactions History</h4>
+                    <h4 translate>Transactions History</h4>
 
                     <!-- EXPORT TO CVS: START -->
                     <div ng-if="!isCordova">
@@ -63,7 +63,7 @@
                 </div>
                 <div>
                     <button ng-show="limit < total_transactions" class="btn btn_red" ng-click="increaseLimit();">
-                        <span>Show More</span>
+                        <span translate>Show More</span>
                     </button>
                 </div>
             </div>

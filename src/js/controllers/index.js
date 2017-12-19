@@ -1397,7 +1397,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
 
         self.openBackupNeededModal = function () {
           const ModalInstanceCtrl = function ($scopeModal, $modalInstance, $sce) {
-            $scopeModal.header = $sce.trustAsHtml(gettextCatalog.getString('Bakup needed'));
+            $scopeModal.header = $sce.trustAsHtml(gettextCatalog.getString('Backup needed'));
             $scopeModal.title = $sce.trustAsHtml(gettextCatalog.getString(`Now is a good time to backup your wallet seed.
           Write it down and keep it somewhere safe. Once you have written your wallet seed down, you must delete it from
           this device. If this device is lost, it will be impossible to access your funds without a backup.`));

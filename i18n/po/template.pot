@@ -170,6 +170,10 @@ msgstr ""
 msgid "Backup"
 msgstr ""
 
+#: src/js/controllers/index.js:1400
+msgid "Backup needed"
+msgstr ""
+
 #: src/js/controllers/index.js:1405
 msgid "Backup now"
 msgstr ""
@@ -188,10 +192,6 @@ msgstr ""
 
 #: public/views/preferencesGlobal.html:14
 msgid "Backup your wallets and configure restrictions."
-msgstr ""
-
-#: src/js/controllers/index.js:1400
-msgid "Bakup needed"
 msgstr ""
 
 #: public/views/preferencesInformation.html:91
@@ -1658,7 +1658,7 @@ msgid "You are sending all your stable amount. Transaction fee will be automatic
 msgstr ""
 
 #: public/views/preferencesLanguage.html:14
-msgid "You can make corrections or help to make this app available in your native language by joining <a href=\"#\" class=\"inline\">our community</a> on Crowdin."
+msgid "You can make corrections or help to make this app available in your native language by joining <a ng-click=\"openExternalLink('https://crowdin.com/project/dagcoin')\" class=\"inline\">our community</a> on Crowdin."
 msgstr ""
 
 #: public/views/backup.html:36
