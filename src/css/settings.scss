@@ -14,7 +14,6 @@ $background: #f5f5f5;
   }
 
   form {
-    background: #fff;
     padding-top: 10px;
     margin-bottom: 10px;
   }
@@ -74,6 +73,7 @@ $background: #f5f5f5;
         color: #999;
         display: block;
         width: 100%;
+        white-space: pre-line;
       }
 
       .switch {
@@ -94,16 +94,16 @@ $background: #f5f5f5;
       }
 
       &.left_icon {
-        padding-left: 60px;
+        padding-left: 50px;
       }
 
       &.right_icon {
-        padding-right: 60px;
+        padding-right: 50px;
       }
 
       svg-icon {
         position: absolute;
-        left: 30px;
+        left: 20px;
         top: 50%;
         margin-top: -8px;
         float: none;
@@ -115,7 +115,7 @@ $background: #f5f5f5;
 
         &.svg-icon-chevron-thin-right, &.right {
           left: auto;
-          right: 30px;
+          right: 20px;
           margin-top: -5px;
 
           svg {
