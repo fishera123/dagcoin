@@ -43,6 +43,20 @@
           $rootScope.openTxModal(transaction, $scope.rows);
         };
 
+        $scope.formatSum = (sum) => {
+          const string = sum.toString().split('.');
+
+          if (!string[1]) {
+            return `${sum}.00`;
+          }
+
+          if (string[1] && string[1].length === 1) {
+            return `${sum}0`;
+          }
+
+          return sum;
+        };
+
         $scope.formatDate = (value) => {
           if (value === today) {
             return 'Today';

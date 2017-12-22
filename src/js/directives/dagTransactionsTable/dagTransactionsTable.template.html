@@ -50,7 +50,7 @@
                             </td>
                             <td class="transaction_sum">
                                 <div class="transaction_sum">{{transaction.action === 'received' ? '+' : '-'}}
-                                    {{transaction.amountStr}}
+                                    {{formatSum(transaction.amountStr)}}
                                 </div>
                                 <div class="transition_date">{{transaction.time * 1000 | amDateFormat:'HH:mm:ss'}}</div>
                             </td>
