@@ -9,9 +9,9 @@
     .module('copayApp.directives')
     .directive('dagTransactionsTable', dagTransactionsTable);
 
-  dagTransactionsTable.$inject = ['moment', 'exportTransactions', 'isCordova', '$timeout', '$rootScope', 'gettextCatalog'];
+  dagTransactionsTable.$inject = ['moment', 'exportTransactions', 'isCordova', '$timeout', '$rootScope', 'gettextCatalog', '$q'];
 
-  function dagTransactionsTable(moment, exportTransactions, isCordova, $timeout, $rootScope, gettextCatalog) {
+  function dagTransactionsTable(moment, exportTransactions, isCordova, $timeout, $rootScope, gettextCatalog, $q) {
     return {
       restrict: 'E',
       replace: true,
@@ -22,9 +22,9 @@
       link: ($scope) => {
         const today = moment().format('DD/MM/YYYY');
         const yesterday = moment().subtract(1, 'day').format('DD/MM/YYYY');
+        $scope.loading = true;
         $scope.isCordova = isCordova;
         $scope.transactions = {};
-        $scope.total_transactions = 0;
         $scope.visible_rows = 0;
         $scope.limit = 10;
 
@@ -53,47 +53,49 @@
         };
 
         $scope.transactionStatus = (transaction) => {
-          const pending = gettextCatalog.getString('Pending');
-          const received = gettextCatalog.getString('Received');
-          const sent = gettextCatalog.getString('Sent');
           if (!transaction.confirmations) {
-            return { icon: 'autorenew', title: pending };
+            return { icon: 'autorenew', title: gettextCatalog.getString('Pending') };
           }
 
           if (transaction.action === 'received') {
-            return { icon: 'call_received', title: received };
+            return { icon: 'call_received', title: gettextCatalog.getString('Received') };
           }
-          return { icon: 'call_made', title: sent };
+          return { icon: 'call_made', title: gettextCatalog.getString('Sent') };
         };
 
         function filterRows() {
           $scope.transactions = {};
 
-          for (let x = 0, maxLen = $scope.total_transactions; x < maxLen; x += 1) {
-            if (x <= $scope.limit) {
-              const t = $scope.rows[x];
-              console.log(t);
-              if (!t.isFundingNodeTransaction) {
-                const timestamp = t.time * 1000;
-                const date = moment(timestamp).format('DD/MM/YYYY');
+          return $q((resolve) => {
+            for (let x = 0, maxLen = $scope.rows.length; x < maxLen; x += 1) {
+              if (x <= $scope.limit) {
+                const t = $scope.rows[x];
+                console.log(t);
+                if (!t.isFundingNodeTransaction) {
+                  const timestamp = t.time * 1000;
+                  const date = moment(timestamp).format('DD/MM/YYYY');
 
-                if (!$scope.transactions[date]) {
-                  $scope.transactions[date] = [];
+                  if (!$scope.transactions[date]) {
+                    $scope.transactions[date] = [];
+                  }
+
+                  $scope.transactions[date].push(t);
+                  $scope.visible_rows += 1;
                 }
-
-                $scope.transactions[date].push(t);
-                $scope.visible_rows += 1;
               }
             }
-          }
+            resolve(true);
+          });
         }
 
         $scope.$watch('rows', () => {
           if ($scope.rows.length > 0) {
-            $scope.total_transactions = $scope.rows.length;
-            filterRows();
+            filterRows().then(() => {
+              $scope.loading = false;
+            });
           } else {
             $scope.total_transactions = 0;
+            $scope.loading = false;
           }
         });
 
@@ -101,6 +103,10 @@
           $scope.limit += 10;
           filterRows();
         };
+
+        $rootScope.$on('Local/UpdateHistoryStart', () => {
+          $scope.loading = true;
+        });
       }
     };
   }

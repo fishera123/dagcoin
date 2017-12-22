@@ -18,6 +18,13 @@
     text-transform: uppercase;
   }
 
+  dag-spinner{
+    .loader{
+      border-left-color: $main_color;
+      font-size: 3px;
+    }
+  }
+
   .dag_transactions_list_triggers{
     margin-bottom: 10px;
   }

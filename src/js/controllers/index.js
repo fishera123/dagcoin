@@ -53,7 +53,6 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         self.isCordova = isCordova;
         self.isSafari = isMobile.Safari();
         self.onGoingProcess = {};
-        self.historyShowLimit = 10;
         self.updatingTxHistory = true;
         self.bSwipeSuspended = false;
         self.$state = $state;
@@ -1041,116 +1040,6 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           });
         };
 
-        this.csvHistory = function () {
-          function saveFile(name, data) {
-            const chooser = document.querySelector(name);
-            chooser.addEventListener('change', function (evt) {
-              const fs = require('fs');
-              fs.writeFile(this.value, data, (err) => {
-                if (err) {
-                  $log.debug(evt, err);
-                }
-              });
-              this.value = '';
-            }, false);
-            chooser.click();
-          }
-
-          function formatDate(date) {
-            const dateObj = new Date(date);
-            if (!dateObj) {
-              $log.debug('Error formating a date');
-              return 'DateError';
-            }
-            if (!dateObj.toJSON()) {
-              return '';
-            }
-
-            return dateObj.toJSON();
-          }
-
-          function formatString(str) {
-            let formatString = str;
-            if (!formatString) {
-              return '';
-            }
-
-            if (formatString.indexOf('"') !== -1) {
-              // replace all
-              formatString = formatString.replace(new RegExp('"', 'g'), '\'');
-            }
-
-            // escaping commas
-            formatString = `\"${formatString}\"`;
-
-            return formatString;
-          }
-
-          const step = 6;
-          // const unique = {};
-
-          if (isCordova) {
-            $log.info('CSV generation not available in mobile');
-            return;
-          }
-          const isNode = nodeWebkit.isDefined();
-          const fc = profileService.focusedClient;
-          const c = fc.credentials;
-          if (!fc.isComplete()) return;
-          const self = this;
-          const allTxs = [];
-
-          $log.debug('Generating CSV from History');
-          self.setOngoingProcess('generatingCSV', true);
-
-          $timeout(() => {
-            fc.getTxHistory(ENV.DAGCOIN_ASSET, self.shared_address, (txs) => {
-              self.setOngoingProcess('generatingCSV', false);
-              $log.debug('Wallet Transaction History:', txs);
-
-              const data = txs;
-              const filename = `Dagcoin-${self.alias || self.walletName}.csv`;
-              let csvContent = '';
-
-              if (!isNode) csvContent = 'data:text/csv;charset=utf-8,';
-              csvContent += 'Date,Destination,Note,Amount,Currency\n';
-
-              let amount;
-              let note;
-              let dataString;
-              data.forEach((it, index) => {
-                console.log('Processing transactions number', index);
-                let amount = it.amount;
-
-                if (it.action === 'moved') {
-                  amount = 0;
-                }
-
-                amount = (it.action === 'sent' ? '-' : '') + amount;
-                note = formatString(`${it.message ? it.message : ''} unit: ${it.unit}`);
-
-                if (it.action === 'moved') {
-                  note += ` Moved:${it.amount}`;
-                }
-
-                dataString = `${formatDate(it.time * 1000)},${formatString(it.addressTo)},${note},${amount},dag`;
-                csvContent += `${dataString}\n`;
-              });
-
-              if (isNode) {
-                saveFile('#export_file', csvContent);
-              } else {
-                const encodedUri = encodeURI(csvContent);
-                const link = document.createElement('a');
-                link.setAttribute('href', encodedUri);
-                link.setAttribute('download', filename);
-                link.click();
-              }
-              $rootScope.$apply();
-            });
-          });
-        };
-
         self.updateLocalTxHistory = function (client, cb) {
           const walletId = client.credentials.walletId;
           if (self.arrBalances.length === 0) {
@@ -1166,10 +1055,11 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
 
             if (walletId === profileService.focusedClient.credentials.walletId) {
               self.completeHistory = newHistory;
-              self.txHistory = newHistory.slice(0, self.historyShowLimit);
+              self.txHistory = newHistory;
               self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
 
               console.log('wallet transaction history is updated');
+              console.log(self.txHistory);
               $rootScope.$apply();
             }
 
@@ -1195,6 +1085,8 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
 
           if (!fc.isComplete()) return;
 
+          $rootScope.$emit('Local/UpdateHistoryStart');
+
           $log.debug('Updating Transaction History for walletId', walletId);
           self.txHistoryError = false;
           self.updatingTxHistory = true;
@@ -1206,7 +1098,9 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                 self.txHistoryError = true;
               }
 
+
               $rootScope.$apply();
+              $rootScope.$emit('Local/UpdateHistoryEnd');
             });
           });
         };
