@@ -1,10 +1,10 @@
 <div class="dag_transactions">
     <dag-tabset>
         <dag-tab heading="Transactions">
-            <div class="transaction_history_status" ng-show="total_transactions <= 0">
+            <div class="transaction_history_status" ng-show="rows.length <= 0">
                 <p translate>No transactions yet</p>
             </div>
-            <div class="dag_transactions_list" ng-show="total_transactions > 0">
+            <div class="dag_transactions_list" ng-show="rows.length > 0">
 
                 <div class="dag_transactions_list_triggers">
                     <h4 translate>Transactions History</h4>
