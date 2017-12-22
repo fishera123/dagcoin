@@ -974,7 +974,10 @@
 
                         $timeout(() => {
                           indexScope.updateTxHistory();
-                          self.openTxModal(indexScope.txHistory[0], indexScope.txHistory);
+
+                          $rootScope.$on('Local/UpdateHistoryEnd', () => {
+                            self.openTxModal(indexScope.txHistory[0], indexScope.txHistory);
+                          });
                         }, 1000);
                       }
                       resolve();

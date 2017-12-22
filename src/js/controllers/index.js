@@ -1098,9 +1098,8 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                 self.txHistoryError = true;
               }
 
-
-              $rootScope.$apply();
               $rootScope.$emit('Local/UpdateHistoryEnd');
+              $rootScope.$apply();
             });
           });
         };
