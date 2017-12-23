@@ -1,0 +1,90 @@
+$main_color: #d51f26;
+
+$red: #e51e25;
+$green: #48be18;
+
+$warning: #ffa500;
+
+$nav_bar_height: 50px;
+
+
+@mixin gradientBackground($colorFrom, $colorTo, $directionStart, $directionEnd){
+  background: linear-gradient(to $directionEnd, $colorFrom 0%,$colorTo 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$colorFrom, endColorstr=$colorTo,GradientType=0 );
+}
+
+.transition{
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+section{
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 1 !important;
+  background-color: #fafafa;
+}
+
+ul {
+  margin-left: 0;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-LightItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-MediumItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+$font: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
