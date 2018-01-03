@@ -1,0 +1,13 @@
+  .transparent-background {
+    position: absolute;
+    z-index: -1;
+    width: 200px;
+    height: 200px;
+    opacity: .3;
+    fill: #ddd;
+    left: 50%;
+    top: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+  }
+

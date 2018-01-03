@@ -14,7 +14,7 @@
     width: 300px;
     margin: 0 auto;
 
-    .svg-icon-Dagcoin_logo{
+    .app-svg-icon-dagcoin_logo{
       svg{
         height: 20px;
         width: 105px;
@@ -46,6 +46,12 @@
 
     .state_icon {
       margin-bottom: 20px;
+
+      app-svg-icon svg {
+        width: 100px;
+        height: 100px;
+        margin-left: -55px;
+      }
     }
 
     .swiper-slide {
@@ -65,7 +71,7 @@
 
   .swiper-slide{
     .state_icon {
-      svg-icon {
+      app-svg-icon {
         @extend .transition;
         transform: translate3d(0, -40px, 0);
         opacity: 0;
@@ -75,7 +81,7 @@
 
   .swiper-slide-active {
     .state_icon {
-      svg-icon {
+      app-svg-icon {
         transform: translate3d(0, 0, 0);
         opacity: 1;
       }

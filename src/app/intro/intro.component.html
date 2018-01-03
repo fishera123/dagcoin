@@ -1,24 +1,31 @@
 <div class="intro_content content">
-    <div class="intro_content_body">
-        <div class="icons_states_swiper">
-          <div class="swiper-container">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <!-- <dag-state-icon icon="safe"></dag-state-icon> -->
-                    <div class="icons_states_swiper_info">
-                        <h3><app-svg-icon name="dagcoin_logo"></app-svg-icon> is secure.</h3>
-                        <p>This app stores your <strong>dagcoin</strong>s<br/> with cutting-edge security.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
-              </div>
-              <div class="swiper-pagination"></div>
+  <div class="intro_content_body">
+    <div class="icons_states_swiper">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="state_icon">
+              <app-svg-icon name="safe"></app-svg-icon>
+              <app-svg-icon name="icon-BG-shape-1" className="transparent-background"></app-svg-icon>
             </div>
+            <!-- <dag-state-icon icon="safe"></dag-state-icon> -->
+            <div class="icons_states_swiper_info">
+              <h3>
+                <app-svg-icon name="dagcoin_logo"></app-svg-icon>
+                is secure.
+              </h3>
+              <p>This app stores your <strong>dagcoin</strong>s<br/> with cutting-edge security.</p>
+            </div>
+          </div>
+          <div class="swiper-slide">Slide 2</div>
+          <div class="swiper-slide">Slide 3</div>
         </div>
-
-        <div class="intro_content_trigger">
-            <button ui-sref="disclaimer" class="btn btn_red-full">GET STARTED</button>
-        </div>
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
+
+    <div class="intro_content_trigger">
+      <button ui-sref="disclaimer" class="btn btn_red-full">GET STARTED</button>
+    </div>
+  </div>
 </div>

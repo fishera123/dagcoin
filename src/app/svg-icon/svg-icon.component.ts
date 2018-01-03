@@ -1,35 +1,35 @@
-import { Component, Input, ChangeDetectionStrategy, ElementRef, Renderer } from '@angular/core';
-import { HttpClient, Response } from '@angular/common/http';
+import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer, OnInit} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-svg-icon',
-  template: `<ng-content></ng-content>`,
+  template: `
+    <ng-content></ng-content>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SvgIconComponent {
-  @Input()
-  set name(val: string) {
-    this.loadSvg(val);
+export class SvgIconComponent implements OnInit {
+  @Input() name;
+  @Input() className;
+
+  constructor(private http: HttpClient, private renderer: Renderer, private elementRef: ElementRef) {
   }
 
-  @Input() alt: string;
+  ngOnInit() {
+    this.loadSvg(this.name, this.className);
+  }
 
-  constructor(private http: HttpClient, private renderer: Renderer, private elementRef: ElementRef) { }
+  loadSvg(name: string, className: string) {
 
-  loadSvg(val: string) {
-    debugger;
-
-    this.http.get(`assets/svgs/${val}.svg`)
+    this.http.get(`/assets/svgs/${name}.svg`, {responseType: 'text'})
       .subscribe(
         res => {
           const element = this.elementRef.nativeElement;
-          element.innerHTML = '';
-          const response = res.text();
           const parser = new DOMParser();
-          const svg = parser.parseFromString(response, 'image/svg+xml');
-          this.renderer.projectNodes(element, [svg.documentElement]);
-        },
-        err => { console.error(err); });
+          const svg = parser.parseFromString(res, 'image/svg+xml').documentElement;
+          if (className) {
+            this.renderer.setElementClass(svg, className, true);
+          }
+          this.renderer.projectNodes(element, [svg]);
+        });
   }
-
 }
