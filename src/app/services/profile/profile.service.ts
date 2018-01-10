@@ -123,6 +123,12 @@ export class ProfileService implements IProfileService {
     return undefined;
   }
 
+  // interface method, added here to show adding clearMnemonic method to Root class
+  clearMnemonic(cb): any {
+    this.root.clearMnemonic();
+    return undefined;
+  }
+
   setPrivateKeyEncryptionFC(password: string, cb?): any {
     return undefined;
   }
@@ -191,12 +197,6 @@ export class ProfileService implements IProfileService {
   }
 
   private updateCredentialsFC(cb?): any {
-    throw new Error('not implemented');
-  }
-
-  // interface method, added here to show adding clearMnemonic method to Root class
-  public clearMnemonic(cb): any {
-    this.root.clearMnemonic();
     throw new Error('not implemented');
   }
 
