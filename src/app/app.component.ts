@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {ProfileService} from './services/profile/profile.service';
+import {IProfileService, ProfileService} from './services/profile/profile.service';
+import {SharedModule} from './_base/shared.module';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,11 @@ import {ProfileService} from './services/profile/profile.service';
 export class AppComponent {
   title = 'app';
 
-  constructor(profileService: ProfileService) { }
+  constructor(private profileService: ProfileService) {
+    this.injectServicesIntoSharedModule();
+  }
+
+  private injectServicesIntoSharedModule() {
+    SharedModule.setProfileService(this.profileService);
+  }
 }

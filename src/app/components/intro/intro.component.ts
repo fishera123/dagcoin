@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as Swiper from 'swiper';
+import {BaseComponent} from '../../_base/base.component';
 
 @Component({
   selector: 'app-intro',
@@ -7,9 +8,10 @@ import * as Swiper from 'swiper';
   styleUrls: ['./intro.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class IntroComponent implements OnInit {
+export class IntroComponent extends BaseComponent implements OnInit {
 
   constructor() {
+    super();
   }
 
   ngOnInit() {
@@ -18,6 +20,7 @@ export class IntroComponent implements OnInit {
         el: '.swiper-pagination',
       },
     });
+    console.log(this.getProfileService());
   }
 
 }

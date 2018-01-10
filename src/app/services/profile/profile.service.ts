@@ -73,12 +73,92 @@ export interface IProfileService {
 }
 
 @Injectable()
-export class ProfileService /*implements IProfileService*/ {
+export class ProfileService implements IProfileService {
 
   root: Root;
 
   constructor() {
     this.root = new Root();
+  }
+
+  formatAmount(amount: any, asset: any, opts?: any): string {
+    return undefined;
+  }
+
+  setAndStoreFocus(walletId: string): void {
+  }
+
+  setWalletClients(): void {
+  }
+
+  loadAndBindProfile(): Promise<any> {
+    return undefined;
+  }
+
+  createWallet(opts: any, cb?): any {
+    return undefined;
+  }
+
+  deleteWallet(opts: any, cb?): any {
+    return undefined;
+  }
+
+  importWallet(str: string, opts, cb?): any {
+    return undefined;
+  }
+
+  addWalletClient(walletClient: WalletClient, opts: any, cb?): any {
+    return undefined;
+  }
+
+  importExtendedPrivateKey(xPrivKey: any, opts: any, cb?): any {
+    return undefined;
+  }
+
+  importMnemonic(words: any, opts: any, cb?): any {
+    return undefined;
+  }
+
+  importExtendedPublicKeyFunction(opts, cb): any {
+    return undefined;
+  }
+
+  setPrivateKeyEncryptionFC(password: string, cb?): any {
+    return undefined;
+  }
+
+  disablePrivateKeyEncryptionFC(cb?): any {
+    return undefined;
+  }
+
+  lockFC(): void {
+  }
+
+  unlockFC(error: any, cb?) {
+  }
+
+  insistUnlockFC(insistUnlockFCError: any, cb?): any {
+    return undefined;
+  }
+
+  getWallets(network: any): any {
+    return undefined;
+  }
+
+  requestTouchid(cb): any {
+    return undefined;
+  }
+
+  setSingleAddressFlag(newValue: any): any {
+    return undefined;
+  }
+
+  replaceProfile(xPrivKey: any, mnemonic: string, myDeviceAddress: string, cb?): any {
+    return undefined;
+  }
+
+  getWalletByAddress(address): Promise<any> {
+    return undefined;
   }
 
   private setFocus (walletId: string, cb?): void {
