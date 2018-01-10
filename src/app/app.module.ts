@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
+import {ProfileService} from './services/profile/profile.service';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
     BrowserModule,
     HttpClientModule
   ],
+  providers: [ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
