@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SvgIconComponent } from './svg-icon.component';
+import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {CommonTestModuleMetadata} from '../../_test/common.test.module.metadata';
 
 describe('SvgIconComponent', () => {
   let component: SvgIconComponent;
@@ -8,6 +10,8 @@ describe('SvgIconComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
+      providers: [HttpClient, HttpHandler],
       declarations: [ SvgIconComponent ]
     })
     .compileComponents();
@@ -16,6 +20,13 @@ describe('SvgIconComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SvgIconComponent);
     component = fixture.componentInstance;
+
+    /*
+    spyOn(component, 'loadSvg').and.callFake(() => {
+      console.log('loadSvg called fake');
+    });
+    */
+
     fixture.detectChanges();
   });
 

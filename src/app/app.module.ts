@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { ProfileService } from './services/profile/profile.service';
 import { SharedModule } from './_base/shared.module';
+import {ConfigService} from './services/config/config.service';
+import {FileStorageService} from './services/file-storage/file-storage.service';
+import {LocalStorageService} from './services/local-storage/local-storage.service';
+import {StorageService} from './services/storage/storage.service';
 
 
 @NgModule({
@@ -19,7 +23,13 @@ import { SharedModule } from './_base/shared.module';
     HttpClientModule,
     SharedModule
   ],
-  providers: [ProfileService],
+  providers: [
+    ProfileService,
+    ConfigService,
+    StorageService,
+    FileStorageService,
+    LocalStorageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

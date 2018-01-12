@@ -1,137 +1,115 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as _ from 'lodash';
-import { StorageService } from '../storage/storage.service';
+import {StorageService} from '../storage/storage.service';
+import {Config} from '../../models/config.model';
 
+export interface IConfigService {
+  getSync(): any;
+  get(): Promise<Config>;
+  set(newOpts: any): Promise<any>;
+
+  // TODO add other declarations
+}
 
 @Injectable()
-export class ConfigService {
+export class ConfigService implements IConfigService {
 
-  defaultConfig = {
-    // wallet limits
-    limits: {
-      totalCosigners: 6,
-    },
-    hub: 'testnetexplorer.dagcoin.org/wss/',
-    deviceName: 'test name',
-    wallet: {
-      requiredCosigners: 2,
-      totalCosigners: 3,
-      spendUnconfirmed: false,
-      reconnectDelay: 5000,
-      idleDurationMin: 4,
-      settings: {
-        unitName: 'bytes',
-        unitValue: 1,
-        unitDecimals: 0,
-        unitCode: 'oneByte',
-        dagUnitName: 'DAG',
-        dagUnitValue: 1000000,
-        dagUnitDecimals: 6,
-        dagUnitCode: 'one',
-        alternativeName: 'US Dollar',
-        alternativeIsoCode: 'USD',
-      },
-    },
-    rates: {
-      url: 'https://insight.bitpay.com:443/api/rates',
-    },
-    pushNotifications: {
-      enabled: true,
-      config: {
-        android: {
-          icon: 'push',
-          iconColor: '#2F4053',
-        },
-        ios: {
-          alert: 'true',
-          badge: 'true',
-          sound: 'true',
-        },
-        windows: {},
-      },
-    },
-    autoUpdateWitnessesList: true,
-  };
+  defaultConfig: Config;
   configCache = null;
 
-  constructor(private storage: StorageService) { }
+  constructor(private storage: StorageService) {
+    this.defaultConfig = new Config();
+  }
 
   getSync() {
     if (!this.configCache) {
-      throw new Error('configService#getSync called when cache is not initialized');
+      return this.defaultConfig;
+      // throw new Error('configService#getSync called when cache is not initialized');
     }
     return this.configCache;
   }
 
-  get(cb) {
-    this.storage.getConfig((err, localConfig) => {
-      if (localConfig) {
-        this.configCache = JSON.parse(localConfig);
+  get(): Promise<Config> {
+    const $self = this;
+    const promise: Promise<string> = this.storage.getConfig();
 
-        // these ifs are to avoid migration problems
-        if (!this.configCache.wallet) {
-          this.configCache.wallet = this.defaultConfig.wallet;
-        }
-        if (!this.configCache.wallet.settings.unitCode) {
-          this.configCache.wallet.settings.unitCode = this.defaultConfig.wallet.settings.unitCode;
-        }
-        if (!this.configCache.wallet.settings.unitValue) {
-          if (this.configCache.wallet.settings.unitToBytes) {
-            this.configCache.wallet.settings.unitValue = this.configCache.wallet.settings.unitToBytes;
-          } else {
-            this.configCache.wallet.settings.unitValue = this.defaultConfig.wallet.settings.unitValue;
-          }
-        }
-        if (!this.configCache.wallet.settings.dagUnitName) {
-          this.configCache.wallet.settings.dagUnitName = this.defaultConfig.wallet.settings.dagUnitName;
-        }
-        if (!this.configCache.wallet.settings.dagUnitValue) {
-          this.configCache.wallet.settings.dagUnitValue = this.defaultConfig.wallet.settings.dagUnitValue;
-        }
-        if (!this.configCache.wallet.settings.dagUnitDecimals) {
-          this.configCache.wallet.settings.dagUnitDecimals = this.defaultConfig.wallet.settings.dagUnitDecimals;
-        }
-        if (!this.configCache.wallet.settings.dagUnitCode) {
-          this.configCache.wallet.settings.dagUnitCode = this.defaultConfig.wallet.settings.dagUnitCode;
-        }
-        if (!this.configCache.pushNotifications) {
-          this.configCache.pushNotifications = this.defaultConfig.pushNotifications;
-        }
-        if (!this.configCache.hub) {
-          this.configCache.hub = this.defaultConfig.hub;
-        }
-        if (!this.configCache.deviceName) {
-          this.configCache.deviceName = this.defaultConfig.deviceName;
-        }
-      } else {
-        this.configCache = _.clone(this.defaultConfig);
-        this.configCache.deviceName = this.defaultConfig.deviceName;
-      }
-
-      // $log.debug('Preferences read:', this.configCache);
-      return cb(err, this.configCache);
+    return new Promise(function (resolve, reject) {
+      resolve(promise.then(value => {
+        $self.getLocalConfig(value);
+        return $self.configCache;
+      }));
     });
   }
 
-  set(newOpts, cb) {
+  set(newOpts: any): Promise<any> {
+    const $self = this;
     let config = this.defaultConfig;
-    this.storage.getConfig((err, oldOpts) => {
-      let oldOptions;
-      let newOptions = newOpts;
-      if (_.isString(oldOpts)) {
-        oldOptions = JSON.parse(oldOpts);
-      }
-      if (_.isString(config)) {
-        config = JSON.parse(config);
-      }
-      if (_.isString(newOptions)) {
-        newOptions = JSON.parse(newOptions);
-      }
-      _.merge(config, oldOptions, newOptions);
-      this.configCache = config;
+    const promise: Promise<string> = this.storage.getConfig();
 
-      this.storage.storeConfig(JSON.stringify(config), cb);
+    return new Promise(function (resolve, reject) {
+      resolve(promise.then(oldOpts => {
+        let oldOptions;
+        let newOptions = newOpts;
+        if (_.isString(oldOpts)) {
+          oldOptions = JSON.parse(oldOpts);
+        }
+        if (_.isString(config)) {
+          config = JSON.parse(config);
+        }
+        if (_.isString(newOptions)) {
+          newOptions = JSON.parse(newOptions);
+        }
+        _.merge(config, oldOptions, newOptions);
+        $self.configCache = config;
+
+        return $self.storage.storeConfig(JSON.stringify(config));
+      }));
     });
+  }
+
+  private getLocalConfig(localConfig) {
+    if (localConfig) {
+      this.configCache = JSON.parse(localConfig);
+
+      // these ifs are to avoid migration problems
+      if (!this.configCache.wallet) {
+        this.configCache.wallet = this.defaultConfig.wallet;
+      }
+      if (!this.configCache.wallet.settings.unitCode) {
+        this.configCache.wallet.settings.unitCode = this.defaultConfig.wallet.settings.unitCode;
+      }
+      if (!this.configCache.wallet.settings.unitValue) {
+        if (this.configCache.wallet.settings.unitToBytes) {
+          this.configCache.wallet.settings.unitValue = this.configCache.wallet.settings.unitToBytes;
+        } else {
+          this.configCache.wallet.settings.unitValue = this.defaultConfig.wallet.settings.unitValue;
+        }
+      }
+      if (!this.configCache.wallet.settings.dagUnitName) {
+        this.configCache.wallet.settings.dagUnitName = this.defaultConfig.wallet.settings.dagUnitName;
+      }
+      if (!this.configCache.wallet.settings.dagUnitValue) {
+        this.configCache.wallet.settings.dagUnitValue = this.defaultConfig.wallet.settings.dagUnitValue;
+      }
+      if (!this.configCache.wallet.settings.dagUnitDecimals) {
+        this.configCache.wallet.settings.dagUnitDecimals = this.defaultConfig.wallet.settings.dagUnitDecimals;
+      }
+      if (!this.configCache.wallet.settings.dagUnitCode) {
+        this.configCache.wallet.settings.dagUnitCode = this.defaultConfig.wallet.settings.dagUnitCode;
+      }
+      if (!this.configCache.pushNotifications) {
+        this.configCache.pushNotifications = this.defaultConfig.pushNotifications;
+      }
+      if (!this.configCache.hub) {
+        this.configCache.hub = this.defaultConfig.hub;
+      }
+      if (!this.configCache.deviceName) {
+        this.configCache.deviceName = this.defaultConfig.deviceName;
+      }
+    } else {
+      this.configCache = _.clone(this.defaultConfig);
+      this.configCache.deviceName = this.defaultConfig.deviceName;
+    }
   }
 
   setWithoutMergingOld(newOpts, cb) {
@@ -147,7 +125,7 @@ export class ConfigService {
     _.merge(config, newOptions);
     this.configCache = config;
 
-    this.storage.storeConfig(JSON.stringify(config), cb);
+    this.storage.storeConfig(JSON.stringify(config));
   }
 
   // reset(cb) {

@@ -160,4 +160,11 @@ export class Utils {
 
     return wordList.join(isJA ? '\u3000' : ' ');
   }
+
+  public static clearLocalStorage() {
+    const ls = typeof window.localStorage !== 'undefined' ? window.localStorage : null;
+    if (ls != null) {
+      ls.clear();
+    }
+  }
 }

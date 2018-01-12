@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import {IInternalStorageService} from '../storage/storage.service';
 
 
 @Injectable()
-export class FileStorageService {
+export class FileStorageService implements IInternalStorageService {
 
   fileSystem;
   directory;
@@ -11,34 +12,52 @@ export class FileStorageService {
   constructor() { }
 
 
-  init(cb) {
+  init() {
     if (this.directory) {
-      return cb(null, this.fileSystem, this.directory);
+      return; // cb(null, this.fileSystem, this.directory);
     }
+    /*
+    const __this = this;
+    return new Promise(function(resolve, reject) {
+      try {
+        resolve({
+          fileSystem: __this.fileSystem,
+          directory: __this.directory
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
+    */
 
     function onFileSystemSuccess(fs) {
       console.log('File system started: ', fs.name, fs.root.name);
       this.fileSystem = fs;
       this.getDir((err, newDir) => {
         if (err || !newDir.nativeURL) {
-          return cb(err);
+          return; // cb(err);
         }
         this.directory = newDir;
         // $log.debug('Got main dir:', directory.nativeURL);
-        return cb(null, this.fileSystem, this.directory);
+        return; // cb(null, this.fileSystem, this.directory);
       });
     }
 
     function fail(evt) {
       const msg = `Could not init file system: ${evt.target.error.code}`;
       console.log(msg);
-      return cb(msg);
+      // TODO throw exception
+      return; // cb(msg);
     }
 
-    // return window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+    // return window.webkitRequestFileSyste (LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
   }
 
-  get = function (k, cb) {
+  get(key: string, cb?): Promise<string> {
+    return new Promise<string>(function (resolve, reject) {
+      return resolve ('');
+    });
+    /*
     this.init((err, fs, dir) => {
       if (err) {
         return cb(err);
@@ -66,9 +85,14 @@ export class FileStorageService {
         return cb(error);
       });
     });
-  };
+    */
+  }
 
-  set = function (k, v, cb) {
+  set(key: string, value: any, cb?): Promise<any> {
+    return new Promise<any>(function (resolve, reject) {
+      return resolve ('');
+    });
+    /*
     this.init((err, fs, dir) => {
       if (err) {
         return cb(err);
@@ -102,9 +126,14 @@ export class FileStorageService {
         }, cb);
       }, cb);
     });
-  };
+    */
+  }
 
-  remove = function (k, cb) {
+  remove(key: string, cb?): Promise<any> {
+    return new Promise<any>(function (resolve, reject) {
+      return resolve ('');
+    });
+    /*
     this.init((err, fs, dir) => {
       if (err) {
         return cb(err);
@@ -119,12 +148,17 @@ export class FileStorageService {
         }, cb);
       }, cb);
     });
-  };
+    */
+  }
 
   /**
    * Same as setItem, but fails if an item already exists
    */
-  create = function (name, value, callback) {
+  create(name: string, value: any, cb?): Promise<any> {
+    return new Promise<any>(function (resolve, reject) {
+      return resolve ('');
+    });
+    /*
     this.get(name,
       (err, data) => {
         if (data) {
@@ -132,6 +166,7 @@ export class FileStorageService {
         }
         return this.set(name, value, callback);
       });
-  };
+      */
+  }
 
 }
