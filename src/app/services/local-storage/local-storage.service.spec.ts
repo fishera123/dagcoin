@@ -50,7 +50,7 @@ describe('LocalStorageService', () => {
     expect(getPromise).toBeTruthy();
     tick();
     getPromise.then((value => {
-      expect(value).toEqual(true);
+      expect(value).toEqual('new-test-value');
     }));
 
     expect(ls.getItem('new-key-test')).toEqual('new-test-value');

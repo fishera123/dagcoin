@@ -10,6 +10,7 @@ import {ConfigService} from './services/config/config.service';
 import {FileStorageService} from './services/file-storage/file-storage.service';
 import {LocalStorageService} from './services/local-storage/local-storage.service';
 import {StorageService} from './services/storage/storage.service';
+import {WalletClientApiModule} from './_api/wallet.client.api/wallet.client.api.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {StorageService} from './services/storage/storage.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    WalletClientApiModule
   ],
   providers: [
     ProfileService,

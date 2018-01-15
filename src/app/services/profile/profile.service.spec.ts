@@ -25,6 +25,7 @@ describe('ProfileService', () => {
   */
 
   it('should create', fakeAsync(inject([ProfileService], (service: ProfileService) => {
+    /*
     const createPromise = service.create({});
     tick();
     createPromise
@@ -32,6 +33,8 @@ describe('ProfileService', () => {
         console.log(`ok :: value=${value}`);
       })
       .catch(err => console.log(err));
+      */
   })));
+
 
 });

@@ -7,8 +7,10 @@ import {ConfigService} from '../config/config.service';
 import {Utils} from '../../_base/utils';
 import {BaseService} from '../../_base/base.service';
 import {reject} from 'q';
-import {BitcoreWalletClientApiWrapper, bwcService} from '../../_wrapper/bitcore.wallet.client.api.wrapper';
+import {BitcoreWalletClientApiWrapper} from '../../_wrapper/bitcore.wallet.client.api.wrapper';
 import {StorageService} from '../storage/storage.service';
+import {BwcService} from '../../_api/wallet.client.api/bwc.service';
+import {API} from '../../_api/wallet.client.api/wallet-client/lib/api';
 
 /**
  * Manages the profile data
@@ -99,7 +101,9 @@ export class ProfileService extends BaseService implements IProfileService {
 
   root: Root;
 
-  constructor(private configService: ConfigService, private storageService: StorageService) {
+  constructor(private configService: ConfigService,
+              private storageService: StorageService,
+              private bwcService: BwcService) {
     super();
     this.root = new Root();
   }
@@ -226,7 +230,7 @@ export class ProfileService extends BaseService implements IProfileService {
 
   private seedWallet(opts: any, cb?): Promise<any> {
     const options = opts || {};
-    const walletClient = bwcService.getClient(); // change bwcService
+    const walletClient: API =  this.bwcService.getClient();
     const network = options.networkName || 'livenet';
     const $log = console;
     return new Promise(function (resolve, rej) {
@@ -308,9 +312,9 @@ export class ProfileService extends BaseService implements IProfileService {
       .then(walletClient => {
         console.log('4.');
         const config = $self.configService.getSync();
-        const device = {genPrivKey() { return ''; }, getMyDeviceAddress() { }}; // require('byteballcore/device.js');
+        const device = require('byteballcore/device.js'); //{genPrivKey() { return ''; }, getMyDeviceAddress() { }}; //
         const tempDeviceKey = device.genPrivKey();
-        // walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, config.hub, config.deviceName);
+        walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, config.hub, config.deviceName);
         const walletName = gettextCatalog.getString('Small Expenses Wallet');
         return {
           wc: walletClient,
