@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { API } from './wallet-client/lib/api';
+import {Injectable} from '@angular/core';
+import {APIs} from './wallet-client/lib/api';
 
 
 @Injectable()
 export class BwcService {
 
-  constructor(private api: API) {
+  constructor(private api: APIs) {
     console.log(this.api);
   }
 
-  getClient(): API {
+  getClient(): APIs {
     return this.api;
   }
 }

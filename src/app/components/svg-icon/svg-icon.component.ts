@@ -19,9 +19,12 @@ export class SvgIconComponent implements OnInit {
   }
 
   loadSvg(name: string, className: string) {
+    console.log(`load svg ${name} ${className}`);
     return this.http.get(`/assets/svgs/${name}.svg`, {responseType: 'text'})
       .subscribe(
         res => {
+          alert(11);
+          console.log(res);
           const element = this.elementRef.nativeElement;
           const parser = new DOMParser();
           const svg = parser.parseFromString(res, 'image/svg+xml').documentElement;

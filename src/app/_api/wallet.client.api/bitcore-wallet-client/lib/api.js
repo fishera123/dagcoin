@@ -490,7 +490,7 @@ API.prototype.createAddress = function (isChange, cb) {
 };
 
 /*
- API.prototype.sendPayment = function(asset, to_address, amount, arrSigningDeviceAddresses, recipient_device_address, cb) {
+ APIs.prototype.sendPayment = function(asset, to_address, amount, arrSigningDeviceAddresses, recipient_device_address, cb) {
  this.sendMultiPayment({
  asset: asset,
  to_address: to_address,

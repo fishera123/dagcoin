@@ -2,15 +2,33 @@
   "name": "dagcoin",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "main.js",
+  "main": "dist/index.html",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "start-web": "webpack-dev-server --inline --progress --port 8080",
+    "start": "concurrently \"npm run webpack:w\" \"npm run nw\"",
+    "test": "karma start",
+    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail && npm run nw",
+    "postinstall": "typings install",
+    "nw": "nw .",
+    "webpack:w": "webpack --display-error-details -w"
+
   },
-  "private": true,
+  "webkit": {
+    "partitions": [
+      {
+        "name": "assets",
+        "accessible_resources": ["/assets/**"]
+      }
+    ]
+  },
+  "window": {
+    "title": "Angular2 NWJS webpack",
+    "width": 600,
+    "height": 400,
+    "position": "center",
+    "min_width": 100,
+    "min_height": 100
+  },
   "dependencies": {
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
@@ -34,7 +52,6 @@
     "chokidar": "^1.7.0",
     "core-js": "^2.4.1",
     "dagcoin-core": "^0.6.2",
-    "electron": "^1.7.10",
     "foundation-sites": "^6.4.3",
     "jszip": "^3.1.3",
     "lodash": "^4.17.4",
@@ -50,6 +67,8 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
+    "angular2-template-loader": "^0.4.0",
+    "awesome-typescript-loader": "^2.2.4",
     "@angular/cli": "1.6.1",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/language-service": "^5.0.0",
@@ -68,7 +87,7 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2",
+    "typings": "1.3.2",
     "adm-zip": "^0.4.7",
     "bhttp": "^1.2.1",
     "cssnano": "^3.10.0",
@@ -81,9 +100,29 @@
     "stringify": "^5.1.0",
     "stylelint": "^8.0.0",
     "stylelint-csstree-validator": "^1.1.1",
-    "stylelint-scss": "^1.5.1"
-  },
-  "env": {
-    "NODE_ENV": "testnet"
+    "stylelint-scss": "^1.5.1",
+    "autoprefixer": "^6.5.3",
+    "css-loader": "^0.28.1",
+    "exports-loader": "^0.6.3",
+    "file-loader": "^1.1.5",
+    "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.29.0",
+    "less-loader": "^4.0.5",
+    "postcss-loader": "^2.0.8",
+    "postcss-url": "^7.1.2",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.3",
+    "source-map-loader": "^0.2.0",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "style-loader": "^0.13.1",
+    "stylus-loader": "^3.0.1",
+    "url-loader": "^0.6.2",
+    "circular-dependency-plugin": "^4.2.1",
+    "copy-webpack-plugin": "^4.1.1",
+    "uglifyjs-webpack-plugin": "~1.1.2",
+
+    "webpack-dev-server": "~2.9.3",
+    "webpack": "~3.10.0",
+    "webpack-merge": "^0.14.0"
   }
 }

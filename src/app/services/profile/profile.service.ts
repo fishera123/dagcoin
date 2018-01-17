@@ -10,7 +10,7 @@ import {reject} from 'q';
 import {BitcoreWalletClientApiWrapper} from '../../_wrapper/bitcore.wallet.client.api.wrapper';
 import {StorageService} from '../storage/storage.service';
 import {BwcService} from '../../_api/wallet.client.api/bwc.service';
-import {API} from '../../_api/wallet.client.api/wallet-client/lib/api';
+import {APIs} from '../../_api/wallet.client.api/wallet-client/lib/api';
 
 /**
  * Manages the profile data
@@ -230,7 +230,7 @@ export class ProfileService extends BaseService implements IProfileService {
 
   private seedWallet(opts: any, cb?): Promise<any> {
     const options = opts || {};
-    const walletClient: API =  this.bwcService.getClient();
+    const walletClient: APIs =  this.bwcService.getClient();
     const network = options.networkName || 'livenet';
     const $log = console;
     return new Promise(function (resolve, rej) {

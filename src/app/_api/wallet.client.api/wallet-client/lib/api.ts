@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Constants} from './common/constants';
 
-const ecdsaSig = require('byteballcore/signature.js');
-const breadcrumbs = require('byteballcore/breadcrumbs.js');
-const constants = require('byteballcore/constants.js');
+// const ecdsaSig = require('byteballcore/signature.js');
+import * as ecdsaSig from 'byteballcore/signature.js';
+
+// const breadcrumbs = require('byteballcore/breadcrumbs.js');
+import * as breadcrumbs from 'byteballcore/breadcrumbs.js';
+
+// const constants = require('byteballcore/constants.js');
+import * as constants from 'byteballcore/constants.js';
+
 
 const isTestnet = constants.version.match(/t$/);
 constants.DAGCOIN_ASSET = isTestnet ? 'B9dw3C3gMC+AODL/XqWjFh9jFe31jS08yf2C3zl8XGg=' : 'j5brqzPhQ0H2VNYi3i59PmlV15p54yAiSzacrQ2KqQQ=';
@@ -19,7 +25,7 @@ const Credentials = require('./credentials');
 const Errors = require('./errors/error.definitions');
 
 @Injectable()
-export class API {
+export class APIs {
 
   verbose: any;
   timeout: number;
@@ -28,7 +34,8 @@ export class API {
     iter: 10000,
   };
 
-  constructor(opts) {
+  constructor() {
+    const opts: any = null;
     const options = opts || {};
     this.verbose = !!options.verbose;
     this.timeout = options.timeout || 50000;
@@ -100,9 +107,9 @@ export class API {
       options.passphrase,
       options.language || 'en',
       options.account || 0);
-  };
+  }
 
 }
 
-util.inherits(API, events.EventEmitter);
+// util.inherits(APIs, events.EventEmitter);
 

@@ -4,8 +4,8 @@
  */
 
 /**
- * Client API.
- * @alias module:Client.API
+ * Client APIs.
+ * @alias module:Client.APIs
  */
 const client = require('./api');
 module.exports = require('./api');

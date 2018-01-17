@@ -15,7 +15,7 @@ export class IntroComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    const myswiper = new Swiper.default('.swiper-container', {
+    const myswiper = new Swiper('.swiper-container', {
       pagination: {
         el: '.swiper-pagination',
       },

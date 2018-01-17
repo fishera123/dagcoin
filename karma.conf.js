@@ -1,6 +1,3 @@
-// Karma configuration file, see link for more information
-// https://karma-runner.github.io/1.0/config/configuration-file.html
-
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -13,14 +10,6 @@ module.exports = function (config) {
       require('@angular/cli/plugins/karma')
     ],
     files: [
-      'bower_components/angular/angular.js', // angular
-      'bower_components/angular-mocks/angular-mocks.js', // angular mocks
-      'bower_components/raven-js/dist/raven.js',
-      'bower_components/raven-js/dist/plugins/angular.js',
-      'src/js/app.js',
-      'src/js/directives/svgIcon/svgIcon.directive.js',
-      'src/js/directives/svgIcon/svgIcon.spec.js',
-      'public/views/**/*.html',
     ],
 
     exclude: [
@@ -48,3 +37,4 @@ module.exports = function (config) {
     singleRun: false
   });
 };
+
