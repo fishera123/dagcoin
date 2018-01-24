@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as Swiper from 'swiper';
 import {BaseComponent} from '../../_base/base.component';
+import {ProfileService} from '../../services/profile/profile.service';
 
 @Component({
   selector: 'app-intro',
@@ -10,7 +11,7 @@ import {BaseComponent} from '../../_base/base.component';
 })
 export class IntroComponent extends BaseComponent implements OnInit {
 
-  constructor() {
+  constructor(private profileService: ProfileService) {
     super();
   }
 
@@ -21,6 +22,13 @@ export class IntroComponent extends BaseComponent implements OnInit {
       },
     });
     console.log(this.getProfileService());
+  }
+
+  testCreateWallet() {
+    this.profileService.create({})
+      .then(value => {
+        alert(value);
+      });
   }
 
 }

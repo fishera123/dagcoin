@@ -12,6 +12,9 @@ import {StorageService} from '../storage/storage.service';
 import {BwcService} from '../../_api/wallet.client.api/bwc.service';
 import {APIs} from '../../_api/wallet.client.api/wallet-client/lib/api';
 
+const device =  require('byteballcore/device.js'); // {genPrivKey() { return ''; }, getMyDeviceAddress() { }};
+// const device =  {genPrivKey() { return ''; }, getMyDeviceAddress() { }};
+
 /**
  * Manages the profile data
  */
@@ -312,7 +315,6 @@ export class ProfileService extends BaseService implements IProfileService {
       .then(walletClient => {
         console.log('4.');
         const config = $self.configService.getSync();
-        const device = require('byteballcore/device.js'); //{genPrivKey() { return ''; }, getMyDeviceAddress() { }}; //
         const tempDeviceKey = device.genPrivKey();
         walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, config.hub, config.deviceName);
         const walletName = gettextCatalog.getString('Small Expenses Wallet');
@@ -324,7 +326,6 @@ export class ProfileService extends BaseService implements IProfileService {
       .then(wcn => Promise.resolve(BitcoreWalletClientApiWrapper.createWallet(wcn.wn, 1, 1, {network: 'livenet'})))
       .then(walletClient => {
         console.log('6.');
-        const device = {genPrivKey() { return ''; }, getMyDeviceAddress() { }}; // require('byteballcore/device.js');
         console.log('created wallet, client:', walletClient);
         const xPrivKey = walletClient.credentials.xPrivKey;
         const mnemonic = walletClient.credentials.mnemonic;

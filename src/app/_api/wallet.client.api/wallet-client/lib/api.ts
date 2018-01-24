@@ -9,6 +9,8 @@ import * as breadcrumbs from 'byteballcore/breadcrumbs.js';
 
 // const constants = require('byteballcore/constants.js');
 import * as constants from 'byteballcore/constants.js';
+import {Utils} from '../../../../_base/utils';
+import {Credentials} from './credentials';
 
 
 const isTestnet = constants.version.match(/t$/);
@@ -21,7 +23,6 @@ const Bitcore = require('bitcore-lib');
 
 const log = require('./log');
 
-const Credentials = require('./credentials');
 const Errors = require('./errors/error.definitions');
 
 @Injectable()
@@ -102,7 +103,7 @@ export class APIs {
     $.checkArgument(arguments.length <= 1, 'DEPRECATED: only 1 argument accepted.');
     $.checkArgument(lodash.isUndefined(opts) || lodash.isObject(opts), 'DEPRECATED: argument should be an options object.');
     const options = opts || {};
-    console.log(`client: seedFromRandomWithMnemonic ${JSON.stringify(opts)}`);
+    Utils.debug(`client: seedFromRandomWithMnemonic ${JSON.stringify(opts)}`);
     this.credentials = Credentials.createWithMnemonic(options.network || 'livenet',
       options.passphrase,
       options.language || 'en',

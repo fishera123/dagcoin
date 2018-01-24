@@ -1,5 +1,6 @@
 import {DatePipe} from '@angular/common';
-import {environment} from '../../environments/environment';
+
+const lodash = require('lodash');
 
 /**
  * Class is used for utility methods,
@@ -165,6 +166,17 @@ export class Utils {
     const ls = typeof window.localStorage !== 'undefined' ? window.localStorage : null;
     if (ls != null) {
       ls.clear();
+    }
+  }
+
+  /**
+   *
+   * @param network
+   * @throws Error if network neither livenet nor testnet
+   */
+  public static checkNetwork(network) {
+    if (!lodash.includes(['livenet', 'testnet'], network)) {
+      throw new Error('Invalid network');
     }
   }
 }

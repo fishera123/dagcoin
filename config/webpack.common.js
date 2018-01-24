@@ -10,7 +10,7 @@ const postcssUrl = require('postcss-url');
 const cssnano = require('cssnano');
 const customProperties = require('postcss-custom-properties');
 
-const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
+const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin, IgnorePlugin } = require('webpack');
 const { ScriptsWebpackPlugin, NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin } = require('webpack').optimize;
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
@@ -18,14 +18,17 @@ const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
 const genDirNodeModules = path.join(process.cwd(), 'src', '$$_gendir', 'node_modules');
-const entryPoints = ["inline","polyfills","sw-register","styles","scripts","vendor","main"];
+const entryPoints = ["inline","polyfills","sw-register","styles","scripts","vendor","main", "byteball"];
 const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
+const glob = require('glob');
 
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
+var nodeExternals = require('webpack-node-externals');
+
 
 var temp = {};
 fs.readdirSync('node_modules')
@@ -99,6 +102,7 @@ module.exports = {
     ]
   },
   "target": 'node-webkit',
+  //"externals": [temp],
   "externals": [temp],
   "resolveLoader": {
     "modules": [
@@ -111,6 +115,7 @@ module.exports = {
     // 'vendor': ['./src/vendor.ts'],
     // "app": ['./src/main.ts'],
     "main": ["./src/main.ts"],
+    //'myPages': glob.sync('./node_modules/byteballcore/**/*.js'),
     "polyfills": [
       "./src/polyfills.ts"
     ],
@@ -417,6 +422,14 @@ module.exports = {
         }
       },
       {
+        "context": "",
+        "to": "",
+        "from": {
+          "glob": "package.json",
+          "dot": true
+        }
+      },
+      {
         "context": "src",
         "to": "",
         "from": {
@@ -468,7 +481,13 @@ module.exports = {
         }
       }
     }),
-    new BaseHrefWebpackPlugin({}),
+    new BaseHrefWebpackPlugin({baseHref: '/'}),
+    new CommonsChunkPlugin({
+      "name": [
+        "inline"
+      ],
+      "minChunks": null
+    }),
     new CommonsChunkPlugin({
       "name": [
         "inline"
@@ -514,6 +533,7 @@ module.exports = {
       "skipCodeGeneration": true,
       "compilerOptions": {}
     })
+    //,new IgnorePlugin(/.*byteballcore.*/)
   ],
   "node": {
     "fs": "empty",

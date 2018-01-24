@@ -1,4 +1,4 @@
-import {Credentials} from './credentials.model';
+import {Credentials} from '../_api/wallet.client.api/wallet-client/lib/credentials';
 
 export class WalletClient {
 

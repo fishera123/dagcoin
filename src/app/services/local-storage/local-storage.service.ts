@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IInternalStorageService} from '../storage/storage.service';
+import {Reject} from '../../_base/reject';
 
 @Injectable()
 export class LocalStorageService implements IInternalStorageService {
@@ -33,7 +34,7 @@ export class LocalStorageService implements IInternalStorageService {
       try {
         console.log(`local-storage creating: ${name}`);
         if (__this.getSync(name)) {
-          reject(new Error('already in storage'));
+          reject(new Reject(0, 'already in storage'));
         } else {
           __this.setSync(name, value);
           console.log(`local-storage created: ${name}`);
