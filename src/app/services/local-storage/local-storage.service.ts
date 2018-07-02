@@ -1,50 +1,81 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {IInternalStorageService} from '../storage/storage.service';
+import {Reject} from '../../_base/reject';
 
 @Injectable()
-export class LocalStorageService {
+export class LocalStorageService implements IInternalStorageService {
+
+  private static ls = ((typeof window.localStorage !== 'undefined') ? window.localStorage : null);
 
   constructor() {
   }
 
-  ls = ((typeof window.localStorage !== 'undefined') ? window.localStorage : null);
-  get = function (k, cb) {
-    return cb(null, this.ls.getItem(k));
-  };
+  get(key: string, cb?): Promise<string> {
+    const __this = this;
+    return new Promise(function(resolve, reject) {
+      try {
+        resolve(__this.getSync(key));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 
-  getSync = function (k) {
-    return this.ls.getItem(k);
+  getSync = function (key) {
+    return LocalStorageService.ls.getItem(key);
   };
 
   /**
    * Same as setItem, but fails if an item already exists
    */
-  create = function (name, value, callback) {
-    this.get(name,
-      (err, data) => {
-        if (data) {
-          return callback('EXISTS');
+  create(name: string, value: string, callback?): Promise<any> {
+    const __this = this;
+    return new Promise(function (resolve, reject) {
+      try {
+        console.log(`local-storage creating: ${name}`);
+        if (__this.getSync(name)) {
+          reject(new Reject(0, 'already in storage'));
+        } else {
+          __this.setSync(name, value);
+          console.log(`local-storage created: ${name}`);
+          resolve(value);
         }
-        return this.set(name, value, callback);
-      });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  set(key: string, value: any, cb?): Promise<any> {
+    const __this = this;
+    return new Promise(function (resolve, reject) {
+      try {
+        __this.setSync(key, value);
+        resolve(true);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  setSync = function (key, value) {
+    LocalStorageService.ls.setItem(key, value);
   };
 
-  set = function (k, v, cb) {
-    this.ls.setItem(k, v);
-    return cb();
+  removeSync = function (key) {
+    LocalStorageService.ls.removeItem(key);
   };
 
-  setSync = function (k, v) {
-    this.ls.setItem(k, v);
-  };
-
-  removeSync = function (k) {
-    this.ls.removeItem(k);
-  };
-
-  remove = function (k, cb) {
-    this.ls.removeItem(k);
-    return cb();
-  };
-
+  remove(key: string, cb?): Promise<any> {
+    const __this = this;
+    return new Promise(function (resolve, reject) {
+      try {
+        __this.removeSync(key);
+        resolve(true);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 
 }

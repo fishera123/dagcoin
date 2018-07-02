@@ -5,7 +5,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="state_icon">
-              <app-svg-icon name="safe"></app-svg-icon>
+              <img src="dist/assets/svgs/safe.svg"/>
               <app-svg-icon name="icon-BG-shape-1" className="transparent-background"></app-svg-icon>
             </div>
             <!-- <dag-state-icon icon="safe"></dag-state-icon> -->
@@ -26,6 +26,7 @@
 
     <div class="intro_content_trigger">
       <button ui-sref="disclaimer" class="btn btn_red-full">GET STARTED</button>
+      <button ui-sref="disclaimer" class="btn btn_red-full" (click)="testCreateWallet()">Test create wallet</button>
     </div>
   </div>
 </div>

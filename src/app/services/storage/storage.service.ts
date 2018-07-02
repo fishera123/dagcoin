@@ -2,21 +2,36 @@ import { Injectable } from '@angular/core';
 import { FileStorageService } from '../file-storage/file-storage.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import * as sjcl from 'sjcl';
+import {Config} from '../../models/config.model';
+import {Profile} from '../../models/profile.model';
+
+export interface IInternalStorageService {
+  get(key: string, cb?): Promise<string>;
+  set(key: string, value: any, cb?): Promise<any>;
+  remove(key: string, cb?): Promise<any>;
+  create(name: string, value: any, cb?): Promise<any>;
+}
+
+export interface IStorageService {
+  getConfig(): Promise<string>;
+  storeConfig(): Promise<any>;
+  storeNewProfile(profile: any): Promise<any>;
+}
 
 @Injectable()
 export class StorageService {
 
+  storage: IInternalStorageService;
+
   constructor(private fileStorage: FileStorageService,
               private localStorage: LocalStorageService) {
+    this.storage = this.shouldUseFileStorage ? this.fileStorage : this.localStorage;
   }
 
   // File storage is not supported for writting according to
   // https://github.com/apache/cordova-plugin-file/#supported-platforms
-  shouldUseFileStorage = true;
+  shouldUseFileStorage = false;
   // $log.debug('Using file storage:', shouldUseFileStorage);
-
-
-  storage = this.shouldUseFileStorage ? this.fileStorage : this.localStorage;
 
   static encryptOnMobile(text, cb) {
     // UUID encryption is disabled.
@@ -75,10 +90,13 @@ export class StorageService {
     return walletId.replace(/[\/+=]/g, '');
   }
 
-  storeNewProfile(profile, cb) {
+  storeNewProfile(profile: any, cb?): Promise<any> {
+    /*
     StorageService.encryptOnMobile(profile.toObj(), (err, x) => {
       this.storage.create('profile', x, cb);
     });
+    */
+    return this.storage.create('profile', profile);
   }
 
   storeProfile(profile, cb) {
@@ -135,13 +153,13 @@ export class StorageService {
     this.storage.remove(`backup-${this.getSafeWalletId(walletId)}`, cb);
   }
 
-  getConfig(cb) {
-    this.storage.get('config', cb);
+  getConfig(): Promise<string> {
+    return this.storage.get('config');
   }
 
-  storeConfig(val, cb) {
+  storeConfig(val): Promise<any> {
     // $log.debug('Storing Preferences', val);
-    this.storage.set('config', val, cb);
+    return this.storage.set('config', val);
   }
 
   clearConfig(cb) {
